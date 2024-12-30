@@ -287,15 +287,32 @@ const Footer = () => {
               <h3 className="font-bold text-xl">Our Services</h3>{" "}
               {/* Increased font size */}
               <ul className="mt-6 space-y-3">
-                {" "}
-                {/* Increased space between items */}
                 <li className="text-lg">
-                  Digital Marketing & Business Consultant
-                </li>{" "}
-                {/* Increased font size */}
-                <li className="text-lg">ITES Services</li>
-                <li className="text-lg">Warehouse Management</li>
-                <li className="text-lg">Detailed Engineering Design</li>
+                  <Link href="/service/bmc">
+                    Business Management & Consultancy
+                  </Link>
+                </li>
+                <li className="text-lg">
+                  <Link href="/service/hrm">Human Resource Management</Link>
+                </li>
+                <li className="text-lg">
+                  <Link href="/service/dmbc">
+                    Digital Marketing & Business Consulting
+                  </Link>
+                </li>
+                <li className="text-lg">
+                  <Link href="/service/wm">Warehouse Management</Link>
+                </li>
+                <li className="text-lg">
+                  <Link href="/service/grmc">
+                    Governance, Risk Management & Compliance
+                  </Link>
+                </li>
+                <li className="text-lg">
+                  <Link href="/service/wdhs">
+                    Web Development & Hosting Services
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
