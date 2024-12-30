@@ -148,10 +148,12 @@ export default function Navbar2(){
   ];
 
   useEffect(() => {
-    document.onclick = (e) => {
+    document.onclick = (e ) => {
       const target = e.target;
+      if(target){
       if (!target.closest(".nav-menu"))
         setDrapdownState({ isActive: false, idx: null });
+    }
     };
   }, []);
 
