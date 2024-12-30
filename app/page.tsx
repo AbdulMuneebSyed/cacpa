@@ -1,4 +1,4 @@
-import  {OrbitingCirclesMobile , OrbitingCirclesDemo} from "@/app/new/page";
+import  {OrbitingCirclesMobile , OrbitingCirclesDemo} from "@/components/ui/orbiting";
 import About from "@/components/about";
 import Footer from "@/components/Footer";
 import Hero from "@/components/hero";
