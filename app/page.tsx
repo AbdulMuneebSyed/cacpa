@@ -1,4 +1,4 @@
-import  OrbitingCirclesDemo from "@/app/new/page";
+import  {OrbitingCirclesMobile , OrbitingCirclesDemo} from "@/app/new/page";
 import About from "@/components/about";
 import Footer from "@/components/Footer";
 import Hero from "@/components/hero";
@@ -16,8 +16,11 @@ export default function Home() {
         <Navbar2 />
       </div>
       {/* <Hero/> */}
-      <OrbitingCirclesDemo />
-      <LandingPageBanner/>
+      <div className="hidden md:block">OrbitingCirclesDemo</div>
+      <div className="md:hidden">
+        <OrbitingCirclesMobile />
+      </div>
+      <LandingPageBanner />
       <About />
       <LandServices />
       <Footer />
