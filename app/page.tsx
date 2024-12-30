@@ -16,7 +16,9 @@ export default function Home() {
         <Navbar2 />
       </div>
       {/* <Hero/> */}
-      <div className="hidden md:block">OrbitingCirclesDemo</div>
+      <div className=" md:flex">
+        <OrbitingCirclesDemo />
+      </div>
       <div className="md:hidden">
         <OrbitingCirclesMobile />
       </div>
