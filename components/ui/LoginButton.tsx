@@ -7,7 +7,7 @@ const LoginButton: React.FC = () => {
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
 
- const handleLogin = (e) => {
+ const handleLogin = (e: React.FormEvent<HTMLButtonElement>) => {
    // Add login logic here
    e.preventDefault();
    console.log("Email:", email);
@@ -77,7 +77,7 @@ const LoginButton: React.FC = () => {
               {/* Login Button */}
               <button
                 onClick={(e) => handleLogin(e)}
-                className="w-full h-12 rounded-md bg-gradient-to-r from-[#19b2b0] to-[#3f5964] text-white font-medium transition-all ease-in-out duration-300 hover:scale-105 hover:bg-gradient-to-r from-[#3f5964] to-[#19b2b0] focus:outline-none focus:ring-2 focus:ring-[#19b2b0] focus:ring-offset-2"
+                className="w-full h-12 rounded-md bg-gradient-to-r from-[#19b2b0] to-[#3f5964] text-white font-medium transition-all ease-in-out duration-300 hover:scale-105 hover:bg-gradient-to-r focus:outline-none focus:ring-2 focus:ring-[#19b2b0] focus:ring-offset-2"
               >
                 Login
               </button>
