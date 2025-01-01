@@ -61,11 +61,11 @@ export default function Services() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ amount: 0.1 }}
         transition={{ duration: 1 }}
-        className="text-3xl font-bold text-center mb-8"
+        className="text-3xl font-bold text-center mt-10 mb-8"
       >
         Explore Our Services
       </motion.h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mb-20 gap-6">
         {services.map((service, index) => (
           <motion.div
             key={service.name}

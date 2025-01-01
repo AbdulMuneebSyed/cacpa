@@ -1,21 +1,40 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabaseClient"; // I
 import { FramerModal, ModalContent } from "@/components/ui/loginModel";
 
 const LoginButton: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
- const [email, setEmail] = useState("");
- const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter(); 
 
- const handleLogin = (e: React.FormEvent<HTMLButtonElement>) => {
-   // Add login logic here
-   e.preventDefault();
-   console.log("Email:", email);
-   console.log("Password:", password);
-   setModalOpen(false);
- };
+  const handleLogin = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        console.error(error.message);
+        alert("Login failed: " + error.message);
+      } else {
+        console.log("Login successful", data);
+        // setModalOpen(false);
+        router.push("/dashboard"); 
+      }
+    } catch (error) {
+      console.error("An unexpected error occurred", error);
+      alert("An unexpected error occurred");
+    }
+  };
+
   return (
-    <div className=" h-full flex justify-center items-center">
+    <div className="h-full flex justify-center items-center">
       <button
         onClick={() => setModalOpen(true)}
         className="i h-9 rounded-md border-2 dark:border-[#656fe2] border-[#c0c6fc] dark:bg-[linear-gradient(110deg,#1e2a78,45%,#3749be,55%,#1e2a78)] bg-[#19b2b0] dark:hover:border-white px-6 font-medium text-white dark:text-white transition-all ease-in-out duration-300 hover:scale-105 hover:bg-[#3f5964] focus:outline-none focus:ring-2 dark:focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-gray-50"
@@ -49,7 +68,6 @@ const LoginButton: React.FC = () => {
                   id="email"
                   placeholder="Your email"
                   value={email}
-                  onClick={(e) => e.preventDefault()}
                   onChange={(e) => setEmail(e.target.value)}
                   className="h-12 w-full rounded-md border bg-transparent px-4 text-sm shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#19b2b0] focus:border-[#19b2b0]"
                 />
@@ -68,7 +86,6 @@ const LoginButton: React.FC = () => {
                   id="password"
                   placeholder="Your password"
                   value={password}
-                  onClick={(e) => e.preventDefault()}
                   onChange={(e) => setPassword(e.target.value)}
                   className="h-12 w-full rounded-md border bg-transparent px-4 text-sm shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#19b2b0] focus:border-[#19b2b0]"
                 />
@@ -76,7 +93,7 @@ const LoginButton: React.FC = () => {
 
               {/* Login Button */}
               <button
-                onClick={(e) => handleLogin(e)}
+                onClick={handleLogin}
                 className="w-full h-12 rounded-md bg-gradient-to-r from-[#19b2b0] to-[#3f5964] text-white font-medium transition-all ease-in-out duration-300 hover:scale-105 hover:bg-gradient-to-r focus:outline-none focus:ring-2 focus:ring-[#19b2b0] focus:ring-offset-2"
               >
                 Login

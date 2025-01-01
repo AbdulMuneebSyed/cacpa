@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import oip from "@/public/parallax/OIP.jpg"
-
+import { motion } from "framer-motion";
 // Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,7 +53,13 @@ const About = () => {
       ></div>
 
       <div className="min-h-screen flex justify-center items-center ">
-        <div className="text-center p-8 md:aboutCapCO bg-white rounded-lg shadow-lg max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ amount: 0.1 }}
+          transition={{ duration: 1 }}
+          className="text-center p-8 md:aboutCapCO bg-white rounded-lg shadow-lg max-w-4xl"
+        >
           <h1 className="text-3xl font-bold text-gray-800 mb-4">About CAPCO</h1>
           <p className="text-gray-700 leading-relaxed text-lg">
             At CAPCO, we specialize in empowering businesses across Qatar,
@@ -64,7 +70,7 @@ const About = () => {
             and deliver lasting value to our clients, employees, and
             communities.
           </p>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

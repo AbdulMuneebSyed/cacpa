@@ -12,12 +12,13 @@ gsap.registerPlugin(ScrollTrigger);
 const Footer = () => {
     useEffect(()=>{
         gsap.to(".footerAnimation",{
-                scale:.7,
+                scale:.8,
                 // y:50,
+                scaleX:1.5,
                 scrollTrigger:{
                     trigger: ".footerAnimation",
-                    start: "top 90%",
-                    end: "top 60%",
+                    start: "top 75%",
+                    end: "top 20%",
                             scrub: true,
 
                 }
@@ -55,7 +56,7 @@ const Footer = () => {
                   alt="Three flags logo Logo"
                   width={50} // You still need to provide a width value here
                   height={0}
-                  className="object-contain w-20"
+                  className="object-contain w-28"
                 />
               </div>
               {/* Increased margin */}

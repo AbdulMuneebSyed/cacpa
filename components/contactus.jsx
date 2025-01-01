@@ -1,15 +1,73 @@
 "use client"
-// import US from "country-flag-icons/react/3x2/US";
+import { useState } from "react";
+import emailjs from "emailjs-com";
 
-export default function Contactus() {
+export default function ContactUs() {
   const servicesItems = [
     "Business Management & Consultancy",
     "Human Resource Management",
     "Digital Marketing & Business Consultant",
     "Warehouse Management",
     "Governance, Risk Management & Compliance",
-    "Web Development &  Hosting Services",
+    "Web Development & Hosting Services",
   ];
+
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    message: "",
+    services: [],
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") {
+      setFormData((prev) => ({
+        ...prev,
+        services: checked
+          ? [...prev.services, value]
+          : prev.services.filter((service) => service !== value),
+      }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    // Map formData to match the EmailJS template structure
+    const emailParams = {
+      to_name: "Sadmuneeb786@gmail.com", 
+      from_name: "samuneeb786@gmail.com", 
+      message: `Name:${formData.fullName}\n Email: ${formData.email}\nPhone: ${
+        formData.phone
+      }\nServices: ${formData.services.join(", ")}\nMessage: ${
+        formData.message
+      }`, // Combine all details into the message
+    };
+
+    emailjs
+      .send(
+        "service_znyyw56", // Your EmailJS service ID
+        "muneeb_iqciy5o", // Your EmailJS template ID
+        emailParams,
+        "T4h1H0gjpxDP_OF7r" // Your EmailJS public key
+      )
+      .then(
+        (response) => {
+          alert("Message sent successfully!");
+          console.log("Success!", response.status, response.text);
+        },
+        (error) => {
+          console.error("Failed to send message", error);
+          alert("Failed to send message. Please try again later.");
+        }
+      );
+  };
+
+
 
   return (
     <main className="flex min-h-screen">
@@ -19,24 +77,24 @@ export default function Contactus() {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className=" flex-1 lg:flex lg:justify-center lg:min-h-screen">
+      <div className="flex-1 lg:flex lg:justify-center lg:min-h-screen">
         <div className="max-w-lg flex-1 mx-auto px-4 text-gray-600">
           <div>
             <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">
               Get in touch
             </h3>
             <p className="mt-3">
-              We’d love to hear from you! Please fill out the form bellow.
+              We’d love to hear from you! Please fill out the form below.
             </p>
           </div>
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="space-y-5 mt-12 lg:pb-12"
-          >
+          <form onSubmit={sendEmail} className="space-y-5 mt-12 lg:pb-12">
             <div>
               <label className="font-medium">Full name</label>
               <input
                 type="text"
+                name="fullName"
+                value={formData.fullName}
+                onChange={handleChange}
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
               />
@@ -45,27 +103,23 @@ export default function Contactus() {
               <label className="font-medium">Email</label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 required
                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
               />
             </div>
             <div>
               <label className="font-medium">Phone number</label>
-              <div className="relative mt-2">
-                <div className="absolute inset-y-0 left-3 my-auto h-6 flex items-center border-r pr-2">
-                  <select className="text-sm bg-transparent outline-none rounded-lg h-full">
-                    <option>CA </option>
-                    <option>QA</option>
-                    <option>IN</option>
-                  </select>
-                </div>
-                <input
-                  type="number"
-                  placeholder="+1 (555) 000-000"
-                  required
-                  className="w-full pl-[4.5rem] pr-3 py-2 appearance-none bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
-                />
-              </div>
+              <input
+                type="text"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                required
+                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
+              />
             </div>
             <div>
               <label className="font-medium">Services</label>
@@ -96,6 +150,9 @@ export default function Contactus() {
             <div>
               <label className="font-medium">Message</label>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 required
                 className="w-full mt-2 h-36 px-3 py-2 resize-none appearance-none bg-transparent outline-none border focus:border-gray-800 shadow-sm rounded-lg"
               ></textarea>
@@ -108,4 +165,4 @@ export default function Contactus() {
       </div>
     </main>
   );
-};
+}

@@ -4,9 +4,10 @@ import logo from "@/public/logo/logo.png";
 import Image from "next/image";
 import LoginButton from "./ui/LoginButton";
 import Link from "next/link";
+import { motion } from "framer-motion";
 const dropdownNavs = [
   {
-    label: "Services",
+    label: "",
     navs: [
       {
         title: " Business Management & Consultancy ",
@@ -44,11 +45,6 @@ const dropdownNavs = [
           </svg>
         ),
       },
-    ],
-  },
-  {
-    label: "",
-    navs: [
       {
         title: "Digital Marketing & Business Consultant",
         desc: "Boosting business growth through digital strategies",
@@ -79,11 +75,6 @@ const dropdownNavs = [
           </svg>
         ),
       },
-    ],
-  },
-  {
-    label: "",
-    navs: [
       {
         title: "Governance, Risk Management & Compliance",
         desc: "Ensuring Accountability, risk, and compliance management",
@@ -123,8 +114,8 @@ const dropdownNavs = [
           </svg>
         ),
       },
-    ],
-  },
+    ]
+    }
 ];
 
 export default function Navbar2(){
@@ -167,7 +158,7 @@ export default function Navbar2(){
         <div className="items-center gap-x-14 px-4 max-w-screen-xl mx-auto md:flex md:px-8">
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
             <a href="javascript:void(0)">
-              <Image src={logo} width={120} height={50} alt="Float UI logo" />
+              <Image src={logo} width={120} height={50} alt="Capca logo" />
             </a>
             <div className="md:hidden">
               <button
@@ -215,7 +206,7 @@ export default function Navbar2(){
                   <li key={idx}>
                     {item.isDrapdown ? (
                       <button
-                        className="w-full flex items-center justify-between gap-1 text-gray-700 hover:text-indigo-600"
+                        className="w-full flex flex-row items-center justify-between gap-1 text-gray-700 hover:text-indigo-600"
                         onClick={() =>
                           setDrapdownState({
                             idx,
@@ -263,42 +254,42 @@ export default function Navbar2(){
                     {item.isDrapdown &&
                     drapdownState.idx == idx &&
                     drapdownState.isActive ? (
-                      <div className="mt-6 inset-x-0 top-20 w-full md:absolute md:border-y md:shadow-md bg-white md:mt-0">
-                        <ul className="max-w-screen-xl mx-auto grid items-center gap-6 md:p-8 md:grid-cols-2 lg:grid-cols-3">
-                          {item?.navs.map((dropdownItem, idx) => (
-                            <li key={idx}>
-                              <p className="text-indigo-600 text-sm">
-                                {dropdownItem.label}
-                              </p>
-                              <ul className="mt-5 space-y-6">
-                                {dropdownItem.navs.map((navItem, idx) => (
-                                  <li key={idx} className="group">
-                                    <Link
-                                      href={navItem.path}
-                                      className="flex gap-3 items-center"
-                                    >
-                                      <div className="w-12 h-12 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center duration-150 group-hover:bg-indigo-600 group-hover:text-white md:w-14 md:h-14">
-                                        {navItem.icon}
-                                      </div>
-                                      <div>
-                                        <span className="text-gray-800 duration-200 group-hover:text-indigo-600 text-sm font-medium md:text-base">
-                                          {navItem.title}
-                                        </span>
-                                        <p className="text-sm text-gray-600 group-hover:text-gray-800 mt-1">
-                                          {navItem.desc}
-                                        </p>
-                                      </div>
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </li>
-                          ))}
-                        </ul>
+                      <div className="relative z-50 mt-1">
+                        <motion.div
+                          className="absolute inset-x-0 top-full text-sm md:border-y md:shadow-lg w-96 bg-white rounded-lg md:w-auto mt-2"
+                          initial={{ opacity: 0, y: -10 }} // Start invisible and above the button
+                          animate={{ opacity: 1, y: 0 }} // Fade in and slide down
+                          exit={{ opacity: 0, y: 10 }} // Fade out and slide up
+                          transition={{ duration: 0.3 }} // Smooth transition
+                        >
+                          <ul className="max-w-screen-xl mx-auto grid items-center gap-4 w-96 bg-white rounded-lg shadow-sm shadow-gray-400 md:p-4 md:grid-cols-1 lg:grid-cols-2">
+                            {item?.navs.map((dropdownItem, idx) => (
+                              <li key={idx} className="space-y-2">
+                                <p className="text-indigo-600 text-xs font-semibold">
+                                  {dropdownItem.label}
+                                </p>
+                                <ul className="mt-2 space-y-2">
+                                  {dropdownItem.navs.map((navItem, idx) => (
+                                    <li key={idx} className="group">
+                                      <Link
+                                        href={navItem.path}
+                                        className="flex w-96 gap-2 items-center transition-colors duration-200 hover:bg-gray-50 p-2 rounded-md"
+                                      >
+                                        <div>
+                                          <span className="text-gray-800 duration-200 group-hover:text-indigo-600 text-sm font-medium md:text-sm">
+                                            {navItem.title}
+                                          </span>
+                                        </div>
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </li>
+                            ))}
+                          </ul>
+                        </motion.div>
                       </div>
-                    ) : (
-                      ""
-                    )}
+                    ) : null}
                   </li>
                 );
               })}

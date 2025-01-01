@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 
 
 import Hero from "@/components/hero";
-const page = () => {
+export default function page(){
   return (
     <div className="min-h-screen max-w-screen overflow-hidden ">
       <div className="fixed z-50 top-0 max-w-screen">
@@ -16,5 +16,3 @@ const page = () => {
     </div>
   );
 }
-
-export default page
