@@ -268,12 +268,12 @@ export default function Navbar2(){
                                 <p className="text-indigo-600 text-xs font-semibold">
                                   {dropdownItem.label}
                                 </p>
-                                <ul className="mt-2 space-y-2">
+                                <ul className="mt-2  space-y-2">
                                   {dropdownItem.navs.map((navItem, idx) => (
                                     <li key={idx} className="group">
                                       <Link
                                         href={navItem.path}
-                                        className="flex w-96 gap-2 items-center transition-colors duration-200 hover:bg-gray-50 p-2 rounded-md"
+                                        className="flex w-96 gap-2 items-center transition-colors duration-200  p-2 rounded-md"
                                       >
                                         <div>
                                           <span className="text-gray-800 duration-200 group-hover:text-indigo-600 text-sm font-medium md:text-sm">

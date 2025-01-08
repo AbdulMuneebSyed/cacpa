@@ -7,6 +7,7 @@ import Image from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect } from "react";
+import Footer from "./Footer";
 
 const services = [
   {
@@ -90,7 +91,9 @@ export default function Services() {
             </Link>
           </motion.div>
         ))}
+       
       </div>
+      
     </div>
   );
 }
