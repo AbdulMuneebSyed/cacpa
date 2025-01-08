@@ -161,12 +161,12 @@ export default function AnimatedServices() {
                 <motion.div
                   className="w-12 h-12 rounded-lg bg-[#19b2b0] flex items-center justify-center mb-4"
                   whileHover={{
-                    rotate: 360,
+                    // rotate: 360,
                     scale: 1.2,
                     transition: { duration: 0.8 },
                   }}
                 >
-                  {<service.icon className="w-6 h-6 text-white" />}
+                  {<service.icon />}
                 </motion.div>
                 <h2 className="text-xl font-semibold text-white mb-3">
                   {service.title}
@@ -223,14 +223,14 @@ export default function AnimatedServices() {
                 }}
               >
                 <motion.div
-                  className="w-12 h-12 rounded-lg bg-[#3f5964] flex items-center justify-center mb-4"
+                  className="w-12 h-12 rounded-lg bg-[#19b2b0] flex items-center justify-center mb-4"
                   whileHover={{
-                    rotate: -360,
+                    // rotate: -360,
                     scale: 1.2,
                     transition: { duration: 0.8 },
                   }}
                 >
-                  {<service.icon className="w-6 h-6 text-white" />}
+                  {<service.icon/>}
                 </motion.div>
                 <h2 className="text-xl font-semibold text-white mb-3">
                   {service.title}
