@@ -6,7 +6,7 @@ import Footer from "@/components/Footer"
 export default function Page() {
   return (
     <main>
-      <div className="fixed z-50 top-0 max-w-screen">
+      <div className="sticky z-50 top-0 max-w-screen">
               <Navbar2 />
             </div>
       <HeroSection />

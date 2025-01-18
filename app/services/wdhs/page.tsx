@@ -40,7 +40,9 @@ export default function WebServicesPage() {
   return (
     <div className="min-h-screen max-w-screen overflow-hidden bg-[#3f5964]">
       {/* Hero Section with 3D Perspective */}
-      <Navbar2 />
+      <div className="fixed z-50 top-0 max-w-screen">
+              <Navbar2 />
+            </div>
       <section className="relative min-h-screen overflow-hidden perspective-1000">
         <motion.div
           className="absolute inset-0"

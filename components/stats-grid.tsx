@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Footer from "./Footer";
 
 interface StatsGridProps {
   stats: {

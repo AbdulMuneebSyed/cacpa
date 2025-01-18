@@ -77,7 +77,7 @@ export default function ContactUs() {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="flex-1 lg:flex lg:justify-center lg:min-h-screen">
+      <div className="flex-1 lg:flex lg:justify-center pt-16 md:pt-0 lg:min-h-screen">
         <div className="max-w-lg flex-1 mx-auto px-4 text-gray-600">
           <div>
             <h3 className="text-gray-800 text-3xl font-semibold sm:text-4xl">

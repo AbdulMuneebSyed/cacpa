@@ -35,61 +35,77 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { EditModal } from "@/components/edit-model";
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
-  },
-];
-
-export type Payment = {
+type Lead = {
   id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
+  accountName: string;
+  leadSource: string;
+  title: string;
+  stage: string;
+  status: string;
+  leadOwner: string;
+  industry: string;
+  services: string;
+  products: string;
+  rating: string;
+  leadFiscalPeriod: string;
+  assignedToSalesTeam: string;
+  domains: string;
+  deploymentType: string;
+  leadOverview: string;
+  leadGeneratedMonth: string;
+  createDate: string;
+  createBy: string;
+  editDate: string;
+  editBy: string;
 };
 
-export const columns: ColumnDef<Payment>[] = [
+const data: Lead[] = [
+  {
+    id: "1",
+    accountName: "Acme Corp",
+    leadSource: "Trade Show",
+    title: "New Lead",
+    stage: "Demo",
+    status: "Qualified",
+    leadOwner: "John Doe",
+    industry: "Agriculture",
+    services: "Consulting",
+    products: "Product A",
+    rating: "Hot",
+    leadFiscalPeriod: "Q2",
+    assignedToSalesTeam: "Team A",
+    domains: "Domain 1",
+    deploymentType: "Cloud",
+    leadOverview: "Potential big client",
+    leadGeneratedMonth: "January",
+    createDate: "2023-01-15",
+    createBy: "System",
+    editDate: "2023-01-20",
+    editBy: "Jane Smith",
+  },
+  // Add more sample data here
+];
+
+export const columns: ColumnDef<Lead>[] = [
   {
     id: "select",
-    header: ({ table }) => (
+    header: ({ table }:{table :any}) => (
       <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
+        checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
       />
     ),
-    cell: ({ row }) => (
+    cell: ({ row }: { row: any }) => (
       <Checkbox
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
@@ -100,74 +116,153 @@ export const columns: ColumnDef<Payment>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+    accessorKey: "accountName",
+    header: "Account Name",
+    cell: ({ row }: { row: any }) => (
+      <Input defaultValue={row.getValue("accountName")} />
     ),
   },
   {
-    accessorKey: "email",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Email
-          <ArrowUpDown />
-        </Button>
-      );
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    accessorKey: "leadSource",
+    header: "Lead Source",
+    options: [
+      "Trade Show",
+      "Account Mining",
+      "Email Campaign",
+      "Partner",
+      "Tender Portal",
+    ],
+    cell: ({ row }: { row: any }) => row.getValue("leadSource"),
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
-    },
+    accessorKey: "title",
+    header: "Title",
+    cell: ({ row }: { row: any }) => (
+      <Input defaultValue={row.getValue("title")} />
+    ),
   },
   {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    accessorKey: "stage",
+    header: "Stage",
+    options: [
+      "Vendor Registration",
+      "Demo",
+      "POC",
+      "Technical",
+      "Clarification",
+      "Proposal",
+      "Submitted",
+    ],
+    cell: ({ row }: { row: any }) => row.getValue("stage"),
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    options: ["New", "Qualified", "Working", "Nurturing"],
+    cell: ({ row }: { row: any }) => row.getValue("status"),
+  },
+  {
+    accessorKey: "leadOwner",
+    header: "Lead Owner",
+    cell: ({ row }: { row: any }) => (
+      <Input defaultValue={row.getValue("leadOwner")} />
+    ),
+  },
+  {
+    accessorKey: "industry",
+    header: "Industry",
+    options: [
+      "Agriculture",
+      "Forestry",
+      "Fishing and Aquaculture",
+      "Mining and Quarrying",
+      "Oil and Gas",
+    ],
+    cell: ({ row }: { row: any }) => row.getValue("industry"),
+  },
+  {
+    accessorKey: "services",
+    header: "Services",
+    cell: ({ row }: { row: any }) => (
+      <Input defaultValue={row.getValue("services")} />
+    ),
+  },
+  {
+    accessorKey: "products",
+    header: "Products",
+    cell: ({ row }: { row: any }) => (
+      <Input defaultValue={row.getValue("products")} />
+    ),
+  },
+  {
+    accessorKey: "rating",
+    header: "Rating",
+    options: ["Warm", "Cold", "Hot"],
+    cell: ({ row }: { row: any }) => row.getValue("rating"),
+  },
+  {
+    accessorKey: "leadFiscalPeriod",
+    header: "Lead Fiscal Period",
+    options: ["Q1", "Q2", "Q3", "Q4"],
+    cell: ({ row }: { row: any }) => row.getValue("leadFiscalPeriod"),
+  },
+  {
+    accessorKey: "assignedToSalesTeam",
+    header: "Assigned To Sales Team",
+    cell: ({ row }: { row: any }) => (
+      <Input defaultValue={row.getValue("assignedToSalesTeam")} />
+    ),
+  },
+  {
+    accessorKey: "domains",
+    header: "Domains",
+    cell: ({ row }: { row: any }) => (
+      <Input defaultValue={row.getValue("domains")} />
+    ),
+  },
+  {
+    accessorKey: "deploymentType",
+    header: "Deployment Type",
+    cell: ({ row }: { row: any }) => (
+      <Input defaultValue={row.getValue("deploymentType")} />
+    ),
+  },
+  {
+    accessorKey: "leadOverview",
+    header: "Lead Overview",
+    cell: ({ row }: { row: any }) => (
+      <Input defaultValue={row.getValue("leadOverview")} />
+    ),
+  },
+  {
+    accessorKey: "leadGeneratedMonth",
+    header: "Lead Generated Month",
+    options: ["January", "February", "March", "April", "May"],
+    cell: ({ row }: { row: any }) => row.getValue("leadGeneratedMonth"),
+  },
+  {
+    accessorKey: "createDate",
+    header: "Create Date",
+    cell: ({ row }: { row: any }) => row.getValue("createDate"),
+  },
+  {
+    accessorKey: "createBy",
+    header: "Create By",
+    cell: ({ row }: { row: any }) => row.getValue("createBy"),
+  },
+  {
+    accessorKey: "editDate",
+    header: "Edit Date",
+    cell: ({ row }: { row: any }) => row.getValue("editDate"),
+  },
+  {
+    accessorKey: "editBy",
+    header: "Edit By",
+    cell: ({ row }: { row: any }) => row.getValue("editBy"),
   },
 ];
 
-export function DataTableDemo() {
+export function LeadManagementTable() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -175,6 +270,13 @@ export function DataTableDemo() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+
+  const [editingCell, setEditingCell] = React.useState<{
+    row: number;
+    column: string;
+    value: string;
+    options?: string[];
+  } | null>(null);
 
   const table = useReactTable({
     data,
@@ -195,21 +297,45 @@ export function DataTableDemo() {
     },
   });
 
+  const handleCellClick = (
+    row: number,
+    column: string,
+    value: string,
+    options?: string[]
+  ) => {
+    setEditingCell({ row, column, value, options });
+  };
+
+  const handleSaveEdit = (value: string) => {
+    if (editingCell) {
+      const updatedData = [...data];
+      updatedData[editingCell.row] = {
+        ...updatedData[editingCell.row],
+        [editingCell.column]: value,
+      };
+      // Here you would typically update your data source or make an API call
+      console.log("Updated data:", updatedData);
+    }
+    setEditingCell(null);
+  };
+
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter account names..."
+          value={
+            (table.getColumn("accountName")?.getFilterValue() as string) ?? ""
+          }
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("accountName")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
+              Columns <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -261,11 +387,23 @@ export function DataTableDemo() {
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                    <TableCell key={cell.id} className="p-2">
+                      <div
+                        className="w-fit cursor-pointer"
+                        onClick={() =>
+                          handleCellClick(
+                            row.index,
+                            cell.column.id,
+                            cell.getValue() as string,
+                            (cell.column.columnDef as any).options
+                          )
+                        }
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </div>
                     </TableCell>
                   ))}
                 </TableRow>
@@ -307,6 +445,20 @@ export function DataTableDemo() {
           </Button>
         </div>
       </div>
+      {editingCell && (
+        <EditModal
+          isOpen={!!editingCell}
+          onClose={() => setEditingCell(null)}
+          onSave={handleSaveEdit}
+          value={editingCell.value}
+          column={{
+            id: editingCell.column,
+            header: table.getColumn(editingCell.column)?.columnDef
+              .header as string,
+          }}
+          options={editingCell.options}
+        />
+      )}
     </div>
   );
 }

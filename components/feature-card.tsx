@@ -34,6 +34,7 @@ export function FeatureCard({
       whileHover={{ scale: 1.05, y: -10 }}
       className="group relative overflow-hidden rounded-xl bg-[#3f5964]/20 p-6 backdrop-blur-lg"
     >
+        
       {/* Animated background */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-[#19b2b0]/20 to-transparent opacity-0"

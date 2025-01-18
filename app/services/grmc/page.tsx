@@ -83,7 +83,9 @@ export default function GovernancePage() {
   return (
     <div className="min-h-screen bg-[#3f5964] w-max-screen overflow-hidden">
       {/* Hero Section */}
-      <Navbar2/>
+<div className="fixed z-50 top-0 max-w-screen">
+        <Navbar2 />
+      </div>
       <section className="relative min-h-screen">
         <motion.div
           className="absolute inset-0 -z-10"
