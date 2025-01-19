@@ -14,42 +14,42 @@ const services = [
     name: "Business Management",
     description:
       "Providing expert advice to help businesses achieve growth, optimize operations, and maintain a competitive edge in the market.",
-    route: "/services/business-management",
+    route: "/services/bmc",
     image: pic,
   },
   {
     name: "Human Resource Management",
     description:
       "Comprehensive solutions for recruiting, training, and retaining top talent while ensuring a positive workplace environment.",
-    route: "/services/hr-management",
+    route: "/services/hrm",
     image: pic,
   },
   {
     name: "Digital Marketing",
     description:
       "Driving brand growth and customer engagement through innovative online strategies, SEO, and targeted marketing campaigns.",
-    route: "/services/digital-marketing",
+    route: "/services/dmbc",
     image: pic,
   },
   {
     name: "Warehouse Management",
     description:
       "Streamlining inventory management and logistics to maximize efficiency and reduce operational costs.",
-    route: "/services/warehouse-management",
+    route: "/services/wm",
     image: pic,
   },
   {
     name: "Governance & Compliance",
     description:
       "Ensuring organizational accountability, minimizing risks, and adhering to regulatory requirements with robust compliance frameworks.",
-    route: "/services/governance-compliance",
+    route: "/services/grmc",
     image: pic,
   },
   {
     name: "Web Development",
     description:
       "Building modern, responsive, and feature-rich websites to enhance your digital presence and user experience.",
-    route: "/services/web-development",
+    route: "/services/wm",
     image: pic,
   },
 ];
