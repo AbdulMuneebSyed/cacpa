@@ -440,7 +440,7 @@ export function LeadManagementTable() {
 
 
   return (
-    <div className="w-full">
+    <div className="w-max-screen">
       <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Filter account names..."
@@ -488,7 +488,7 @@ export function LeadManagementTable() {
           </Button>
         </div>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -510,7 +510,7 @@ export function LeadManagementTable() {
             {table.getRowModel().rows.map((row) => (
               <TableRow key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="min-w-fit cursor-pointer">
+                  <TableCell key={cell.id} className="min-w-32 cursor-pointer">
                     <div
                       className="w-full cursor-pointer"
                       onClick={() => {

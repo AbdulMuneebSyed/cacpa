@@ -65,7 +65,7 @@ export default function Page() {
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 max-w-7xl border border-neutral-200 dark:border-neutral-700 overflow-hidden",
+        "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 flex-1 w-screen border border-neutral-200 dark:border-neutral-700 overflow-hidden",
         "h-screen w-screen" // for your use case, use `h-screen` instead of `h-[60vh]`
       )}
     >
@@ -127,7 +127,7 @@ const LogoIcon = () => {
 
 const Dashboard = () => {
   return (
-    <div className="container mx-auto py-10">
+    <div className="max-w-screen overflow-scroll mx-5 py-10">
       <h1 className="text-2xl font-bold mb-5">Lead Management</h1>
       <LeadManagementTable />
     </div>
