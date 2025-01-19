@@ -31,19 +31,7 @@ export function OrbitingCirclesDemo() {
           Web Development & Hosting Services
         </span>
       </OrbitingCircles>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        className=" absolute inset-0 size-full"
-      >
-        <circle
-          className="stroke-black/50 stroke-1 dark:stroke-white/10"
-          cx="50%"
-          cy="50%"
-          r="100px"
-          fill="none"
-        />
-      </svg>
+     
       <OrbitingCircles
         className="size-[25px] border-none bg-transparent  flex flex-col"
         duration={20}
