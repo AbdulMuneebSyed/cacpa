@@ -67,3 +67,4 @@ export function AnimatedText({
     </motion.div>
   );
 }
+//checked

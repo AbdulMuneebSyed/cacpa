@@ -54,3 +54,4 @@ export function MagneticSection({
     </motion.div>
   );
 }
+//checked

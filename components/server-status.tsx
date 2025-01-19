@@ -82,3 +82,4 @@ export function ServerStatus({ status }: ServerStatusProps) {
     </div>
   );
 }
+//checked

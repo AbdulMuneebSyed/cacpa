@@ -13,7 +13,12 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import {
+  ArrowUpDown,
+  ChevronDown,
+  MoreHorizontal,
+  PlusCircle,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -43,25 +48,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { EditModal } from "@/components/edit-model";
+import { LeadForm, LeadData } from "@/components/lead-form";
 
-type Lead = {
+type Lead = LeadData & {
   id: string;
-  accountName: string;
-  leadSource: string;
-  title: string;
-  stage: string;
-  status: string;
-  leadOwner: string;
-  industry: string;
-  services: string;
-  products: string;
-  rating: string;
-  leadFiscalPeriod: string;
-  assignedToSalesTeam: string;
-  domains: string;
-  deploymentType: string;
-  leadOverview: string;
-  leadGeneratedMonth: string;
   createDate: string;
   createBy: string;
   editDate: string;
@@ -95,10 +85,10 @@ const data: Lead[] = [
   // Add more sample data here
 ];
 
-export const columns: ColumnDef<Lead>[] = [
+export const columns: ColumnDef<Lead, any, any, any>[] = [
   {
     id: "select",
-    header: ({ table }:{table :any}) => (
+    header: ({ table }: { table: any }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
@@ -278,6 +268,8 @@ export function LeadManagementTable() {
     options?: string[];
   } | null>(null);
 
+  const [isAddLeadModalOpen, setIsAddLeadModalOpen] = React.useState(false);
+
   const table = useReactTable({
     data,
     columns,
@@ -319,9 +311,25 @@ export function LeadManagementTable() {
     setEditingCell(null);
   };
 
+  const handleAddLead = (leadData: LeadData) => {
+    const newLead: Lead = {
+      ...leadData,
+      id: (data.length + 1).toString(),
+      createDate: new Date().toISOString(),
+      createBy: "Current User",
+      editDate: new Date().toISOString(),
+      editBy: "Current User",
+    };
+    // Here you would typically update your data source or make an API call
+    console.log("New lead:", newLead);
+    // For this example, we'll just add it to the existing data
+    data.push(newLead);
+    setIsAddLeadModalOpen(false);
+  };
+
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Filter account names..."
           value={
@@ -332,32 +340,38 @@ export function LeadManagementTable() {
           }
           className="max-w-sm"
         />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center space-x-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline">
+                Columns <ChevronDown className="ml-2 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column) => column.getCanHide())
+                .map((column) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={column.id}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {column.id}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Button onClick={() => setIsAddLeadModalOpen(true)}>
+            <PlusCircle className="mr-2 h-4 w-4" />
+            Add Lead
+          </Button>
+        </div>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -459,6 +473,11 @@ export function LeadManagementTable() {
           options={editingCell.options}
         />
       )}
+      <LeadForm
+        isOpen={isAddLeadModalOpen}
+        onClose={() => setIsAddLeadModalOpen(false)}
+        onSave={handleAddLead}
+      />
     </div>
   );
 }

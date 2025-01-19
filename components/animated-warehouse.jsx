@@ -147,3 +147,4 @@ export function AnimatedWarehouse() {
     </motion.div>
   );
 }
+//checked

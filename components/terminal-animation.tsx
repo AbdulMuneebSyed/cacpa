@@ -45,3 +45,4 @@ export function TerminalAnimation({ commands }: TerminalAnimationProps) {
     </div>
   );
 }
+//checked

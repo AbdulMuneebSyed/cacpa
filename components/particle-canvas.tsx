@@ -131,3 +131,4 @@ export function ParticleCanvas() {
     />
   );
 }
+//if (!ctx || !canvas)return;

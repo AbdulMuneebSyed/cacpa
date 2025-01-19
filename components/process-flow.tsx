@@ -58,3 +58,4 @@ export function ProcessFlow({ steps }: ProcessFlowProps) {
     </div>
   );
 }
+if (!ctx || !canvas) return;

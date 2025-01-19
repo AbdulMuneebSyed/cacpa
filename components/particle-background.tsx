@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 export function ParticleBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -54,10 +54,10 @@ export function ParticleBackground() {
         const dx = mouseX - this.x;
         const dy = mouseY - this.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        const forceDirectionX = dx / distance;
-        const forceDirectionY = dy / distance;
+        const forceDirectionX = dx / distance || 0; // Prevent NaN
+        const forceDirectionY = dy / distance || 0;
         const maxDistance = mouseRadius;
-        const force = (maxDistance - distance) / maxDistance;
+        const force = (maxDistance - distance) / maxDistance || 0;
         const directionX = forceDirectionX * force * this.density;
         const directionY = forceDirectionY * force * this.density;
 
@@ -79,6 +79,7 @@ export function ParticleBackground() {
 
     function init() {
       particles.length = 0;
+      if (!ctx || !canvas) return;
       for (let i = 0; i < particleCount; i++) {
         const x = Math.random() * canvas.width;
         const y = Math.random() * canvas.height;
@@ -87,7 +88,8 @@ export function ParticleBackground() {
     }
 
     function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!ctx || !canvas)return;
+       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
@@ -119,6 +121,7 @@ export function ParticleBackground() {
     }
 
     function handleResize() {
+      if (!ctx || !canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       init();

@@ -92,3 +92,4 @@ export function FramerModal({
 export function ModalContent({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
+//checked

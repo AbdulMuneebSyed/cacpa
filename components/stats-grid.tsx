@@ -50,3 +50,4 @@ export function StatsGrid({ stats }: StatsGridProps) {
     </div>
   );
 }
+//checked

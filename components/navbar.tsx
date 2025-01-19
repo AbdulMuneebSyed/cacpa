@@ -73,3 +73,4 @@ function Navbar({ className }: { className?: string }) {
 }
 
 export default Navbar;
+//checked

@@ -50,3 +50,4 @@ export const AnimatedBackground = ({
 };
 
 export default AnimatedBackground;
+//checked

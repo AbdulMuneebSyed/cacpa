@@ -80,3 +80,4 @@ export function ServicePanel({ title, description, icon: Icon, index, color }: S
   )
 }
 
+//checked
