@@ -11,7 +11,7 @@ const LandingPageBanner = () => {
         transition={{ duration: 1 }}
         className="text-base sm:text-xl font-bold text-blue-800"
       >
-        Unleash Your Business Potential With Insights Consulting Services
+        Unleash Your Business Potential With Capco
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 50 }}
