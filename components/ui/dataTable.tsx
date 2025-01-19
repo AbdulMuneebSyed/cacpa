@@ -84,8 +84,11 @@ const data: Lead[] = [
   },
   // Add more sample data here
 ];
+type CustomColumnDef<TData extends object> = ColumnDef<TData> & {
+  options?: string[]; // Add the `options` property as an optional array of strings
+};
 
-export const columns: ColumnDef<Lead, any, any, any>[] = [
+export const columns: CustomColumnDef<Lead>[] = [
   {
     id: "select",
     header: ({ table }: { table: any }) => (
