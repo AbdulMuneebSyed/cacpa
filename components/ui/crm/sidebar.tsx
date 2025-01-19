@@ -167,12 +167,20 @@ export const SidebarLink = ({
   const { open, animate } = useSidebar();
   return (
     <Link
-      href={link.href}
+      href={link.href == "logout" ? "/logout" : link.href}
       className={cn(
         "flex items-center justify-start gap-2  group/sidebar py-2",
         className
       )}
       {...props}
+      onClick={()=>{
+          if (link.href == "logout") {
+            console.log("bye from logout");
+            localStorage.removeItem("user");
+            const user = localStorage.getItem("user");
+            console.log("logging out ", user);
+          }
+      }}
     >
       {link.icon}
 
@@ -188,3 +196,8 @@ export const SidebarLink = ({
     </Link>
   );
 };
+
+
+
+
+

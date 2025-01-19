@@ -40,52 +40,30 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { EditModal } from "@/components/edit-model";
 import { LeadForm, LeadData } from "@/components/lead-form";
+import {
+  createClient,
+  PostgrestResponse,
+  SupabaseClient,
+} from "@supabase/supabase-js";
 
 type Lead = LeadData & {
-  id: string;
+  id_: string;
   createDate: string;
   createBy: string;
   editDate: string;
   editBy: string;
 };
 
-const data: Lead[] = [
-  {
-    id: "1",
-    accountName: "Acme Corp",
-    leadSource: "Trade Show",
-    title: "New Lead",
-    stage: "Demo",
-    status: "Qualified",
-    leadOwner: "John Doe",
-    industry: "Agriculture",
-    services: "Consulting",
-    products: "Product A",
-    rating: "Hot",
-    leadFiscalPeriod: "Q2",
-    assignedToSalesTeam: "Team A",
-    domains: "Domain 1",
-    deploymentType: "Cloud",
-    leadOverview: "Potential big client",
-    leadGeneratedMonth: "January",
-    createDate: "2023-01-15",
-    createBy: "System",
-    editDate: "2023-01-20",
-    editBy: "Jane Smith",
-  },
-  // Add more sample data here
-];
+// Initialize Supabase client
+const supabase: SupabaseClient = createClient(
+  "https://cjrzpzawafiudegfzcbn.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNqcnpwemF3YWZpdWRlZ2Z6Y2JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU3MzI5ODEsImV4cCI6MjA1MTMwODk4MX0.tYE7pFDPWjNOC8uYrs7bvOwsvTd2W5IWUgJx1T-lPu8"
+);
+
 type CustomColumnDef<TData extends object> = ColumnDef<TData> & {
-  options?: string[]; // Add the `options` property as an optional array of strings
+  options?: string[]; // Add the options property as an optional array of strings
 };
 
 export const columns: CustomColumnDef<Lead>[] = [
@@ -109,11 +87,14 @@ export const columns: CustomColumnDef<Lead>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: "id_",
+    header: "Id",
+    cell: ({ row }: { row: any }) => row.getValue("id_"),
+  },
+  {
     accessorKey: "accountName",
     header: "Account Name",
-    cell: ({ row }: { row: any }) => (
-      <Input defaultValue={row.getValue("accountName")} />
-    ),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("accountName")}</p>,
   },
   {
     accessorKey: "leadSource",
@@ -125,14 +106,12 @@ export const columns: CustomColumnDef<Lead>[] = [
       "Partner",
       "Tender Portal",
     ],
-    cell: ({ row }: { row: any }) => row.getValue("leadSource"),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("leadSource")}</p>,
   },
   {
     accessorKey: "title",
     header: "Title",
-    cell: ({ row }: { row: any }) => (
-      <Input defaultValue={row.getValue("title")} />
-    ),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("title")}</p>,
   },
   {
     accessorKey: "stage",
@@ -146,20 +125,18 @@ export const columns: CustomColumnDef<Lead>[] = [
       "Proposal",
       "Submitted",
     ],
-    cell: ({ row }: { row: any }) => row.getValue("stage"),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("stage")}</p>,
   },
   {
     accessorKey: "status",
     header: "Status",
     options: ["New", "Qualified", "Working", "Nurturing"],
-    cell: ({ row }: { row: any }) => row.getValue("status"),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("status")}</p>,
   },
   {
     accessorKey: "leadOwner",
     header: "Lead Owner",
-    cell: ({ row }: { row: any }) => (
-      <Input defaultValue={row.getValue("leadOwner")} />
-    ),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("leadOwner")}</p>,
   },
   {
     accessorKey: "industry",
@@ -171,87 +148,79 @@ export const columns: CustomColumnDef<Lead>[] = [
       "Mining and Quarrying",
       "Oil and Gas",
     ],
-    cell: ({ row }: { row: any }) => row.getValue("industry"),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("industry")}</p>,
   },
   {
     accessorKey: "services",
     header: "Services",
-    cell: ({ row }: { row: any }) => (
-      <Input defaultValue={row.getValue("services")} />
-    ),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("services")}</p>,
   },
   {
     accessorKey: "products",
     header: "Products",
-    cell: ({ row }: { row: any }) => (
-      <Input defaultValue={row.getValue("products")} />
-    ),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("products")}</p>,
   },
   {
     accessorKey: "rating",
     header: "Rating",
     options: ["Warm", "Cold", "Hot"],
-    cell: ({ row }: { row: any }) => row.getValue("rating"),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("rating")}</p>,
   },
   {
     accessorKey: "leadFiscalPeriod",
     header: "Lead Fiscal Period",
     options: ["Q1", "Q2", "Q3", "Q4"],
-    cell: ({ row }: { row: any }) => row.getValue("leadFiscalPeriod"),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("leadFiscalPeriod")}</p>,
   },
   {
     accessorKey: "assignedToSalesTeam",
     header: "Assigned To Sales Team",
     cell: ({ row }: { row: any }) => (
-      <Input defaultValue={row.getValue("assignedToSalesTeam")} />
+      <p>{row.getValue("assignedToSalesTeam")}</p>
     ),
   },
   {
     accessorKey: "domains",
     header: "Domains",
-    cell: ({ row }: { row: any }) => (
-      <Input defaultValue={row.getValue("domains")} />
-    ),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("domains")}</p>,
   },
   {
     accessorKey: "deploymentType",
     header: "Deployment Type",
-    cell: ({ row }: { row: any }) => (
-      <Input defaultValue={row.getValue("deploymentType")} />
-    ),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("deploymentType")}</p>,
   },
   {
     accessorKey: "leadOverview",
     header: "Lead Overview",
-    cell: ({ row }: { row: any }) => (
-      <Input defaultValue={row.getValue("leadOverview")} />
-    ),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("leadOverview")}</p>,
   },
   {
     accessorKey: "leadGeneratedMonth",
     header: "Lead Generated Month",
     options: ["January", "February", "March", "April", "May"],
-    cell: ({ row }: { row: any }) => row.getValue("leadGeneratedMonth"),
+    cell: ({ row }: { row: any }) => (
+      <p>{row.getValue("leadGeneratedMonth")}</p>
+    ),
   },
   {
     accessorKey: "createDate",
     header: "Create Date",
-    cell: ({ row }: { row: any }) => row.getValue("createDate"),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("createDate")}</p>,
   },
   {
     accessorKey: "createBy",
     header: "Create By",
-    cell: ({ row }: { row: any }) => row.getValue("createBy"),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("createBy")}</p>,
   },
   {
     accessorKey: "editDate",
     header: "Edit Date",
-    cell: ({ row }: { row: any }) => row.getValue("editDate"),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("editDate")}</p>,
   },
   {
     accessorKey: "editBy",
     header: "Edit By",
-    cell: ({ row }: { row: any }) => row.getValue("editBy"),
+    cell: ({ row }: { row: any }) => <p>{row.getValue("editBy")}</p>,
   },
 ];
 
@@ -263,15 +232,76 @@ export function LeadManagementTable() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  const [data, setData] = React.useState<Lead[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+  const [change, setChange] = React.useState(true);
 
-  const [editingCell, setEditingCell] = React.useState<{
-    row: number;
-    column: string;
-    value: string;
-    options?: string[];
-  } | null>(null);
+ React.useEffect(() => {
+   const fetchData = async () => {
+     setIsLoading(true);
+     const { data, error }: PostgrestResponse<Lead> = await supabase
+       .from("leads")
+       .select("*");
 
-  const [isAddLeadModalOpen, setIsAddLeadModalOpen] = React.useState(false);
+     if (error) {
+       setError(error.message);
+       setIsLoading(false);
+       return;
+     }
+
+     console.log("connected to DB + 254");
+     console.log(data);
+
+     // Sort the data array by id_
+     const sortedData = (data || []).sort((a, b) => {
+       if (a.id_ < b.id_) return -1; // Ascending order
+       if (a.id_ > b.id_) return 1;
+       return 0;
+     });
+
+     setData(sortedData);
+     setIsLoading(false);
+   };
+
+   // Initial fetch
+   fetchData();
+
+   // Subscribe to changes in the 'leads' table
+   const subscription = supabase
+     .channel("leads")
+     .on(
+       "postgres_changes",
+       { event: "INSERT", schema: "public", table: "leads" },
+       (payload) => {
+         console.log("New data inserted:", payload);
+         fetchData(); // Re-fetch data on insert
+       }
+     )
+     .on(
+       "postgres_changes",
+       { event: "UPDATE", schema: "public", table: "leads" },
+       (payload) => {
+         console.log("Data updated:", payload);
+         fetchData(); // Re-fetch data on update
+       }
+     )
+     .on(
+       "postgres_changes",
+       { event: "DELETE", schema: "public", table: "leads" },
+       (payload) => {
+         console.log("Data deleted:", payload);
+         fetchData(); // Re-fetch data on delete
+       }
+     )
+     .subscribe();
+
+   // Cleanup the subscription when the component is unmounted
+   return () => {
+     subscription.unsubscribe();
+   };
+ }, [change]);
+
 
   const table = useReactTable({
     data,
@@ -291,44 +321,123 @@ export function LeadManagementTable() {
       rowSelection,
     },
   });
-
+  const [isAddLeadModalOpen, setIsAddLeadModalOpen] = React.useState(false);
+  const [editingCell, setEditingCell] = React.useState<{
+    row: number;
+    column: string;
+    value: string;
+    options?: string[];
+  } | null>(null);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
   const handleCellClick = (
     row: number,
     column: string,
     value: string,
     options?: string[]
   ) => {
+    console.log("this is", row, column, value);
     setEditingCell({ row, column, value, options });
   };
 
-  const handleSaveEdit = (value: string) => {
-    if (editingCell) {
-      const updatedData = [...data];
-      updatedData[editingCell.row] = {
-        ...updatedData[editingCell.row],
-        [editingCell.column]: value,
-      };
-      // Here you would typically update your data source or make an API call
-      console.log("Updated data:", updatedData);
+ const handleSaveEdit = async (value: string) => {
+   if (editingCell) {
+     setChange(false);
+     const updatedData = [...data];
+
+     // Get the current date and time in the desired format
+     const currentDate = new Date();
+     const formattedDate =
+       `${currentDate.getDate().toString().padStart(2, "0")}/` +
+       `${(currentDate.getMonth() + 1).toString().padStart(2, "0")}/` +
+       `${currentDate.getFullYear().toString().slice(-2)} ` +
+       `${currentDate.getHours().toString().padStart(2, "0")}:` +
+       `${currentDate.getMinutes().toString().padStart(2, "0")}`;
+
+     const updatedRow = {
+       ...updatedData[editingCell.row],
+       [editingCell.column]: value,
+       editDate: formattedDate, // Set formatted date here
+     };
+     updatedData[editingCell.row] = updatedRow;
+
+     try {
+       const { error } = await supabase
+         .from("leads") // Replace with your table name
+         .update({
+           [editingCell.column]: value,
+           editDate: updatedRow.editDate, // Update editDate as well
+         })
+         .eq("id_", updatedRow.id_); // Assuming 'id' is your primary key column
+       if (error) {
+         console.error("Error updating data in Supabase:", error);
+       } else {
+         console.log("Updated data:", updatedData);
+       }
+       setChange(true);
+     } catch (err) {
+       console.error("Unexpected error:", err);
+     }
+   }
+   setEditingCell(null);
+ };
+
+
+
+
+  const handleAddLead = async (leadData: LeadData) => {
+    setChange(false);
+   const newLead: Lead = {
+     ...leadData,
+     id_: (data.length + 1).toString(),
+     createDate:
+       new Date().toLocaleString("en-US", {
+         hour: "2-digit",
+         minute: "2-digit",
+         hour12: true,
+       }) +
+       " " +
+       new Date().getDate() +
+       ", " +
+       (new Date().getMonth() + 1) +
+       ", " +
+       new Date().getFullYear(),
+     createBy: "Current User", // You can replace this with the actual user information
+     editDate:
+       new Date().toLocaleString("en-US", {
+         hour: "2-digit",
+         minute: "2-digit",
+         hour12: true,
+       }) +
+       " " +
+       new Date().getDate() +
+       ", " +
+       (new Date().getMonth() + 1) +
+       ", " +
+       new Date().getFullYear(),
+     editBy: "Current User", // Same for editBy, you can set the actual user
+   };
+
+
+
+    try {
+      const { error } = await supabase
+        .from("leads") // Replace with your actual table name
+        .insert([newLead]); // Inserts the new lead into Supabase
+
+      if (error) {
+        console.error("Error inserting data into Supabase:", error);
+      } else {
+        console.log("New lead added:", newLead);
+        data.push(newLead); // Update local state after successful insertion
+        setIsAddLeadModalOpen(false);
+        setChange(true);
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
     }
-    setEditingCell(null);
   };
 
-  const handleAddLead = (leadData: LeadData) => {
-    const newLead: Lead = {
-      ...leadData,
-      id: (data.length + 1).toString(),
-      createDate: new Date().toISOString(),
-      createBy: "Current User",
-      editDate: new Date().toISOString(),
-      editBy: "Current User",
-    };
-    // Here you would typically update your data source or make an API call
-    console.log("New lead:", newLead);
-    // For this example, we'll just add it to the existing data
-    data.push(newLead);
-    setIsAddLeadModalOpen(false);
-  };
 
   return (
     <div className="w-full">
@@ -350,7 +459,10 @@ export function LeadManagementTable() {
                 Columns <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent
+              align="end"
+              className="max-h-96 overflow-y-scroll"
+            >
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
@@ -381,60 +493,52 @@ export function LeadManagementTable() {
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="p-2">
-                      <div
-                        className="w-fit cursor-pointer"
-                        onClick={() =>
+            {table.getRowModel().rows.map((row) => (
+              <TableRow key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id} className="min-w-fit cursor-pointer">
+                    <div
+                      className="w-full cursor-pointer"
+                      onClick={() => {
+                        if (
+                          cell.column.id != "select" &&
+                          cell.column.id != "editBy" &&
+                          cell.column.id != "editDate" &&
+                          cell.column.id != "createBy" &&
+                          cell.column.id != "createDate"
+                        ) {
                           handleCellClick(
                             row.index,
                             cell.column.id,
                             cell.getValue() as string,
                             (cell.column.columnDef as any).options
-                          )
+                          );
                         }
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </div>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
+                      }}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </div>
+                  </TableCell>
+                ))}
               </TableRow>
-            )}
+            ))}
           </TableBody>
         </Table>
       </div>
@@ -442,24 +546,6 @@ export function LeadManagementTable() {
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
         </div>
       </div>
       {editingCell && (
@@ -484,3 +570,7 @@ export function LeadManagementTable() {
     </div>
   );
 }
+function useEffect(arg0: () => () => void, arg1: boolean[]) {
+  throw new Error("Function not implemented.");
+}
+

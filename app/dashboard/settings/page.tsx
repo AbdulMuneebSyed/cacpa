@@ -1,5 +1,16 @@
 "use client";
-import { LeadManagementTable } from "@/components/ui/dataTable";
+
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/card";
+import ChangePasswordModal from "@/components/ChangePasswordModal";
+
 import React, { useState, useEffect } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/crm/sidebar";
 import {
@@ -19,14 +30,14 @@ import { useRouter } from "next/navigation"; // Importing useRouter
 export default function Page() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [user,setUser] = useState("");
+  const [user, setUser] = useState("");
   // Check if the user is logged in when the component mounts
   useEffect(() => {
     const user = localStorage.getItem("user");
-    console.log(user);
+
     if (!user) {
-      router.push("/unauthorized"); 
-    }else{
+      router.push("/unauthorized");
+    } else {
       setUser(JSON.parse(user));
     }
   }, []);
@@ -69,36 +80,38 @@ export default function Page() {
         "h-screen w-screen" // for your use case, use `h-screen` instead of `h-[60vh]`
       )}
     >
-      {user && <Sidebar open={open} setOpen={setOpen}>
-        <SidebarBody className="justify-between h-full gap-10">
-          <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-            {open ? <Logo /> : <LogoIcon />}
-            <div className="mt-8 flex flex-col gap-2">
-              {links.map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
-              ))}
+      {user && (
+        <Sidebar open={open} setOpen={setOpen}>
+          <SidebarBody className="justify-between h-full gap-10">
+            <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+              {open ? <Logo /> : <LogoIcon />}
+              <div className="mt-8 flex flex-col gap-2">
+                {links.map((link, idx) => (
+                  <SidebarLink key={idx} link={link} />
+                ))}
+              </div>
             </div>
-          </div>
-          <div>
-            <SidebarLink
-              link={{
-                label: "Muneeb",
-                href: "#",
-                icon: (
-                  <Image
-                    src={profile}
-                    className="h-7 w-7 flex-shrink-0 rounded-full"
-                    width={50}
-                    height={50}
-                    alt="Avatar"
-                  />
-                ),
-              }}
-            />
-          </div>
-        </SidebarBody>
-      </Sidebar>}
-      {user && <Dashboard />}
+            <div>
+              <SidebarLink
+                link={{
+                  label: "Muneeb",
+                  href: "#",
+                  icon: (
+                    <Image
+                      src={profile}
+                      className="h-7 w-7 flex-shrink-0 rounded-full"
+                      width={50}
+                      height={50}
+                      alt="Avatar"
+                    />
+                  ),
+                }}
+              />
+            </div>
+          </SidebarBody>
+        </Sidebar>
+      )}
+      {user && <Settings />}
     </div>
   );
 }
@@ -124,12 +137,39 @@ const LogoIcon = () => {
     </Link>
   );
 };
+const Settings = () => {
+  const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] =
+    useState(false);
 
-const Dashboard = () => {
   return (
     <div className="container mx-auto py-10">
-      <h1 className="text-2xl font-bold mb-5">Lead Management</h1>
-      <LeadManagementTable />
+      <Card>
+        <CardHeader>
+          <CardTitle>Settings</CardTitle>
+          <CardDescription>
+            Manage your account settings and set preferences.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <h3 className="text-lg font-medium">Security</h3>
+          <p className="text-sm text-gray-500 mt-1 mb-4">
+            Update your password and manage your account security.
+          </p>
+          <Button onClick={() => setIsChangePasswordModalOpen(true)}>
+            Change Password
+          </Button>
+        </CardContent>
+        <CardFooter>
+          <p className="text-sm text-gray-500">
+            Last updated: {new Date().toLocaleDateString()}
+          </p>
+        </CardFooter>
+      </Card>
+
+      <ChangePasswordModal
+        isOpen={isChangePasswordModalOpen}
+        onClose={() => setIsChangePasswordModalOpen(false)}
+      />
     </div>
   );
 };

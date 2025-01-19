@@ -1,35 +1,49 @@
 "use client";
+
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabaseClient"; // I
+import { supabase } from "@/lib/supabaseClient";
 import { FramerModal, ModalContent } from "@/components/ui/loginModel";
 
 const LoginButton: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter(); 
+  const [loading, setLoading] = useState(false); // Loading state
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    // Basic validation
+    if (!email || !password) {
+      alert("Please enter both email and password.");
+      return;
+    }
 
+    setLoading(true);
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+        email: email as string,
+        password: password as string,
       });
-
       if (error) {
         console.error(error.message);
-        alert("Login failed: " + error.message);
-      } else {
+        alert("Login failed. Please check your credentials.");
+      } else if (data) {
         console.log("Login successful", data);
-        // setModalOpen(false);
-        router.push("/dashboard"); 
+        router.push("/dashboard"); // Navigate after successful login
+        localStorage.setItem("user", JSON.stringify(data));
+         let user = localStorage.getItem("user");
+         if(user){
+           user = JSON.parse(user);
+         }
+        console.log(user)
       }
     } catch (error) {
       console.error("An unexpected error occurred", error);
-      alert("An unexpected error occurred");
+      alert("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -44,7 +58,6 @@ const LoginButton: React.FC = () => {
 
       <FramerModal open={modalOpen} setOpen={setModalOpen}>
         <ModalContent>
-          {/* Login Form Container */}
           <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-8 space-y-6">
             <h2 className="text-3xl font-semibold text-gray-800 text-center">
               Login
@@ -53,9 +66,7 @@ const LoginButton: React.FC = () => {
               Please enter your credentials to continue.
             </p>
 
-            {/* Form */}
             <div className="space-y-4">
-              {/* Email Input */}
               <div className="flex flex-col space-y-2">
                 <label
                   htmlFor="email"
@@ -73,7 +84,6 @@ const LoginButton: React.FC = () => {
                 />
               </div>
 
-              {/* Password Input */}
               <div className="flex flex-col space-y-2">
                 <label
                   htmlFor="password"
@@ -91,12 +101,16 @@ const LoginButton: React.FC = () => {
                 />
               </div>
 
-              {/* Login Button */}
               <button
                 onClick={handleLogin}
-                className="w-full h-12 rounded-md bg-gradient-to-r from-[#19b2b0] to-[#3f5964] text-white font-medium transition-all ease-in-out duration-300 hover:scale-105 hover:bg-gradient-to-r focus:outline-none focus:ring-2 focus:ring-[#19b2b0] focus:ring-offset-2"
+                disabled={loading} // Disable button while loading
+                className={`w-full h-12 rounded-md ${
+                  loading
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-gradient-to-r from-[#19b2b0] to-[#3f5964] text-white"
+                } font-medium transition-all ease-in-out duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#19b2b0] focus:ring-offset-2`}
               >
-                Login
+                {loading ? "Logging in..." : "Login"}
               </button>
             </div>
           </div>
@@ -107,4 +121,3 @@ const LoginButton: React.FC = () => {
 };
 
 export default LoginButton;
-//checked
