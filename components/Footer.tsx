@@ -294,23 +294,23 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li className="text-lg">
-                  <Link href="/service/hrm">Human Resource Management</Link>
+                  <Link href="/services/hrm">Human Resource Management</Link>
                 </li>
                 <li className="text-lg">
-                  <Link href="/service/dmbc">
+                  <Link href="/services/dmbc">
                     Digital Marketing & Business Consulting
                   </Link>
                 </li>
                 <li className="text-lg">
-                  <Link href="/service/wm">Warehouse Management</Link>
+                  <Link href="/services/wm">Warehouse Management</Link>
                 </li>
                 <li className="text-lg">
-                  <Link href="/service/grmc">
+                  <Link href="/services/grmc">
                     Governance, Risk Management & Compliance
                   </Link>
                 </li>
                 <li className="text-lg">
-                  <Link href="/service/wdhs">
+                  <Link href="/services/wdhs">
                     Web Development & Hosting Services
                   </Link>
                 </li>
