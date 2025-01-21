@@ -306,7 +306,7 @@ const ProfilePage = () => {
   try {
     const { data, error } = await supabase
       .from('profiles')
-      .upsert({ ...updatedData, email: user.email })
+      .upsert({ ...updatedData})
       .eq('email', user.email); // Match the email to update the correct profile
 
     if (error) throw error;

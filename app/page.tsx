@@ -17,7 +17,7 @@ export default function Home() {
         <Navbar2 />
       </div>
       <ServiceSlider/>
-      <LandingPageBanner />
+      {/* <LandingPageBanner /> */}
       <About />
       <LandServices />
       <Footer />

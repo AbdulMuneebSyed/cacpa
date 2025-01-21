@@ -22,7 +22,6 @@ interface EditProfileModalProps {
 
 interface UserData {
   name: string;
-  email: string;
   role: string;
   location: string;
   bio: string;
@@ -65,19 +64,6 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 id="name"
                 name="name"
                 value={formData.name}
-                onChange={handleChange}
-                className="col-span-3"
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="email" className="text-right">
-                Email
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                value={formData.email}
                 onChange={handleChange}
                 className="col-span-3"
               />

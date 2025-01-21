@@ -6,12 +6,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import web from "@/public/hero-eb.jpeg";
-import bmc from "@/public/hero-bmc.jpeg";
-import dmbc from "@/public/hero-dmbc.jpeg";
-import grmc from "@/public/hero-grmc.jpeg";
-import hrm from "@/public/hero-hrm.jpeg";
-import wm from "@/public/hero-wm.jpeg";
+import web from "@/public/hero-eb.jpeg"
+import bmc from "@/public/hero-bmc.jpg";
+import dmbc from "@/public/hero-dmbc.jpg";
+import grmc from "@/public/hero-grmc.jpg";
+import hrm from "@/public/hero-hrm.jpg";
+import wm from "@/public/hero-wm.jpg";
 import type { StaticImageData } from "next/image";
 
 interface Service {

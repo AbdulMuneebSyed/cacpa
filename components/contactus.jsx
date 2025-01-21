@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import emailjs from "emailjs-com";
-
+import Image from "next/image";
 export default function ContactUs() {
   const servicesItems = [
     "Business Management & Consultancy",
@@ -72,9 +72,13 @@ export default function ContactUs() {
   return (
     <main className="flex min-h-screen">
       <div className="flex-1 hidden lg:block">
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1697135807547-5fa9fd22d9ec?auto=format&fit=crop&q=80&w=3387&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="photo"
+          width={100}
+          height={100}
           className="w-full h-full object-cover"
+          priority
         />
       </div>
       <div className="flex-1 lg:flex lg:justify-center pt-16 md:pt-0 lg:min-h-screen">

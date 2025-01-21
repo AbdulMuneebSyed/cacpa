@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
-
+import about from "@/public/parallax/OIP.jpg"
 // Register the ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,7 +54,7 @@ const BackgroundImage = ({ visible }: { visible: boolean }) => (
     }`}
     style={{
       backgroundImage:
-        "url('https://inacomp.net/wp-content/uploads/2015/06/IT-Engineering.jpg')",
+        `url('${about.src}')`,
       backgroundAttachment: "fixed",
     }}
   />
