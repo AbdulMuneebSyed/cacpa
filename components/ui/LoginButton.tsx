@@ -14,6 +14,7 @@ const LoginButton: React.FC = () => {
 
   const handleLogin = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+
     // Basic validation
     if (!email || !password) {
       alert("Please enter both email and password.");
@@ -22,22 +23,53 @@ const LoginButton: React.FC = () => {
 
     setLoading(true);
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      // Sign in the user
+      const { data: authData, error } = await supabase.auth.signInWithPassword({
         email: email as string,
         password: password as string,
       });
+
       if (error) {
         console.error(error.message);
         alert("Login failed. Please check your credentials.");
-      } else if (data) {
-        console.log("Login successful", data);
-        router.push("/dashboard"); // Navigate after successful login
-        localStorage.setItem("user", JSON.stringify(data));
-         let user = localStorage.getItem("user");
-         if(user){
-           user = JSON.parse(user);
-         }
-        console.log(user)
+      } else if (authData) {
+        console.log("Login successful", authData);
+
+        // Extract user details from auth response
+        const { user } = authData;
+
+        // Check if uid exists in the `users` table
+        const { data: userData, error: userError } = await supabase
+          .from("profiles")
+          .select("user_id")
+          .eq("user_id", user.id) // Assuming `id` is the user_id in the `users` table
+          .single();
+
+        if (userError) {
+          console.error(userError.message);
+        }
+
+        // If the user does not exist in the `users` table, insert new record
+        if (!userData) {
+          const { error: insertError } = await supabase.from("profiles").insert({
+            user_id: user.id, // User's UID
+            email: user.email, // User's email
+            joined: new Date().toISOString(), // Current date
+          });
+
+          if (insertError) {
+            console.error(insertError.message);
+            alert("An error occurred while updating user information.");
+          } else {
+            console.log("New user added to the database.");
+          }
+        } else {
+          console.log("User already exists in the database.");
+        }
+
+        // Navigate after successful login
+        router.push("/dashboard");
+        localStorage.setItem("user", JSON.stringify(authData));
       }
     } catch (error) {
       console.error("An unexpected error occurred", error);
@@ -46,6 +78,7 @@ const LoginButton: React.FC = () => {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="h-full flex justify-center items-center">

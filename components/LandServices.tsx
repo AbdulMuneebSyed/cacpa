@@ -8,49 +8,54 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 import Footer from "./Footer";
-
+import grmc from "@/public/manage.png";
+import bmc from "@/public/biz.png"
+import dmbc from "@/public/ad.png"
+import wm from "@/public/mar.png"
+import wdhs from "@/public/web.png"
+import hrm from "@/public/hr.png"
 const services = [
   {
     name: "Business Management",
     description:
       "Providing expert advice to help businesses achieve growth, optimize operations, and maintain a competitive edge in the market.",
     route: "/services/bmc",
-    image: pic,
+    image: bmc,
   },
   {
     name: "Human Resource Management",
     description:
       "Comprehensive solutions for recruiting, training, and retaining top talent while ensuring a positive workplace environment.",
     route: "/services/hrm",
-    image: pic,
+    image: hrm,
   },
   {
     name: "Digital Marketing",
     description:
       "Driving brand growth and customer engagement through innovative online strategies, SEO, and targeted marketing campaigns.",
     route: "/services/dmbc",
-    image: pic,
+    image: dmbc,
   },
   {
     name: "Warehouse Management",
     description:
       "Streamlining inventory management and logistics to maximize efficiency and reduce operational costs.",
     route: "/services/wm",
-    image: pic,
+    image: wm,
   },
   {
     name: "Governance & Compliance",
     description:
       "Ensuring organizational accountability, minimizing risks, and adhering to regulatory requirements with robust compliance frameworks.",
     route: "/services/grmc",
-    image: pic,
+    image: grmc,
   },
   {
     name: "Web Development",
     description:
       "Building modern, responsive, and feature-rich websites to enhance your digital presence and user experience.",
     route: "/services/wm",
-    image: pic,
+    image: wdhs,
   },
 ];
 
@@ -80,20 +85,18 @@ export default function Services() {
             <Image
               src={service.image}
               alt={service.name}
-              className="w-full h-40 object-cover rounded-t-lg mb-4"
+              className="w-full h-40 object-contain rounded-t-lg mb-4"
             />
             <h2 className="text-xl font-semibold mb-2">{service.name}</h2>
             <p className="text-gray-600 mb-4">{service.description}</p>
             <Link href={service.route}>
-              <p className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-full">
+              <p className="text-white bg-[#508797] hover:bg-[#2f4f58] px-4 py-2 rounded-full">
                 Know More
               </p>
             </Link>
           </motion.div>
         ))}
-       
       </div>
-      
     </div>
   );
 }

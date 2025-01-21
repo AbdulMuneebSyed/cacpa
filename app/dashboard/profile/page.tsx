@@ -152,40 +152,64 @@ const LogoIcon = () => {
   );
 };
 
-
-
+import { supabase } from "@/lib/supabaseClient";
 
 const ProfilePage = () => {
-  const [user, setUser] = useState<any | null>(null); // User data fetched from localStorage
+  const [user, setUser] = useState<any | null>(null); // User data fetched from Supabase
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   useEffect(() => {
-    // Retrieve user data from localStorage
-    const userData = localStorage.getItem("user");
+    const fetchUserData = async () => {
+      const userEmail = localStorage.getItem("user"); // Get email from localStorage
+     
+      if (!userEmail) {
+        console.error("No email found in localStorage");
+        return;
+      }else{
+               const userJson = JSON.parse(userEmail); // Parse user data into JSON
+               const email = userJson.user.email;
+      
+        
+      const { data, error } = await supabase
+        .from("profiles") // Replace 'profiles' with your actual table name
+        .select("email, role, location, joined, name, bio")
+        .eq("email", email) // Match the email from localStorage
+        .single(); // assuming one user per session
 
-    if (userData) {
-        const temp = JSON.parse(userData);
-        setUser(temp.user); // Set the parsed user data to state
+      if (error) {
+        console.error("Error fetching profile:", error);
+        return;
+      }
+
+      if (data) {
+        setUser(data); // Set the fetched user data to state
+      }
     }
-  }, []);
+    };
 
-   useEffect(() => {
-     // Retrieve user data from localStorage
-     console.log("this is user ", user);
-   }, [user]);
+    fetchUserData();
+  }, []); // Empty dependency array to run on component mount
 
+  useEffect(() => {
+    console.log("this is user ", user);
+  }, [user]);
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear().toString().slice(-2); // Last 2 digits of the year
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Month (0-based, so add 1)
+    const day = date.getDate().toString().padStart(2, "0"); // Day
+
+    return `${year}/${month}/${day}`;
+  };
   if (!user) {
-    {console.log(user)}
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
 
-  return (
-    user ? (
-        <div className="min-h-screen w-screen bg-gray-100">
-        
+  return user ? (
+    <div className="min-h-screen w-screen bg-gray-100">
       <header className="relative h-48 md:h-64 bg-gray-300 overflow-hidden">
         <Image
-          src={user.cover_url || logo} // Fallback cover URL
+          src={user.cover_url || logo}
           alt="Profile cover"
           className="w-full h-full object-cover"
         />
@@ -195,19 +219,25 @@ const ProfilePage = () => {
           <CardHeader className="pb-0">
             <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-4">
               <Avatar className="w-32 h-32 border-4 border-white -mt-16">
-                <AvatarImage src={user?.avatar_url || "https://api.dicebear.com/6.x/avataaars/svg?seed=Jane"} className="bg-white"  />
+                <AvatarImage
+                  src={
+                    user?.avatar_url ||
+                    "https://api.dicebear.com/6.x/avataaars/svg?seed=Jane"
+                  }
+                  className="bg-white"
+                />
                 <AvatarFallback>
-                  {user?.full_name
+                  {user?.name
                     ?.split(" ")
                     ?.map((n: string) => n[0])
-                    ?.join("") || "Syed Abdul Muneeb"}
+                    ?.join("") || "User"}
                 </AvatarFallback>
               </Avatar>
               <div className="text-center sm:text-left">
                 <CardTitle className="text-2xl font-bold">
-                  {user?.full_name || "Syed Abdul Muneeb"}
+                  {user?.name || "Unknown User"}
                 </CardTitle>
-                <p className="text-gray-500">{user?.role || "Software developer"}</p>
+                <p className="text-gray-500">{user?.role || ""}</p>
               </div>
               <Button
                 className="absolute top-4 right-4"
@@ -240,12 +270,12 @@ const ProfilePage = () => {
                 <InfoItem
                   icon={<Calendar className="w-5 h-5" />}
                   label="Joined"
-                  value={user?.joined_date}
+                  value={user?.joined ? formatDate(user.joined) : "N/A"}
                 />
               </div>
               <div>
                 <h3 className="text-lg font-semibold mb-2">Bio</h3>
-                <p className="text-gray-600">{user.bio}</p>
+                <p className="text-gray-600">{user?.bio}</p>
                 <div className="mt-4 flex space-x-4">
                   <SocialLink
                     href={user?.twitter || "#"}
@@ -268,19 +298,32 @@ const ProfilePage = () => {
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
           userData={user}
-          onSave={(updatedData) => {
-            // Update user data both in state and localStorage
-            setUser({ ...user, ...updatedData });
-            localStorage.setItem(
-              "user",
-              JSON.stringify({ ...user, ...updatedData })
-            );
-          }}
+          onSave={async (updatedData) => {
+  // Update local state and localStorage
+  const updatedUser = { ...user, ...updatedData };
+  setUser(updatedUser);
+  // Update in Supabase (assuming you have a `profiles` table)
+  try {
+    const { data, error } = await supabase
+      .from('profiles')
+      .upsert({ ...updatedData, email: user.email })
+      .eq('email', user.email); // Match the email to update the correct profile
+
+    if (error) throw error;
+
+    console.log('Profile updated successfully:', data);
+  } catch (error) {
+    console.error('Error updating profile:', error);
+  }
+}}
         />
       </main>
-    </div>) : <div>Loading...</div> 
+    </div>
+  ) : (
+    <div>Loading...</div>
   );
 };
+
 
 
 const InfoItem = ({

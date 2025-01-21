@@ -73,8 +73,9 @@ export default function Home() {
       className="min-h-screen max-w-screen overflow-hidden bg-[#30444d]"
     >
       <ParticleBackground />
-      <Navbar2 />
-
+      <div className="fixed z-50 top-0 max-w-screen">
+              <Navbar2 />
+            </div>
       {/* Hero Section with Parallax */}
       <section className="relative min-h-screen overflow-hidden bg-gray-900 text-gray-200">
         <motion.div

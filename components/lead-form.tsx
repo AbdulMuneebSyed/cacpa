@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -34,6 +35,13 @@ export interface LeadData {
   services: string;
   products: string;
   rating: string;
+  region: string;
+  country: string;
+  leadCurrency: string;
+  estimatedAmount: string;
+  quotedAmount: string;
+  finalAmount: string;
+  fiscalPeriodByYear: string;
   leadFiscalPeriod: string;
   assignedToSalesTeam: string;
   domains: string;
@@ -48,23 +56,82 @@ const leadSourceOptions = [
   "Email Campaign",
   "Partner",
   "Tender Portal",
+  "Single Source",
+  "Advertisement",
+  "Cold Calls",
+  "Customer Event",
+  "Employee Referral",
+  "LinkedIn",
+  "Vendor Portal",
+  "Website",
+  "Personal Contact",
+  "Others",
 ];
 const stageOptions = [
   "Vendor Registration",
   "Demo",
   "POC",
-  "Technical",
-  "Clarification",
-  "Proposal",
-  "Submitted",
+  "Technical Clarification",
+  "Proposal Submitted",
+  "NEGOTIATION",
+  "DEALS WON",
+  "PROPOSAL SUBMITTED",
+  "BQ SUBMITTED",
+  "RFP",
+  "RFI",
+  "RFQ",
+  "On Hold",
 ];
-const statusOptions = ["New", "Qualified", "Working", "Nurturing"];
+const statusOptions = [
+  "New",
+  "Qualified",
+  "Working",
+  "Nurturing",
+  "Converted Opportunity",
+  "On Hold",
+  "Others",
+];
 const industryOptions = [
   "Agriculture",
   "Forestry",
   "Fishing and Aquaculture",
   "Mining and Quarrying",
   "Oil and Gas",
+  "Construction",
+  "Food and Beverage Manufacturing",
+  "Textiles and Apparel",
+  "Chemical and Pharmaceutical Manufacturing",
+  "Automobile and Transportation Equipment Manufacturing",
+  "Steel and Metal Production",
+  "Electronics and Electrical Equipment Manufacturing",
+  "Machinery and Industrial Equipment",
+  "Paper and Packaging",
+  "Plastic and Rubber Products Manufacturing",
+  "Healthcare and Pharmaceuticals",
+  "Education and Training",
+  "Hospitality and Tourism",
+  "Retail and E-Commerce",
+  "Banking and Financial Services",
+  "Insurance",
+  "Telecommunications",
+  "Transportation and Logistics",
+  "Utilities (Electricity, Water, Gas)",
+  "Real Estate and Property Management",
+  "Media and Entertainment",
+  "IT and Software Development",
+  "Consulting Services",
+  "Legal Services",
+  "Research and Development (R&D)",
+  "Biotechnology",
+  "Aerospace",
+  "Renewable Energy",
+  "Data Analytics and Artificial Intelligence",
+  "Digital Marketing and Advertising",
+  "Cloud Computing and Cybersecurity",
+  "Government and Public Administration",
+  "Non-Profit and Social Enterprises",
+  "Defense and Military",
+  "Space Exploration and Technology",
 ];
 const ratingOptions = ["Warm", "Cold", "Hot"];
 const fiscalPeriodOptions = ["Q1", "Q2", "Q3", "Q4"];
@@ -95,6 +162,13 @@ export function LeadForm({ isOpen, onClose, onSave }: LeadFormProps) {
     services: "",
     products: "",
     rating: "",
+    region: "",
+    country: "",
+    leadCurrency: "",
+    estimatedAmount: "",
+    quotedAmount: "",
+    finalAmount: "",
+    fiscalPeriodByYear: "",
     leadFiscalPeriod: "",
     assignedToSalesTeam: "",
     domains: "",
@@ -233,7 +307,7 @@ export function LeadForm({ isOpen, onClose, onSave }: LeadFormProps) {
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select industry" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="h-60 overflow-y-scroll">
                   {industryOptions.map((option) => (
                     <SelectItem key={option} value={option}>
                       {option}
@@ -285,6 +359,90 @@ export function LeadForm({ isOpen, onClose, onSave }: LeadFormProps) {
                   ))}
                 </SelectContent>
               </Select>
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="region" className="text-right">
+                Region
+              </Label>
+              <Input
+                id="region"
+                name="region"
+                value={leadData.region}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="country" className="text-right">
+                Country
+              </Label>
+              <Input
+                id="country"
+                name="country"
+                value={leadData.country}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="leadCurrency" className="text-right">
+                Lead Currency
+              </Label>
+              <Input
+                id="leadCurrency"
+                name="leadCurrency"
+                value={leadData.leadCurrency}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="estimatedAmount" className="text-right">
+                Estimated Amount
+              </Label>
+              <Input
+                id="estimatedAmount"
+                name="estimatedAmount"
+                value={leadData.estimatedAmount}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="quotedAmount" className="text-right">
+                Quoted Amount
+              </Label>
+              <Input
+                id="quotedAmount"
+                name="quotedAmount"
+                value={leadData.quotedAmount}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="finalAmount" className="text-right">
+                Final Amount
+              </Label>
+              <Input
+                id="finalAmount"
+                name="finalAmount"
+                value={leadData.finalAmount}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="fiscalPeriodByYear" className="text-right">
+                Fiscal Period By Year
+              </Label>
+              <Input
+                id="fiscalPeriodByYear"
+                name="fiscalPeriodByYear"
+                value={leadData.fiscalPeriodByYear}
+                onChange={handleInputChange}
+                className="col-span-3"
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="leadFiscalPeriod" className="text-right">
@@ -365,7 +523,7 @@ export function LeadForm({ isOpen, onClose, onSave }: LeadFormProps) {
                 <SelectTrigger className="col-span-3">
                   <SelectValue placeholder="Select month" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="h-44 overflow-y-scroll">
                   {monthOptions.map((option) => (
                     <SelectItem key={option} value={option}>
                       {option}
@@ -376,10 +534,10 @@ export function LeadForm({ isOpen, onClose, onSave }: LeadFormProps) {
             </div>
           </div>
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={onClose}>
+            <Button type="submit">Save Lead</Button>
+            <Button variant="secondary" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit">Save Lead</Button>
           </DialogFooter>
         </form>
       </DialogContent>

@@ -14,13 +14,12 @@ import {
   Target,
   FileCode,
 } from "lucide-react";
-import Navbar2 from "./navbar2";
 
 interface Service {
   title: string;
   description: string;
   icon: React.ComponentType;
-  direction: "left" | "right" | "down"; // Direction of animation on scroll
+  direction: "left" | "right" | "down";
   delay: number;
 }
 
@@ -65,9 +64,6 @@ const services: Service[] = [
     direction: "right",
     delay: 1.0,
   },
-];
-
-const additionalServices: Service[] = [
   {
     title: "Strategic Planning",
     description:
@@ -112,10 +108,10 @@ const additionalServices: Service[] = [
 
 export default function AnimatedServices() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#3f5964] to-[#19b2b0] p-6">
+    <div className="min-h-screen bg-gradient-to-br from-[#f0f4f8] to-[#d1e3f8] p-6">
       <div className="max-w-7xl mx-auto">
         <motion.h1
-          className="text-4xl md:text-5xl font-bold text-white text-center mb-12"
+          className="text-4xl md:text-5xl font-bold text-[#355a65] text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -128,7 +124,7 @@ export default function AnimatedServices() {
             return (
               <motion.div
                 key={service.title}
-                className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:bg-white/20 transition-colors"
+                className="bg-white/70 backdrop-blur-lg rounded-xl p-6 hover:bg-white/90 transition-colors shadow-lg"
                 initial={{ opacity: 0 }}
                 whileInView={{
                   opacity: 1,
@@ -146,73 +142,7 @@ export default function AnimatedServices() {
                     stiffness: 100,
                   },
                 }}
-                viewport={{ once: true }} // Ensures animation triggers once when element comes into view
-                whileHover={{
-                  scale: 1.05,
-                  // rotate: 10,
-                  transition: { duration: 0.3 },
-                }}
-                whileTap={{
-                  scale: 0.98,
-                  // rotate: -5,
-                  transition: { duration: 0.2 },
-                }}
-              >
-                <motion.div
-                  className="w-12 h-12 rounded-lg bg-[#19b2b0] flex items-center justify-center mb-4"
-                  whileHover={{
-                    // rotate: 360,
-                    scale: 1.2,
-                    transition: { duration: 0.8 },
-                  }}
-                >
-                  {<service.icon />}
-                </motion.div>
-                <h2 className="text-xl font-semibold text-white mb-3">
-                  {service.title}
-                </h2>
-                <p className="text-white/80">{service.description}</p>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        <motion.div
-          className="h-px bg-white/20 my-12"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{
-            delay: 1.2,
-            duration: 0.8,
-            type: "spring",
-            stiffness: 50,
-          }}
-        />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {additionalServices.map((service, index) => {
-            return (
-              <motion.div
-                key={service.title}
-                className="bg-white/10 backdrop-blur-lg rounded-xl p-6 hover:bg-white/20 transition-colors"
-                initial={{ opacity: 0 }}
-                whileInView={{
-                  opacity: 1,
-                  x:
-                    service.direction === "left"
-                      ? 0
-                      : service.direction === "right"
-                      ? 0
-                      : undefined,
-                  y: service.direction === "down" ? 0 : undefined,
-                  transition: {
-                    delay: service.delay,
-                    duration: 0.8,
-                    type: "spring",
-                    stiffness: 100,
-                  },
-                }}
-                viewport={{ once: true }} // Ensures animation triggers once when element comes into view
+                viewport={{ once: true }}
                 whileHover={{
                   scale: 1.05,
                   transition: { duration: 0.3 },
@@ -223,19 +153,22 @@ export default function AnimatedServices() {
                 }}
               >
                 <motion.div
-                  className="w-12 h-12 rounded-lg bg-[#19b2b0] flex items-center justify-center mb-4"
+                  className="w-12 h-12 rounded-lg bg-[#355a65] flex items-center justify-center mb-4"
                   whileHover={{
-                    // rotate: -360,
                     scale: 1.2,
                     transition: { duration: 0.8 },
                   }}
                 >
-                  {<service.icon/>}
+                  {
+                    <div className="text-white">
+                      <service.icon />
+                    </div>
+                  }
                 </motion.div>
-                <h2 className="text-xl font-semibold text-white mb-3">
+                <h2 className="text-xl font-semibold text-[#355a65] mb-3">
                   {service.title}
                 </h2>
-                <p className="text-white/80">{service.description}</p>
+                <p className="text-gray-700">{service.description}</p>
               </motion.div>
             );
           })}
@@ -244,4 +177,3 @@ export default function AnimatedServices() {
     </div>
   );
 }
-//checked

@@ -7,6 +7,7 @@ import LandServices from "@/components/LandServices";
 import Navbar from "@/components/navbar";
 import Navbar2 from "@/components/navbar2";
 import Vision from "@/components/Vision";
+import ServiceSlider from "@/components/hero1";
 
 export default function Home() {
   return (
@@ -15,13 +16,7 @@ export default function Home() {
       <div className="fixed z-50 top-0 max-w-screen">
         <Navbar2 />
       </div>
-      {/* <Hero/> */}
-      <div className="hidden md:flex">
-        <OrbitingCirclesDemo />
-      </div>
-      <div className="md:hidden">
-        <OrbitingCirclesMobile />
-      </div>
+      <ServiceSlider/>
       <LandingPageBanner />
       <About />
       <LandServices />

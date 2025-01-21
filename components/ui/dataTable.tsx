@@ -94,7 +94,9 @@ export const columns: CustomColumnDef<Lead>[] = [
   {
     accessorKey: "accountName",
     header: "Account Name",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("accountName")}</p>,
+    cell: ({ row }: { row: any }) => (
+      <p>{row.getValue("accountName") ?? null}</p>
+    ),
   },
   {
     accessorKey: "leadSource",
@@ -105,13 +107,23 @@ export const columns: CustomColumnDef<Lead>[] = [
       "Email Campaign",
       "Partner",
       "Tender Portal",
+      "Single Source",
+      "Advertisement",
+      "Cold Calls",
+      "Custumer Event",
+      "Employee Referal",
+      "Linkedin",
+      "Vender Portal",
+      "Website",
+      "Personal Contact",
+      "others",
     ],
     cell: ({ row }: { row: any }) => <p>{row.getValue("leadSource")}</p>,
   },
   {
     accessorKey: "title",
     header: "Title",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("title")}</p>,
+    cell: ({ row }: { row: any }) => <p>{row.getValue("title") ?? null}</p>,
   },
   {
     accessorKey: "stage",
@@ -120,23 +132,38 @@ export const columns: CustomColumnDef<Lead>[] = [
       "Vendor Registration",
       "Demo",
       "POC",
-      "Technical",
-      "Clarification",
-      "Proposal",
-      "Submitted",
+      "Technical Clarification",
+      "Proposal Submited",
+      "NEGOTIATION",
+      "DEALS WON",
+      "PROPOSAL SUBMITTED",
+      "BQ SUBMITTED",
+      "RFP",
+      "RFI",
+      "RFQ",
+      "On Hold",
     ],
     cell: ({ row }: { row: any }) => <p>{row.getValue("stage")}</p>,
   },
   {
     accessorKey: "status",
     header: "Status",
-    options: ["New", "Qualified", "Working", "Nurturing"],
+    options: [
+      "New",
+      "Qualified",
+      "Working",
+      "Nurturing",
+      "Qualified",
+      "Converted Opportunity",
+      "On Hold",
+      "Others",
+    ],
     cell: ({ row }: { row: any }) => <p>{row.getValue("status")}</p>,
   },
   {
     accessorKey: "leadOwner",
     header: "Lead Owner",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("leadOwner")}</p>,
+    cell: ({ row }: { row: any }) => <p>{row.getValue("leadOwner") ?? null}</p>,
   },
   {
     accessorKey: "industry",
@@ -147,24 +174,97 @@ export const columns: CustomColumnDef<Lead>[] = [
       "Fishing and Aquaculture",
       "Mining and Quarrying",
       "Oil and Gas",
+      "Construction",
+      "Food and Beverage Manufacturing",
+      "Textiles and Apparel",
+      "Chemical and Pharmaceutical Manufacturing",
+      "Automobile and Transportation Equipment Manufacturing",
+      "Steel and Metal Production",
+      "Electronics and Electrical Equipment Manufacturing",
+      "Machinery and Industrial Equipment",
+      "Paper and Packaging",
+      "Plastic and Rubber Products Manufacturing",
+      "Healthcare and Pharmaceuticals",
+      "Education and Training",
+      "Hospitality and Tourism",
+      "Retail and E-Commerce",
+      "Banking and Financial Services",
+      "Insurance",
+      "Telecommunications",
+      "Transportation and Logistics",
+      "Utilities (Electricity, Water, Gas)",
+      "Real Estate and Property Management",
+      "Media and Entertainment",
+      "IT and Software Development",
+      "Consulting Services",
+      "Legal Services",
+      "Research and Development (R&D)",
+      "Biotechnology",
+      "Aerospace",
+      "Renewable Energy",
+      "Data Analytics and Artificial Intelligence",
+      "Digital Marketing and Advertising",
+      "Cloud Computing and Cybersecurity",
+      "Government and Public Administration",
+      "Non-Profit and Social Enterprises",
+      "Defense and Military",
+      "Space Exploration and Technology",
     ],
     cell: ({ row }: { row: any }) => <p>{row.getValue("industry")}</p>,
   },
   {
     accessorKey: "services",
     header: "Services",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("services")}</p>,
+    cell: ({ row }: { row: any }) => <p>{row.getValue("services") ?? null}</p>,
   },
   {
     accessorKey: "products",
     header: "Products",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("products")}</p>,
+    cell: ({ row }: { row: any }) => <p>{row.getValue("products") ?? null}</p>,
   },
   {
     accessorKey: "rating",
     header: "Rating",
     options: ["Warm", "Cold", "Hot"],
     cell: ({ row }: { row: any }) => <p>{row.getValue("rating")}</p>,
+  },
+  {
+    accessorKey: "region",
+    header: "region",
+    cell: ({ row }: { row: any }) => <p>{row.getValue("region") ?? null}</p>,
+  },
+  {
+    accessorKey: "country",
+    header: "Country",
+    cell: ({ row }: { row: any }) => <p>{row.getValue("country") ?? null}</p>,
+  },
+  {
+    accessorKey: "leadCurrency",
+    header: "Lead Currency",
+    cell: ({ row }: { row: any }) => <p>{row.getValue("leadCurrency")}</p>,
+  },
+  {
+    accessorKey: "estimatedAmount",
+    header: "Estimated Amount",
+    cell: ({ row }: { row: any }) => <p>{row.getValue("estimatedAmount")}</p>,
+  },
+  {
+    accessorKey: "quotedAmount",
+    header: "Quoted Amount",
+    cell: ({ row }: { row: any }) => <p>{row.getValue("quotedAmount")}</p>,
+  },
+  {
+    accessorKey: "finalAmount",
+    header: "Final Amount",
+    cell: ({ row }: { row: any }) => <p>{row.getValue("finalAmount")}</p>,
+  },
+  {
+    accessorKey: "fiscalPeriodByYear",
+    header: "Fiscal Period by Year",
+    options: ["Q1", "Q2", "Q3", "Q4"],
+    cell: ({ row }: { row: any }) => (
+      <p>{row.getValue("fiscalPeriodByYear")}</p>
+    ),
   },
   {
     accessorKey: "leadFiscalPeriod",
@@ -176,28 +276,45 @@ export const columns: CustomColumnDef<Lead>[] = [
     accessorKey: "assignedToSalesTeam",
     header: "Assigned To Sales Team",
     cell: ({ row }: { row: any }) => (
-      <p>{row.getValue("assignedToSalesTeam")}</p>
+      <p>{row.getValue("assignedToSalesTeam") ?? null}</p>
     ),
   },
   {
     accessorKey: "domains",
     header: "Domains",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("domains")}</p>,
+    cell: ({ row }: { row: any }) => <p>{row.getValue("domains") ?? null}</p>,
   },
   {
     accessorKey: "deploymentType",
     header: "Deployment Type",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("deploymentType")}</p>,
+    cell: ({ row }: { row: any }) => (
+      <p>{row.getValue("deploymentType") ?? null}</p>
+    ),
   },
   {
     accessorKey: "leadOverview",
     header: "Lead Overview",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("leadOverview")}</p>,
+    cell: ({ row }: { row: any }) => (
+      <p>{row.getValue("leadOverview") ?? null}</p>
+    ),
   },
   {
     accessorKey: "leadGeneratedMonth",
     header: "Lead Generated Month",
-    options: ["January", "February", "March", "April", "May"],
+    options: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
     cell: ({ row }: { row: any }) => (
       <p>{row.getValue("leadGeneratedMonth")}</p>
     ),
@@ -205,24 +322,33 @@ export const columns: CustomColumnDef<Lead>[] = [
   {
     accessorKey: "createDate",
     header: "Create Date",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("createDate")}</p>,
+    cell: ({ row }: { row: any }) => (
+      <p>{row.getValue("createDate") ?? "Auto Creation Date"}</p>
+    ),
   },
   {
     accessorKey: "createBy",
     header: "Create By",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("createBy")}</p>,
+    cell: ({ row }: { row: any }) => (
+      <p>{row.getValue("createBy") ?? "Auto Creation Name"}</p>
+    ),
   },
   {
     accessorKey: "editDate",
     header: "Edit Date",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("editDate")}</p>,
+    cell: ({ row }: { row: any }) => (
+      <p>{row.getValue("editDate") ?? "Auto Edit Date"}</p>
+    ),
   },
   {
     accessorKey: "editBy",
     header: "Edit By",
-    cell: ({ row }: { row: any }) => <p>{row.getValue("editBy")}</p>,
+    cell: ({ row }: { row: any }) => (
+      <p>{row.getValue("editBy") ?? "Auto Edit Name"}</p>
+    ),
   },
 ];
+
 
 export function LeadManagementTable() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -236,7 +362,17 @@ export function LeadManagementTable() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
   const [change, setChange] = React.useState(true);
-
+  const isClickableColumn = (columnId: string) => {
+    const nonClickableColumns = [
+      "select",
+      "id_",
+      "editBy",
+      "editDate",
+      "createBy",
+      "createDate",
+    ];
+    return !nonClickableColumns.includes(columnId);
+  };
  React.useEffect(() => {
    const fetchData = async () => {
      setIsLoading(true);
@@ -251,7 +387,7 @@ export function LeadManagementTable() {
      }
 
      console.log("connected to DB + 254");
-     console.log(data);
+   
 
      // Sort the data array by id_
      const sortedData = (data || []).sort((a, b) => {
@@ -340,103 +476,165 @@ export function LeadManagementTable() {
     setEditingCell({ row, column, value, options });
   };
 
- const handleSaveEdit = async (value: string) => {
-   if (editingCell) {
-     setChange(false);
-     const updatedData = [...data];
-
-     // Get the current date and time in the desired format
-     const currentDate = new Date();
-     const formattedDate =
-       `${currentDate.getDate().toString().padStart(2, "0")}/` +
-       `${(currentDate.getMonth() + 1).toString().padStart(2, "0")}/` +
-       `${currentDate.getFullYear().toString().slice(-2)} ` +
-       `${currentDate.getHours().toString().padStart(2, "0")}:` +
-       `${currentDate.getMinutes().toString().padStart(2, "0")}`;
-
-     const updatedRow = {
-       ...updatedData[editingCell.row],
-       [editingCell.column]: value,
-       editDate: formattedDate, // Set formatted date here
-     };
-     updatedData[editingCell.row] = updatedRow;
-
-     try {
-       const { error } = await supabase
-         .from("leads") // Replace with your table name
-         .update({
-           [editingCell.column]: value,
-           editDate: updatedRow.editDate, // Update editDate as well
-         })
-         .eq("id_", updatedRow.id_); // Assuming 'id' is your primary key column
-       if (error) {
-         console.error("Error updating data in Supabase:", error);
-       } else {
-         console.log("Updated data:", updatedData);
-       }
-       setChange(true);
-     } catch (err) {
-       console.error("Unexpected error:", err);
-     }
-   }
-   setEditingCell(null);
- };
-
-
-
-
-  const handleAddLead = async (leadData: LeadData) => {
+const handleSaveEdit = async (value: string) => {
+  if (editingCell) {
     setChange(false);
-   const newLead: Lead = {
-     ...leadData,
-     id_: (data.length + 1).toString(),
-     createDate:
-       new Date().toLocaleString("en-US", {
-         hour: "2-digit",
-         minute: "2-digit",
-         hour12: true,
-       }) +
-       " " +
-       new Date().getDate() +
-       ", " +
-       (new Date().getMonth() + 1) +
-       ", " +
-       new Date().getFullYear(),
-     createBy: "Current User", // You can replace this with the actual user information
-     editDate:
-       new Date().toLocaleString("en-US", {
-         hour: "2-digit",
-         minute: "2-digit",
-         hour12: true,
-       }) +
-       " " +
-       new Date().getDate() +
-       ", " +
-       (new Date().getMonth() + 1) +
-       ", " +
-       new Date().getFullYear(),
-     editBy: "Current User", // Same for editBy, you can set the actual user
-   };
+    const updatedData = [...data];
 
+    // Get the current date and time in the desired format
+    const currentDate = new Date();
+    const formattedDate =
+      `${currentDate.getDate().toString().padStart(2, "0")}/` +
+      `${(currentDate.getMonth() + 1).toString().padStart(2, "0")}/` +
+      `${currentDate.getFullYear().toString().slice(-2)} ` +
+      `${currentDate.getHours().toString().padStart(2, "0")}:` +
+      `${currentDate.getMinutes().toString().padStart(2, "0")}`;
 
+    // Get the email from localStorage
+    const userData = localStorage.getItem("user");
+
+    let editBy = "Unknown"; // Default value if no user data is found
+    if (userData) {
+      const userJson = JSON.parse(userData); // Parse user data into JSON
+      const email = userJson.user.email; // Get email from localStorage
+
+      // Compare email with profiles in the database
+      try {
+        const { data: profileData, error } = await supabase
+          .from("profiles")
+          .select("name, email")
+          .eq("email", email)
+          .single(); // Retrieve user profile by email
+
+        if (error) {
+          console.error("Error fetching profile from database:", error);
+        } else {
+          // If user is found in profiles, use the full name, otherwise fallback to email
+          editBy = profileData?.name || email;
+        }
+      } catch (err) {
+        console.error("Unexpected error fetching profile:", err);
+      }
+    }
+
+    const updatedRow = {
+      ...updatedData[editingCell.row],
+      [editingCell.column]: value,
+      editDate: formattedDate, // Set formatted date here
+      editBy: editBy, // Set editBy here
+    };
+    updatedData[editingCell.row] = updatedRow;
 
     try {
       const { error } = await supabase
-        .from("leads") // Replace with your actual table name
-        .insert([newLead]); // Inserts the new lead into Supabase
-
+        .from("leads") // Replace with your table name
+        .update({
+          [editingCell.column]: value,
+          editDate: updatedRow.editDate, // Update editDate as well
+          editBy: updatedRow.editBy, // Update editBy here
+        })
+        .eq("id_", updatedRow.id_); // Assuming 'id' is your primary key column
       if (error) {
-        console.error("Error inserting data into Supabase:", error);
+        console.error("Error updating data in Supabase:", error);
       } else {
-        console.log("New lead added:", newLead);
-        data.push(newLead); // Update local state after successful insertion
-        setIsAddLeadModalOpen(false);
-        setChange(true);
+        console.log("Updated data:", updatedData);
       }
+      setChange(true);
     } catch (err) {
       console.error("Unexpected error:", err);
     }
+  }
+  setEditingCell(null);
+};
+
+
+
+
+
+
+const handleAddLead = async (leadData: LeadData) => {
+  setChange(false);
+
+  // Retrieve email from localStorage
+  const userData = localStorage.getItem("user");
+  console.log(userData);
+  let userEmail = "user@example.com"; // Default email, if not found in localStorage
+  if (userData) {
+    const temp = JSON.parse(userData);
+    userEmail = temp.user.email; // Assuming user email is stored in localStorage
+  }
+
+  // Fetch user's name based on the email from the "profiles" table
+  let userName = userEmail; // Default to email if name not available
+  try {
+    const { data: profiles, error } = await supabase
+      .from("profiles")
+      .select("name, email") // Fetch name and email fields
+      .eq("email", userEmail) // Use email from localStorage
+      .single(); // Get the first result, assuming email is unique
+
+    if (error) {
+      console.error("Error fetching profile data:", error);
+    } else {
+      // If name is available, use it; otherwise, fallback to email
+      userName = profiles?.name || profiles?.email || userEmail;
+    }
+  } catch (err) {
+    console.error("Unexpected error fetching profile data:", err);
+  }
+
+  // Prepare new lead data
+  const newLead: Lead = {
+    ...leadData,
+    id_: (data.length + 1).toString(),
+    createDate:
+      new Date().toLocaleString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }) +
+      " " +
+      new Date().getDate() +
+      ", " +
+      (new Date().getMonth() + 1) +
+      ", " +
+      new Date().getFullYear(),
+    createBy: userName, // Use name or email for createBy
+    editDate:
+      new Date().toLocaleString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }) +
+      " " +
+      new Date().getDate() +
+      ", " +
+      (new Date().getMonth() + 1) +
+      ", " +
+      new Date().getFullYear(),
+    editBy: userName, // Use name or email for editBy
   };
+
+  // Insert the lead data into the database
+  try {
+    const { error: insertError } = await supabase
+      .from("leads") // Replace with your actual table name
+      .insert([newLead]); // Insert the new lead into Supabase
+
+    if (insertError) {
+      console.error("Error inserting data into Supabase:", insertError);
+    } else {
+      console.log("New lead added:", newLead);
+      data.push(newLead); // Update local state after successful insertion
+      setIsAddLeadModalOpen(false);
+      setChange(true);
+    }
+  } catch (err) {
+    console.error("Unexpected error:", err);
+  }
+};
+
+
 
 
   return (
@@ -512,15 +710,13 @@ export function LeadManagementTable() {
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id} className="min-w-32 cursor-pointer">
                     <div
-                      className="w-full cursor-pointer"
+                      className={`w-full ${
+                        isClickableColumn(cell.column.id)
+                          ? "cursor-pointer"
+                          : ""
+                      }`}
                       onClick={() => {
-                        if (
-                          cell.column.id != "select" &&
-                          cell.column.id != "editBy" &&
-                          cell.column.id != "editDate" &&
-                          cell.column.id != "createBy" &&
-                          cell.column.id != "createDate"
-                        ) {
+                        if (isClickableColumn(cell.column.id)) {
                           handleCellClick(
                             row.index,
                             cell.column.id,

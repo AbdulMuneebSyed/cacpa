@@ -67,9 +67,9 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Change Password</DialogTitle>
+          <DialogTitle>Change Password(to be added)</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit}>
+        {/* <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="current-password" className="text-right">
@@ -116,7 +116,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
               {isLoading ? "Updating..." : "Update Password"}
             </Button>
           </DialogFooter>
-        </form>
+        </form> */}
       </DialogContent>
     </Dialog>
   );

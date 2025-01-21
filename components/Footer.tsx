@@ -40,7 +40,7 @@ const Footer = () => {
               className="object-contain"
             />
             <Link href="/contactus">
-              <button className="bg-blue-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition duration-300 sm:py-3 sm:px-8 text-sm md:py-4 md:px-10 md:text-xl">
+              <button className="bg-[#508797] text-white font-bold py-2 px-6 rounded-lg hover:bg-[#223941] transition duration-300 sm:py-3 sm:px-8 text-sm md:py-4 md:px-10 md:text-xl">
                 Let's Talk
               </button>
             </Link>
@@ -54,9 +54,9 @@ const Footer = () => {
                 <Image
                   src="/logo/logo2.png"
                   alt="Three flags logo Logo"
-                  width={50} // You still need to provide a width value here
+                  width={100} // You still need to provide a width value here
                   height={0}
-                  className="object-contain w-28"
+                  className="object-contain w-44"
                 />
               </div>
               {/* Increased margin */}

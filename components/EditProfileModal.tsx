@@ -21,7 +21,7 @@ interface EditProfileModalProps {
 }
 
 interface UserData {
-  full_name: string;
+  name: string;
   email: string;
   role: string;
   location: string;
@@ -62,9 +62,9 @@ const EditProfileModal: React.FC<EditProfileModalProps> = ({
                 Name
               </Label>
               <Input
-                id="full_name"
-                name="full_name"
-                value={formData.full_name}
+                id="name"
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
                 className="col-span-3"
               />
