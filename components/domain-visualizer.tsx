@@ -15,9 +15,10 @@ export function DomainVisualizer() {
   }
 
   return (
-    <div className="relative h-64 w-full overflow-hidden rounded-lg bg-gradient-to-br from-[#19b2b0] to-[#3f5964] p-8">
+    <div className="relative h-64 w-full overflow-hidden rounded-lg bg-gradient-to-br from-[#38bdf8] to-[#f0f9ff] p-8 shadow-lg">
+      <Globe className="h-16 w-16 text-[#38bdf8]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 to-transparent" />
-      
+
       <motion.div
         className="relative flex h-full items-center justify-center"
         onHoverStart={startAnimation}
@@ -44,7 +45,7 @@ export function DomainVisualizer() {
         </div>
       </motion.div>
     </div>
-  )
+  );
 }
 
 //checked

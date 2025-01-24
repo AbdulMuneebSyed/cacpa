@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { type LucideIcon } from "lucide-react";
+import { TypeIcon as type, type LucideIcon } from "lucide-react";
 
 interface AnimatedIconProps {
   icon: LucideIcon;
@@ -24,10 +24,9 @@ export function AnimatedIcon({ icon: Icon, delay = 0 }: AnimatedIconProps) {
         rotate: 360,
         transition: { duration: 0.8 },
       }}
-      className="rounded-xl bg-[#19b2b0]/10 p-3"
+      className="rounded-xl bg-blue-100 p-3"
     >
-      <Icon className="h-6 w-6 text-[#19b2b0]" />
+      <Icon className="h-6 w-6 text-gray-500" />
     </motion.div>
   );
 }
-//checked

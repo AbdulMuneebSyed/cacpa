@@ -27,15 +27,15 @@ export function ProcessFlow({ steps }: ProcessFlowProps) {
           transition={{ delay: index * 0.2 }}
         >
           <motion.div
-            className="relative z-10 rounded-full bg-[#3f5964] p-4"
+            className="relative z-10 rounded-full bg-[#a2e3ff] p-4"
             whileHover={{ scale: 1.2, backgroundColor: "#19b2b0" }}
           >
-            <step.icon className="h-6 w-6 text-white" />
+            <step.icon className="h-6 w-6 text-black" />
           </motion.div>
 
           <div className="flex-1 space-y-2">
             <motion.h3
-              className="text-xl font-semibold text-white"
+              className="text-xl font-semibold text-black"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -44,7 +44,7 @@ export function ProcessFlow({ steps }: ProcessFlowProps) {
               {step.title}
             </motion.h3>
             <motion.p
-              className="text-gray-300"
+              className="text-gray-600"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

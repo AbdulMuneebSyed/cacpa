@@ -300,14 +300,17 @@ const ProfilePage = () => {
           userData={user}
           onSave={async (updatedData) => {
   // Update local state and localStorage
-  const updatedUser = { ...user, ...updatedData };
-  setUser(updatedUser);
+  const Userdata = { ...user, ...updatedData };
+  // const { email, ... Userdata } = updateUser;
+ 
+  setUser(Userdata);
+  console.log(Userdata.email);
   // Update in Supabase (assuming you have a `profiles` table)
   try {
     const { data, error } = await supabase
-      .from('profiles')
-      .upsert({ ...updatedData})
-      .eq('email', user.email); // Match the email to update the correct profile
+      .from("profiles")
+      .update({ ...Userdata })
+      .eq("email", user.email); // Match the email to update the correct profile
 
     if (error) throw error;
 

@@ -25,15 +25,6 @@ interface Service {
 
 const services: Service[] = [
   {
-    id: 1,
-    title: "Ready to Bring Your Digital Vision to Life?",
-    description:
-      "Let's create a stunning website that captures your brand essence and engages your audience. Our expert team is here to turn your ideas into a powerful online presence.",
-    slug: "web-development",
-    image: web,
-    link: "services/wdhs",
-  },
-  {
     id: 2,
     title: "Want to Take Your Business to New Heights?",
     description:
@@ -41,6 +32,15 @@ const services: Service[] = [
     slug: "business-management",
     image: bmc,
     link: "services/bmc",
+  },
+  {
+    id: 1,
+    title: "Ready to Bring Your Digital Vision to Life?",
+    description:
+      "Let's create a stunning website that captures your brand essence and engages your audience. Our expert team is here to turn your ideas into a powerful online presence.",
+    slug: "web-development",
+    image: web,
+    link: "services/wdhs",
   },
   {
     id: 3,
@@ -132,7 +132,7 @@ export default function ServiceSlider() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative  min-h-screen overflow-hidden ">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={currentIndex}

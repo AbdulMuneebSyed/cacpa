@@ -8,6 +8,7 @@ import Navbar from "@/components/navbar";
 import Navbar2 from "@/components/navbar2";
 import Vision from "@/components/Vision";
 import ServiceSlider from "@/components/hero1";
+import AnimatedContent from "@/components/new";
 
 export default function Home() {
   return (
@@ -16,8 +17,10 @@ export default function Home() {
       <div className="fixed z-50 top-0 max-w-screen">
         <Navbar2 />
       </div>
+
       <ServiceSlider/>
       {/* <LandingPageBanner /> */}
+      <AnimatedContent/>
       <About />
       <LandServices />
       <Footer />

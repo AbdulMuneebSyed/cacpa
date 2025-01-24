@@ -11,6 +11,7 @@ import { ServiceList } from "@/components/service-list";
 import dm from "@/public/dm.jpg";
 import Navbar2 from "@/components/navbar2";
 import Footer from "@/components/Footer";
+import { Meteors } from "@/components/ui/meteors";
 
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,16 +25,18 @@ export default function HomePage() {
   const y = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
 
   return (
-    <div className="relative min-h-screen bg-[#30444d]" ref={containerRef}>
-      <div className="fixed z-50 top-0 max-w-screen">
+    <div
+      className="relative min-h-screen min-w-screen overflow-hidden bg-white"
+      ref={containerRef}
+    >
+      {/* <ParticleCanvas /> */}
+      <div className="sticky z-50 top-0 max-w-screen">
         <Navbar2 />
       </div>
-      <ParticleCanvas />
-
       {/* Hero Section */}
-      <section className="relative min-h-screen bg-[#3f5964]">
-        {" "}
-        {/* Set background color to bg-[#19b2b0] */}
+
+      <section className="relative min-h-screen max-w-screen overflow-hidden bg-white">
+        <Meteors number={30} />
         <motion.div
           className="absolute inset-0 -z-10"
           style={{
@@ -48,15 +51,15 @@ export default function HomePage() {
           <div className="mt-24 grid items-start gap-12 md:grid-cols-2">
             <div className="space-y-8">
               <AnimatedText
-                text="Digital  Marketing & Business Consultant"
-                className="text-balance text-4xl font-bold text-white md:text-5xl lg:text-6xl"
+                text="Digital Marketing & Business Consultant"
+                className="text-balance text-4xl font-bold text-gray-600 md:text-5xl lg:text-6xl"
               />
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="prose prose-invert max-w-none"
+                className="prose prose-teal max-w-none"
               >
                 <ServiceList />
               </motion.div>
@@ -66,14 +69,14 @@ export default function HomePage() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1 }}
-              className="sticky top-48 z-10" // Ensure z-index is set and top is adjusted
+              className="sticky top-48 z-10"
             >
               <Image
-                src={dm}
+                src={dm || "/placeholder.svg"}
                 alt="Digital Marketing"
                 width={600}
                 height={400}
-                className="rounded-xl"
+                className="rounded-xl sticky top-48"
               />
             </motion.div>
           </div>
@@ -81,9 +84,7 @@ export default function HomePage() {
       </section>
 
       {/* Let's Talk Section */}
-      <section className="relative py-24 bg-gray-900">
-        {" "}
-        {/* Set background color to bg-[#19b2b0] */}
+      <section className="relative py-24 bg-white">
         <motion.div
           className="absolute inset-0 -z-10"
           style={{
@@ -92,16 +93,17 @@ export default function HomePage() {
             rotate: 180,
           }}
         />
+
         <div className="container mx-auto px-4">
           <div className="rounded-2xl bg-gradient-to-r from-teal-500/20 to-emerald-500/20 p-12 backdrop-blur-lg">
             <div className="mx-auto max-w-2xl text-center">
               <AnimatedText
                 text="Ready to Transform Your Digital Presence?"
-                className="mb-6 text-3xl font-bold text-white md:text-4xl"
+                className="mb-6 text-3xl font-bold text-teal-600 md:text-4xl"
               />
-
+              {/* <Meteors number={30} /> */}
               <motion.p
-                className="mb-8 text-lg text-gray-300"
+                className="mb-8 text-lg text-teal-700"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -126,7 +128,10 @@ export default function HomePage() {
                     Let's Talk
                     <motion.span
                       animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1, repeat: Infinity }}
+                      transition={{
+                        duration: 1,
+                        repeat: Number.POSITIVE_INFINITY,
+                      }}
                     >
                       <ArrowRight className="h-5 w-5" />
                     </motion.span>

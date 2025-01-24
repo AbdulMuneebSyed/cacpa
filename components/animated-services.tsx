@@ -78,7 +78,7 @@ const services: Service[] = [
       "Evaluates organizational health by probing into culture, communication, and efficiency.",
     icon: TrendingUp,
     direction: "right",
-    delay: 1.4,
+    delay: 1.2,
   },
   {
     title: "SOP Development",
@@ -86,7 +86,7 @@ const services: Service[] = [
       "Creating precise, tailored protocols to streamline workflows and ensure consistency.",
     icon: ClipboardList,
     direction: "down",
-    delay: 1.6,
+    delay: 1.2,
   },
   {
     title: "Strategic Consulting",
@@ -94,7 +94,7 @@ const services: Service[] = [
       "Tailored insights to optimize business processes and capitalize on opportunities.",
     icon: Target,
     direction: "left",
-    delay: 1.8,
+    delay: 1.2,
   },
   {
     title: "Policy and Procedure",
@@ -102,7 +102,7 @@ const services: Service[] = [
       "Comprehensive analysis for knowledgeable lending decisions and credit appraisal.",
     icon: FileCode,
     direction: "right",
-    delay: 2.0,
+    delay: 1.2,
   },
 ];
 

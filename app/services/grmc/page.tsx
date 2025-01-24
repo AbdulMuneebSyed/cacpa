@@ -16,7 +16,9 @@ import { ProcessFlow } from "@/components/process-flow";
 import { StatsGrid } from "@/components/stats-grid";
 import { AnimatedIcon } from "@/components/animmated-icon";
 import Footer from "@/components/Footer";
-import Navbar2 from "@/components/navbar2";
+import Navbar from "@/components/navbar2";
+import { Button } from "@/components/ui/button";
+import { Tiles } from "@/components/ui/tiles";
 
 const governanceSteps = [
   {
@@ -77,79 +79,83 @@ export default function GovernancePage() {
     target: containerRef,
     offset: ["start start", "end end"],
   });
-
+   const handleScroll = () => {
+     window.scrollBy({
+       top: window.innerHeight, // scrolls by 100vh
+       behavior: "smooth", // smooth scrolling
+     });
+   };
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div className="min-h-screen bg-[#3f5964] w-max-screen overflow-hidden">
+    <div className="min-h-screen bg-gray-50 max-w-screen overflow-x-hidden">
+      <Navbar />
       {/* Hero Section */}
-<div className="fixed z-50 top-0 max-w-screen">
-        <Navbar2 />
-      </div>
-      <section className="relative min-h-screen">
-        <motion.div
-          className="absolute inset-0 -z-10"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 50% 50%, #19b2b033 0%, transparent 70%)",
-            y: backgroundY,
-          }}
-        />
-
-        <div className="container mx-auto px-4 py-32">
+      <AnimatedGridBackgroundSection>
+        <section className="relative py-20 overflow-hidden">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mx-auto max-w-3xl text-center"
-          >
+            className="absolute inset-0 -z-10"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 50% 50%, #e0f2fe 0%, transparent 70%)",
+              y: backgroundY,
+            }}
+          />
+
+          <div className="container mx-auto px-4">
             <motion.div
-              className="mb-8 flex justify-center gap-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="mx-auto max-w-3xl text-center"
             >
-              {[Settings, Shield, Lock, BarChart].map((icon, index) => (
-                <AnimatedIcon key={index} icon={icon} delay={index * 0.2} />
-              ))}
+              <motion.div
+                className="mb-8 flex justify-center gap-4"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                {[Settings, Shield, Lock, BarChart].map((icon, index) => (
+                  <AnimatedIcon key={index} icon={icon} delay={index * 0.2} />
+                ))}
+              </motion.div>
+
+              <motion.h1
+                className="mb-6 text-4xl font-bold text-gray-900 md:text-6xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                Governance, Risk Management &
+                <span className="text-blue-600"> Compliance</span>
+              </motion.h1>
+
+              <motion.p
+                className="mb-8 text-lg text-gray-600"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                Comprehensive solutions for organizational governance, risk
+                management, and compliance requirements. Ensure your business
+                operates within regulatory frameworks while maximizing
+                efficiency.
+              </motion.p>
+
+              <motion.button
+                onClick={handleScroll}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="rounded-lg border-blue-300 bg-transparent px-6 py-3 font-semibold text-blue-600 transition-colors hover:bg-blue-100"
+              >
+                Learn More
+              </motion.button>
             </motion.div>
-
-            <motion.h1
-              className="mb-6 text-4xl font-bold text-white md:text-6xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              Governance, Risk Management &
-              <span className="text-[#19b2b0]"> Compliance</span>
-            </motion.h1>
-
-            <motion.p
-              className="text-lg text-gray-300"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              Comprehensive solutions for organizational governance, risk
-              management, and compliance requirements. Ensure your business
-              operates within regulatory frameworks while maximizing efficiency.
-            </motion.p>
-          </motion.div>
-        </div>
-
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="rounded-full border-2 border-[#19b2b0] p-2">
-            <div className="h-2 w-2 rounded-full bg-[#19b2b0]" />
           </div>
-        </motion.div>
-      </section>
-
+        </section>
+      </AnimatedGridBackgroundSection>
       {/* Process Section */}
-      <section className="py-24" ref={containerRef}>
+      <section className="py-20 bg-white" ref={containerRef}>
         <div className="container mx-auto px-4">
           <motion.div
             className="mb-16 text-center"
@@ -157,10 +163,10 @@ export default function GovernancePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="mb-4 text-3xl font-bold text-white md:text-4xl">
+            <h2 className="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">
               Our Governance Framework
             </h2>
-            <p className="mx-auto max-w-2xl text-gray-300">
+            <p className="mx-auto max-w-2xl text-gray-600">
               A comprehensive approach to ensuring organizational excellence
               through structured governance, risk management, and compliance
               processes.
@@ -170,14 +176,13 @@ export default function GovernancePage() {
           <ProcessFlow steps={governanceSteps} />
         </div>
       </section>
-
       {/* Stats Section */}
-      <section className="py-24 relative">
+      <section className="py-20 bg-gray-50 relative">
         <motion.div
           className="absolute inset-0 -z-10"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 50% 50%, #19b2b033 0%, transparent 70%)",
+              "radial-gradient(circle at 50% 50%, #e0f2fe 0%, transparent 70%)",
             rotate: 180,
             y: backgroundY,
           }}
@@ -185,7 +190,7 @@ export default function GovernancePage() {
 
         <div className="container mx-auto px-4">
           <motion.h2
-            className="mb-16 text-center text-3xl font-bold text-white md:text-4xl"
+            className="mb-16 text-center text-3xl font-bold text-gray-900 md:text-4xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -196,17 +201,16 @@ export default function GovernancePage() {
           <StatsGrid stats={riskStats} />
         </div>
       </section>
-
       {/* Benefits Section */}
-      <section className="py-24">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
-            className="rounded-2xl bg-gradient-to-r from-[#19b2b0]/20 to-[#3f5964]/20 p-12 backdrop-blur-sm"
+            className="rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 p-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="mb-12 text-center text-3xl font-bold text-white">
+            <h2 className="mb-12 text-center text-3xl font-bold text-gray-900">
               Key Benefits
             </h2>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -238,32 +242,44 @@ export default function GovernancePage() {
               ].map((benefit, index) => (
                 <motion.div
                   key={benefit.title}
-                  className="group relative overflow-hidden rounded-xl bg-[#3f5964]/30 p-6 backdrop-blur-sm"
+                  className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-md transition-all hover:shadow-lg"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
                 >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-[#19b2b0]/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
-                    initial={false}
-                    animate={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                  />
-
-                  <benefit.icon className="mb-4 h-8 w-8 text-[#19b2b0]" />
-                  <h3 className="mb-2 text-lg font-semibold text-white">
+                  <div className="mb-4 rounded-full bg-blue-100 p-3 inline-block">
+                    <benefit.icon className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <h3 className="mb-2 text-lg font-semibold text-gray-900">
                     {benefit.title}
                   </h3>
-                  <p className="text-sm text-gray-300">{benefit.description}</p>
+                  <p className="text-sm text-gray-600">{benefit.description}</p>
                 </motion.div>
               ))}
             </div>
           </motion.div>
         </div>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }
+
+const AnimatedGridBackgroundSection: React.FC<{
+  children?: React.ReactNode;
+}> = ({ children }) => {
+  return (
+    <div
+      className={
+        "w-full h-full min-h-[400px] relative overflow-hidden flex items-center justify-center"
+      }
+    >
+      <div className={"w-fit h-fit relative z-[2]"}>{children}</div>
+      <div className={"absolute top-0 left-0 h-full w-full"}>
+        <Tiles rows={30} cols={20} />
+      </div>
+    </div>
+  );
+};

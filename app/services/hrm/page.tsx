@@ -12,11 +12,12 @@ import {
   Users2,
   ArrowRight,
 } from "lucide-react";
-import { ParticleBackground } from "@/components/particle-background";
 import hrm from "@/public/hrm.jpg";
 import Navbar2 from "@/components/navbar2";
 import Footer from "@/components/Footer";
 import { useRef } from "react";
+import { BackgroundBeams } from "@/components/ui/background-beams";
+import { FlickeringGrid } from "@/components/ui/flickering";
 
 const services = [
   {
@@ -64,76 +65,76 @@ export default function Home() {
     offset: ["start start", "end end"],
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "200%"]);
 
   return (
     <div
       ref={containerRef}
-      className="min-h-screen max-w-screen overflow-hidden bg-[#30444d]"
+      className="min-h-screen max-w-screen overflow-hidden bg-transparent"
     >
-      <ParticleBackground />
-      <div className="fixed z-50 top-0 max-w-screen">
-              <Navbar2 />
-            </div>
-      {/* Hero Section with Parallax */}
-      <section className="relative min-h-screen overflow-hidden bg-gray-900 text-gray-200">
-        <motion.div
-          className="absolute inset-0 -z-10"
-          style={{
-            y: backgroundY,
-            backgroundImage:
-              "radial-gradient(circle at 50% 50%, #19b2b020 0%, transparent 70%)",
-          }}
+      <div className="fixed z-50 top-0 max-w-screen w-full">
+        <Navbar2 />
+      </div>
+
+      {/* Hero Section with AuroraBackground */}
+      <div className=" min-h-screen mt-11 overflow-hidden ">
+        <FlickeringGrid
+          className="absolute inset-0 z-0 min-w-screen max-w-screen h-full"
+          squareSize={4}
+          gridGap={6}
+          color="#6B7280"
+          maxOpacity={0.5}
+          flickerChance={0.1}
         />
+        <div className=" z-10 min-h-screen flex items-center">
+          <div className="container mx-auto px-4 py-16">
+            <div className="grid items-center gap-12 md:grid-cols-2">
+              <motion.div
+                style={{ y: textY }}
+                className="space-y-6 text-center md:text-left"
+              >
+                <h1 className="text-5xl z-50 font-bold text-black md:text-6xl lg:text-7xl">
+                  Human Resource <br />
+                  <span className="text-[#19b2b0] z-50">Management</span>
+                </h1>
+                <p className="mt-4 text-lg text-gray-700 md:text-xl">
+                  Empowering organizations with efficient and scalable solutions
+                  for managing talent, performance, and development.
+                </p>
+              </motion.div>
 
-        <div className="container mx-auto px-4 py-16">
-          <div className="grid items-center gap-12 md:grid-cols-2">
-            <motion.div
-              style={{ y: textY }}
-              className="space-y-6 text-center md:text-left"
-            >
-              <h1 className="text-5xl font-bold text-white md:text-6xl lg:text-7xl">
-                Human Resource <br />
-                <span className="text-[#19b2b0]">Management</span>
-              </h1>
-              <p className="mt-4 text-lg text-gray-300 md:text-xl">
-                Empowering organizations with efficient and scalable solutions
-                for managing talent, performance, and development.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.2 }}
-              className="relative h-[300px] w-full overflow-hidden rounded-xl shadow-lg md:h-[400px]"
-            >
-              <Image
-                src={hrm || "/placeholder.svg"}
-                alt="HR Management"
-                fill
-                className="object-cover"
-              />
-            </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.2 }}
+                className="relative h-[300px] w-full overflow-hidden rounded-xl shadow-lg md:h-[400px]"
+              >
+                <Image
+                  src={hrm || "/placeholder.svg"}
+                  alt="HR Management"
+                  fill
+                  className="object-cover z-10"
+                />
+              </motion.div>
+            </div>
           </div>
         </div>
 
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+          className=" bottom-8 left-1/2 -translate-x-1/2 z-10"
           animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
         >
           <div className="flex flex-col items-center gap-2">
             <div className="h-16 w-[2px] bg-gradient-to-b from-[#19b2b0] to-transparent" />
-            <span className="text-sm text-gray-400">Scroll to explore</span>
+            <span className="text-sm text-gray-600">Scroll to explore</span>
           </div>
         </motion.div>
-      </section>
+      </div>
 
       {/* Content Section with Stagger Animation */}
       <motion.section
-        className="py-24"
+        className="py-24 bg-white"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
@@ -161,7 +162,7 @@ export default function Home() {
                     },
                   },
                 }}
-                className="group relative overflow-hidden rounded-xl bg-white/5 p-6 backdrop-blur-sm"
+                className="group relative overflow-hidden rounded-xl bg-gray-50 p-6 shadow-md"
               >
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-[#19b2b0]/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -178,10 +179,10 @@ export default function Home() {
                   </motion.div>
 
                   <div className="flex-1">
-                    <h3 className="mb-3 text-xl font-semibold text-white">
+                    <h3 className="mb-3 text-xl font-semibold text-gray-900">
                       {service.title}
                     </h3>
-                    <p className="text-gray-300">{service.description}</p>
+                    <p className="text-gray-600">{service.description}</p>
                   </div>
                 </div>
 
@@ -199,17 +200,17 @@ export default function Home() {
 
       {/* Contact Section with Scale Animation */}
       <motion.section
-        className="py-24"
+        className="py-24 bg-gray-50"
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
         <div className="container mx-auto px-4">
-          <div className="rounded-2xl bg-gradient-to-r from-[#19b2b0]/20 to-transparent p-12 backdrop-blur-lg">
+          <div className="rounded-2xl bg-white p-12 shadow-lg">
             <div className="mx-auto max-w-2xl text-center">
               <motion.h2
-                className="mb-6 text-3xl font-bold text-white md:text-4xl"
+                className="mb-6 text-3xl font-bold text-gray-900 md:text-4xl"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -218,7 +219,7 @@ export default function Home() {
               </motion.h2>
 
               <motion.p
-                className="mb-8 text-lg text-gray-300"
+                className="mb-8 text-lg text-gray-600"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -243,7 +244,10 @@ export default function Home() {
                     Let's Talk
                     <motion.span
                       animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1, repeat: Infinity }}
+                      transition={{
+                        duration: 1,
+                        repeat: Number.POSITIVE_INFINITY,
+                      }}
                     >
                       <ArrowRight className="h-5 w-5" />
                     </motion.span>
@@ -253,7 +257,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+        <BackgroundBeams />
       </motion.section>
+
       <Footer />
     </div>
   );

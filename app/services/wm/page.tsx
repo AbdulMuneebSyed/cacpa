@@ -18,6 +18,8 @@ import { AnimatedWarehouse } from "@/components/animated-warehouse";
 import { FeatureCard } from "@/components/feature-card";
 import Navbar2 from "@/components/navbar2";
 import Footer from "@/components/Footer";
+import { FlickeringGrid } from "@/components/ui/flickering";
+import { RetroGrid } from "@/components/ui/retrogrid";
 
 const features = [
   {
@@ -76,27 +78,28 @@ export default function WarehousePage() {
     target: containerRef,
     offset: ["start start", "end end"],
   });
-  
+
   const handleScroll = () => {
     window.scrollBy({
-      top: window.innerHeight,  // scrolls by 100vh
-      behavior: 'smooth', // smooth scrolling
+      top: window.innerHeight, // scrolls by 100vh
+      behavior: "smooth", // smooth scrolling
     });
   };
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <div className="min-h-screen bg-[#3f5964] max-w-screen overflow-hidden">
+    <div className="min-h-screen bg-gray-100 max-w-screen overflow-hidden">
       {/* Enhanced Hero Section */}
       <div className="fixed z-50 top-0 max-w-screen">
-              <Navbar2 />
-            </div>
+        <Navbar2 />
+      </div>
       <section className="relative min-h-screen overflow-hidden">
+        <RetroGrid />
         <motion.div
           className="absolute inset-0 -z-10"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 50% 50%, #19b2b033 0%, transparent 70%)",
+              "radial-gradient(circle at 50% 50%, #3b82f633 0%, transparent 70%)",
             y: backgroundY,
           }}
         />
@@ -108,14 +111,14 @@ export default function WarehousePage() {
             backgroundPosition: ["0px 0px", "100px 100px"],
             transition: {
               duration: 20,
-              repeat: Infinity,
+              repeat: Number.POSITIVE_INFINITY,
               repeatType: "reverse",
               ease: "linear",
             },
           }}
           style={{
             backgroundImage:
-              "radial-gradient(circle at 2px 2px, #19b2b0 1px, transparent 0)",
+              "radial-gradient(circle at 2px 2px, #3b82f6 1px, transparent 0)",
             backgroundSize: "50px 50px",
           }}
         />
@@ -127,28 +130,28 @@ export default function WarehousePage() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="inline-block rounded-full bg-[#19b2b0]/10 px-4 py-2 backdrop-blur-sm"
+                className="inline-block rounded-full bg-blue-100 px-4 py-2 backdrop-blur-sm"
               >
-                <span className="text-sm font-medium text-[#19b2b0]">
+                <span className="text-sm font-medium text-blue-600">
                   Smart Warehouse Solutions
                 </span>
               </motion.div>
 
               <motion.h1
-                className="text-balance text-4xl font-bold text-white md:text-6xl lg:text-7xl"
+                className="text-balance text-4xl font-bold text-gray-900 md:text-6xl lg:text-7xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 Next-Gen
                 <br />
-                <span className="text-[#19b2b0]">Warehouse</span>
+                <span className="text-blue-600">Warehouse</span>
                 <br />
                 Management
               </motion.h1>
 
               <motion.p
-                className="max-w-lg text-lg text-gray-300"
+                className="max-w-lg text-lg text-gray-600"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -164,11 +167,11 @@ export default function WarehousePage() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="flex flex-wrap gap-4"
               >
-                <Link href={"contactus"}>
+                <Link href={"/contactus"}>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="rounded-lg bg-[#19b2b0] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#19b2b0]/80"
+                    className="rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-600/80"
                   >
                     Get Started
                   </motion.button>
@@ -177,7 +180,7 @@ export default function WarehousePage() {
                   onClick={handleScroll}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="rounded-lg border border-[#19b2b0]/50 bg-transparent px-6 py-3 font-semibold text-white transition-colors hover:bg-[#19b2b0]/10"
+                  className="rounded-lg border-blue-300 bg-transparent px-6 py-3 font-semibold text-blue-600 transition-colors hover:bg-blue-100"
                 >
                   Learn More
                 </motion.button>
@@ -199,10 +202,10 @@ export default function WarehousePage() {
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
           animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
         >
           <div className="flex flex-col items-center gap-2">
-            <div className="h-16 w-[2px] bg-gradient-to-b from-[#19b2b0] to-transparent" />
+            <div className="h-16 w-[2px] bg-gradient-to-b from-blue-600 to-transparent" />
             <span className="text-sm text-gray-400">Scroll to explore</span>
           </div>
         </motion.div>
@@ -212,7 +215,7 @@ export default function WarehousePage() {
       <section className="py-24" ref={containerRef}>
         <div className="container mx-auto px-4">
           <motion.h2
-            className="mb-16 text-center text-3xl font-bold text-white md:text-4xl"
+            className="mb-16 text-center text-3xl font-bold text-gray-900 md:text-4xl"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -240,17 +243,17 @@ export default function WarehousePage() {
           className="absolute inset-0 -z-10"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 50% 50%, #19b2b033 0%, transparent 70%)",
+              "radial-gradient(circle at 50% 50%, #3b82f633 0%, transparent 70%)",
             rotate: 180,
             y: backgroundY,
           }}
         />
 
         <div className="container mx-auto px-4">
-          <div className="rounded-2xl bg-gradient-to-r from-[#19b2b0]/20 to-[#3f5964]/20 p-12 backdrop-blur-lg">
+          <div className="rounded-2xl bg-gradient-to-r from-blue-200 to-indigo-200 p-12 backdrop-blur-lg">
             <div className="mx-auto max-w-2xl text-center">
               <motion.h2
-                className="mb-6 text-3xl font-bold text-white md:text-4xl"
+                className="mb-6 text-3xl font-bold text-gray-900 md:text-4xl"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -259,7 +262,7 @@ export default function WarehousePage() {
               </motion.h2>
 
               <motion.p
-                className="mb-8 text-lg text-gray-300"
+                className="mb-8 text-lg text-gray-600"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -277,14 +280,17 @@ export default function WarehousePage() {
               >
                 <Link href="/contactus">
                   <motion.button
-                    className="group inline-flex items-center gap-2 rounded-lg bg-[#19b2b0] px-8 py-4 font-semibold text-white transition-colors hover:bg-[#19b2b0]/80"
+                    className="group inline-flex items-center gap-2 rounded-lg bg-blue-600 px-8 py-4 font-semibold text-white transition-colors hover:bg-blue-600/80"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
                     Let's Talk
                     <motion.span
                       animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1, repeat: Infinity }}
+                      transition={{
+                        duration: 1,
+                        repeat: Number.POSITIVE_INFINITY,
+                      }}
                     >
                       <ArrowRight className="h-5 w-5" />
                     </motion.span>

@@ -32,7 +32,7 @@ const services = [
   {
     name: "Digital Marketing",
     description:
-      "Driving brand growth and customer engagement through innovative online strategies, SEO, and targeted marketing campaigns.",
+      "Driving brand growth and customer engagement through online strategies, and targeted marketing campaigns.",
     route: "/services/dmbc",
     image: dmbc,
   },
@@ -46,7 +46,7 @@ const services = [
   {
     name: "Governance & Compliance",
     description:
-      "Ensuring organizational accountability, minimizing risks, and adhering to regulatory requirements with robust compliance frameworks.",
+      "Ensuring organizational accountability and adhering to regulatory requirements with robust compliance frameworks.",
     route: "/services/grmc",
     image: grmc,
   },

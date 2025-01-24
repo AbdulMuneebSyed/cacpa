@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { Server, Wifi, Shield, Database } from "lucide-react";
 
@@ -14,72 +12,63 @@ interface ServerStatusProps {
 
 export function ServerStatus({ status }: ServerStatusProps) {
   return (
-    <div className="grid grid-cols-2 gap-4 rounded-xl bg-[#3f5964]/30 p-6 backdrop-blur-lg">
-      <motion.div
-        className="flex items-center gap-3"
-        whileHover={{ scale: 1.05 }}
-      >
-        <Server className="h-8 w-8 text-[#19b2b0]" />
-        <div>
-          <p className="text-sm text-gray-300">Uptime</p>
-          <p className="font-semibold text-white">{status.uptime}</p>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="flex items-center gap-3"
-        whileHover={{ scale: 1.05 }}
-      >
-        <Wifi className="h-8 w-8 text-[#19b2b0]" />
-        <div>
-          <p className="text-sm text-gray-300">Load</p>
-          <div className="h-2 w-24 overflow-hidden rounded-full bg-[#3f5964]">
-            <motion.div
-              className="h-full bg-[#19b2b0]"
-              initial={{ width: 0 }}
-              animate={{ width: `${status.load}%` }}
-              transition={{ duration: 1 }}
-            />
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="flex items-center gap-3"
-        whileHover={{ scale: 1.05 }}
-      >
-        <Database className="h-8 w-8 text-[#19b2b0]" />
-        <div>
-          <p className="text-sm text-gray-300">Memory</p>
-          <div className="h-2 w-24 overflow-hidden rounded-full bg-[#3f5964]">
-            <motion.div
-              className="h-full bg-[#19b2b0]"
-              initial={{ width: 0 }}
-              animate={{ width: `${status.memory}%` }}
-              transition={{ duration: 1 }}
-            />
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="flex items-center gap-3"
-        whileHover={{ scale: 1.05 }}
-      >
-        <Shield className="h-8 w-8 text-[#19b2b0]" />
-        <div>
-          <p className="text-sm text-gray-300">Security</p>
-          <div className="h-2 w-24 overflow-hidden rounded-full bg-[#3f5964]">
-            <motion.div
-              className="h-full bg-[#19b2b0]"
-              initial={{ width: 0 }}
-              animate={{ width: `${status.security}%` }}
-              transition={{ duration: 1 }}
-            />
-          </div>
-        </div>
-      </motion.div>
+    <div className="grid grid-cols-2 gap-4 rounded-xl bg-white/95 p-6 backdrop-blur-lg shadow-lg">
+      <StatusItem icon={Server} label="Uptime" value={status.uptime} />
+      <StatusItem
+        icon={Wifi}
+        label="Load"
+        value={`${status.load}%`}
+        progress={status.load}
+      />
+      <StatusItem
+        icon={Database}
+        label="Memory"
+        value={`${status.memory}%`}
+        progress={status.memory}
+      />
+      <StatusItem
+        icon={Shield}
+        label="Security"
+        value={`${status.security}%`}
+        progress={status.security}
+      />
     </div>
   );
 }
-//checked
+
+function StatusItem({
+  icon: Icon,
+  label,
+  value,
+  progress,
+}: {
+  icon: React.ElementType;
+  label: string;
+  value: string;
+  progress?: number;
+}) {
+  return (
+    <motion.div
+      className="flex items-center gap-3"
+      whileHover={{ scale: 1.05 }}
+    >
+      <div className="rounded-full bg-[#38bdf8]/10 p-2">
+        <Icon className="h-6 w-6 text-[#579184]" />
+      </div>
+      <div>
+        <p className="text-sm font-medium text-gray-600">{label}</p>
+        <p className="font-semibold text-gray-800">{value}</p>
+        {progress !== undefined && (
+          <div className="mt-1 h-1 w-24 overflow-hidden rounded-full bg-gray-200">
+            <motion.div
+              className="h-full bg-[#38bdf8]"
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 1 }}
+            />
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+}

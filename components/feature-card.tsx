@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useAnimation } from "framer-motion";
-import { TypeIcon as type, LucideIcon } from "lucide-react";
+import { TypeIcon as type, type LucideIcon } from "lucide-react";
 import { useEffect } from "react";
 
 interface FeatureCardProps {
@@ -32,12 +32,11 @@ export function FeatureCard({
       initial={{ opacity: 0, y: 50 }}
       animate={controls}
       whileHover={{ scale: 1.05, y: -10 }}
-      className="group relative overflow-hidden rounded-xl bg-[#3f5964]/20 p-6 backdrop-blur-lg"
+      className="group relative overflow-hidden rounded-xl bg-white p-6 shadow-lg"
     >
-        
       {/* Animated background */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-[#19b2b0]/20 to-transparent opacity-0"
+        className="absolute inset-0 bg-gradient-to-r from-blue-100 to-transparent opacity-0"
         initial={false}
         animate={{ opacity: 0 }}
         whileHover={{ opacity: 1 }}
@@ -45,19 +44,19 @@ export function FeatureCard({
 
       {/* Icon with animations */}
       <motion.div
-        className="mb-4 inline-block rounded-lg bg-[#19b2b0]/10 p-3"
+        className="mb-4 inline-block rounded-lg bg-blue-100 p-3"
         whileHover={{
           scale: 1.2,
           rotate: 360,
           transition: { duration: 0.8 },
         }}
       >
-        <Icon className="h-6 w-6 text-[#19b2b0]" />
+        <Icon className="h-6 w-6 text-blue-600" />
       </motion.div>
 
       {/* Content */}
       <motion.h3
-        className="mb-2 text-xl font-semibold text-white"
+        className="mb-2 text-xl font-semibold text-gray-900"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: index * 0.3 }}
@@ -66,7 +65,7 @@ export function FeatureCard({
       </motion.h3>
 
       <motion.p
-        className="text-gray-300"
+        className="text-gray-600"
         initial={{ x: -20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: index * 0.4 }}
@@ -76,7 +75,7 @@ export function FeatureCard({
 
       {/* Animated border */}
       <motion.div
-        className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-[#19b2b0] to-[#3f5964]"
+        className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-blue-400 to-indigo-400"
         initial={{ scaleX: 0 }}
         whileHover={{ scaleX: 1 }}
         transition={{ duration: 0.3 }}
@@ -84,4 +83,3 @@ export function FeatureCard({
     </motion.div>
   );
 }
-//checked

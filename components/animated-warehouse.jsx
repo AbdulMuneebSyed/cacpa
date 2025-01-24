@@ -31,7 +31,7 @@ export function AnimatedWarehouse() {
       y: [0, -15, 0],
       transition: {
         duration: 3,
-        repeat: Infinity,
+        repeat: Number.POSITIVE_INFINITY,
         repeatType: "reverse",
         ease: "easeInOut",
       },
@@ -72,11 +72,11 @@ export function AnimatedWarehouse() {
         {[...Array(16)].map((_, i) => (
           <motion.div
             key={i}
-            className="rounded-lg border border-[#19b2b0]/20 bg-[#19b2b0]/5"
+            className="rounded-lg border-blue-200 bg-blue-50"
             variants={cellVariants}
             whileHover={{
               scale: 1.1,
-              backgroundColor: "rgba(25, 178, 176, 0.2)",
+              backgroundColor: "rgba(59, 130, 246, 0.2)",
               transition: { duration: 0.2 },
             }}
           />
@@ -100,22 +100,22 @@ export function AnimatedWarehouse() {
               rotate: [0, 360],
               transition: {
                 duration: 20,
-                repeat: Infinity,
+                repeat: Number.POSITIVE_INFINITY,
                 delay: delay * 2,
                 ease: "linear",
               },
             }}
           >
             <motion.div
-              className="rounded-xl bg-[#19b2b0]/10 p-4 backdrop-blur-sm"
+              className="rounded-xl bg-blue-100 p-4 backdrop-blur-sm"
               whileHover={{
                 scale: 1.2,
-                backgroundColor: "rgba(25, 178, 176, 0.2)",
+                backgroundColor: "rgba(59, 130, 246, 0.2)",
                 rotate: 360,
                 transition: { duration: 0.5 },
               }}
             >
-              <Icon className="h-8 w-8 text-[#19b2b0]" />
+              <Icon className="h-8 w-8 text-blue-600" />
             </motion.div>
           </motion.div>
         ))}
@@ -129,15 +129,15 @@ export function AnimatedWarehouse() {
           scale: [1, 1.1, 1],
           transition: {
             duration: 4,
-            repeat: Infinity,
+            repeat: Number.POSITIVE_INFINITY,
             repeatType: "reverse",
             ease: "easeInOut",
           },
         }}
       >
-        <div className="rounded-full bg-[#19b2b0]/20 p-8 backdrop-blur-lg">
+        <div className="rounded-full bg-blue-200 p-8 backdrop-blur-lg">
           <motion.div
-            className="rounded-full bg-[#19b2b0] p-6"
+            className="rounded-full bg-blue-600 p-6"
             whileHover={{ scale: 1.1 }}
           >
             <Package className="h-12 w-12 text-white" />
@@ -147,4 +147,3 @@ export function AnimatedWarehouse() {
     </motion.div>
   );
 }
-//checked
