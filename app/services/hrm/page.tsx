@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 import {
   UserCheck,
   Target,
@@ -17,7 +18,8 @@ import Navbar2 from "@/components/navbar2";
 import Footer from "@/components/Footer";
 import { useRef } from "react";
 import { BackgroundBeams } from "@/components/ui/background-beams";
-import { FlickeringGrid } from "@/components/ui/flickering";
+// import { FlickeringGrid } from "@/components/ui/flickering";
+import { DotPattern } from "@/components/ui/dotted";
 
 const services = [
   {
@@ -78,13 +80,10 @@ export default function Home() {
 
       {/* Hero Section with AuroraBackground */}
       <div className=" min-h-screen mt-11 overflow-hidden ">
-        <FlickeringGrid
-          className="absolute inset-0 z-0 min-w-screen max-w-screen h-full"
-          squareSize={4}
-          gridGap={6}
-          color="#6B7280"
-          maxOpacity={0.5}
-          flickerChance={0.1}
+        <DotPattern
+          className={cn(
+            "[mask-image:radial-gradient(5000px_circle_at_center,white,transparent)]"
+          )}
         />
         <div className=" z-10 min-h-screen flex items-center">
           <div className="container mx-auto px-4 py-16">
