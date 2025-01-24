@@ -7,11 +7,11 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import web from "@/public/hero-eb.jpeg"
-import bmc from "@/public/hero-bmc.jpg";
-import dmbc from "@/public/hero-dmbc.jpg";
-import grmc from "@/public/hero-grmc.jpg";
-import hrm from "@/public/hero-hrm.jpg";
-import wm from "@/public/hero-wm.jpg";
+import bmc from "@/public/hero-bmc.webp";
+import dmbc from "@/public/hero-dmbc.webp";
+import grmc from "@/public/hero-grmc.webp";
+import hrm from "@/public/hero-hrm.webp";
+import wm from "@/public/hero-wm.webp";
 import type { StaticImageData } from "next/image";
 
 interface Service {
