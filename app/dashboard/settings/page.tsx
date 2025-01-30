@@ -12,7 +12,7 @@ import {
 import ChangePasswordModal from "@/components/ChangePasswordModal";
 
 import React, { useState, useEffect } from "react";
-import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/crm/sidebar";
+import { Sidebar, SidebarBody, SidebarLink } from "@/components/cms/sidebar";
 import {
   IconArrowLeft,
   IconBrandTabler,
