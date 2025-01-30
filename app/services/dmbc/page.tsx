@@ -25,7 +25,7 @@ export default function HomePage() {
 
   return (
     <div
-      className="relative min-h-screen min-w-screen overflow-hidden bg-white"
+      className="relative min-h-screen min-w-screen overflow-clip bg-white"
       ref={containerRef}
     >
       {/* <ParticleCanvas /> */}
@@ -34,8 +34,7 @@ export default function HomePage() {
       </div>
       {/* Hero Section */}
 
-      <section className="relative min-h-screen max-w-screen overflow-hidden bg-white">
-        <Meteors number={30} />
+      <section className="relative min-h-screen max-w-screen  bg-white">
         <motion.div
           className="absolute inset-0 -z-10"
           style={{
@@ -46,9 +45,11 @@ export default function HomePage() {
             y,
           }}
         />
-        <div className="container mx-auto px-4 py-16">
+              <Meteors number={30} />
+        <div className="container mx-auto px-4 py-6">
           <div className="mt-24 grid items-start gap-12 md:grid-cols-2">
             <div className="space-y-8">
+                
               <AnimatedText
                 text="Digital Marketing & Business Consultant"
                 className="text-balance text-4xl font-bold text-gray-600 md:text-5xl lg:text-6xl"

@@ -44,7 +44,8 @@ export default function WebServicesPage() {
         <Navbar2 />
       </div>
       <BackgroundBeamsWithCollision className="md:block hidden">
-        <section className="relative mt-16 min-h-screen h-screen overflow-hidden perspective-1000">
+        <div>
+        <section className="relative mt-16 min-h-screen h-fit overflow-hidden perspective-1000">
           <motion.div
             className="absolute inset-0"
             style={{
@@ -104,6 +105,7 @@ export default function WebServicesPage() {
             </motion.div>
           </div>
         </section>
+        </div>
       </BackgroundBeamsWithCollision>
       <section className="relative mt-16 min-h-screen h-screen overflow-hidden perspective-1000 md:hidden block">
         <motion.div

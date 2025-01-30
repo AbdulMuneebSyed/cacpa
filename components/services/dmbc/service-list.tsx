@@ -85,38 +85,55 @@ const services = [
 
 export function ServiceList() {
   return (
-    <div className="space-y-8">
+    <motion.div
+      className="space-y-8"
+      initial="hidden"
+      animate="visible"
+      viewport={{ once: true }}
+      variants={{
+        visible: {
+          transition: {
+            staggerChildren: 0.1,
+          },
+        },
+      }}
+    >
       {services.map((service, index) => (
         <motion.div
           key={service.title}
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ delay: index * 0.1 }}
-          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           className="group relative rounded-xl bg-teal-50 p-6 transition-colors hover:bg-teal-100"
         >
           <div className="flex items-start gap-4">
             <motion.div
               className="rounded-lg bg-teal-500/10 p-3"
               whileHover={{ scale: 1.1, rotate: 360 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
             >
               <service.icon className="h-6 w-6 text-teal-500" />
             </motion.div>
             <div className="flex-1">
               <motion.h3
                 className="mb-2 text-lg font-semibold text-gray-700"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: index * 0.2 }}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1 },
+                }}
+                transition={{ duration: 0.3, delay: 0.2 }}
               >
                 {service.title}
               </motion.h3>
               <motion.p
                 className="text-teal-600"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: index * 0.3 }}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: { opacity: 1 },
+                }}
+                transition={{ duration: 0.3, delay: 0.4 }}
               >
                 {service.description}
               </motion.p>
@@ -131,6 +148,6 @@ export function ServiceList() {
           />
         </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 }
