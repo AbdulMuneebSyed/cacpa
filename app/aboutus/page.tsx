@@ -1,6 +1,5 @@
 "use client";
 import Navbar2 from "@/components/navbar2";
-import Vision from "@/components/Vision";
 import React from "react";
 import { motion } from "framer-motion";
 import Footer from "@/components/Footer";
@@ -11,7 +10,7 @@ export default function page(){
       <div className="fixed z-50 top-0 max-w-screen w-full">
              <Navbar2 />
            </div>
-      <div className="bg-gray-100 py-16 px-6">
+      <div className="bg-gray-100 py-20 px-6">
 
         <motion.div
           initial={{ opacity: 0, y: -50 }}
