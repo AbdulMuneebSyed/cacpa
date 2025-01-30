@@ -8,9 +8,9 @@ import Footer from "@/components/Footer";
 export default function page(){
   return (
     <div>
-      <div className="fixed z-50 top-0 max-w-screen overflow-hidden">
-              <Navbar2 />
-            </div>
+      <div className="fixed z-50 top-0 max-w-screen w-full">
+             <Navbar2 />
+           </div>
       <div className="bg-gray-100 py-16 px-6">
 
         <motion.div

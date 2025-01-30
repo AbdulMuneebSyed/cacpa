@@ -10,9 +10,9 @@ import { FlickeringGrid } from '@/components/ui/flickering';
 export default function page(){
   return (
     <div className="min-h-screen max-w-screen overflow-hidden ">
-      <div className="fixed z-50 top-0 max-w-screen overflow-hidden">
-        <Navbar2 />
-      </div>
+       <div className="fixed z-50 top-0 max-w-screen w-full">
+              <Navbar2 />
+            </div>
       <FlickeringGrid
         className="absolute inset-0 z-0 min-w-screen max-w-screen overflow-hidden min-h-screen h-[200vh]"
         squareSize={4}

@@ -151,7 +151,7 @@ export default function Navbar2(){
   return (
     <>
       <nav
-        className={`relative z-50 bg-white w-screen md:static md:text-sm md:border-none shadow-lg rounded-b-xl  ${
+        className={`relative z-50 bg-white  w-screen md:static md:text-sm md:border-none shadow-lg rounded-b-xl  ${
           state ? "shadow-lg rounded-b-xl md:shadow-none" : ""
         }`}
       >
@@ -262,7 +262,7 @@ export default function Navbar2(){
                           exit={{ opacity: 0, y: 10 }} // Fade out and slide up
                           transition={{ duration: 0.3 }} // Smooth transition
                         >
-                          <ul className="max-w-screen-xl mx-auto grid items-center gap-4 w-96 bg-white rounded-lg shadow-sm shadow-gray-400 md:p-4 md:grid-cols-1 lg:grid-cols-2">
+                          <ul className="max-w-screen-xl mx-auto grid items-center gap-4 z-50 w-96 bg-white rounded-lg shadow-sm shadow-gray-400 md:p-4 md:grid-cols-1 lg:grid-cols-2">
                             {item?.navs.map((dropdownItem, idx) => (
                               <li key={idx} className="space-y-2">
                                 <p className="text-indigo-600 text-xs font-semibold">

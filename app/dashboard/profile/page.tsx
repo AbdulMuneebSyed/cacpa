@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/card";
 import EditProfileModal from "@/components/EditProfileModal";
-import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/crm/sidebar";
+import { Sidebar, SidebarBody, SidebarLink } from "@/components/cms/sidebar";
 import {
   IconArrowLeft,
   IconBrandTabler,
@@ -191,7 +191,7 @@ const ProfilePage = () => {
   }, []); // Empty dependency array to run on component mount
 
   useEffect(() => {
-    console.log("this is user ", user);
+    // console.log("this is user ", user);
   }, [user]);
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -304,7 +304,7 @@ const ProfilePage = () => {
   // const { email, ... Userdata } = updateUser;
  
   setUser(Userdata);
-  console.log(Userdata.email);
+  // console.log(Userdata.email);
   // Update in Supabase (assuming you have a `profiles` table)
   try {
     const { data, error } = await supabase
@@ -314,7 +314,7 @@ const ProfilePage = () => {
 
     if (error) throw error;
 
-    console.log('Profile updated successfully:', data);
+    // console.log('Profile updated successfully:', data);
   } catch (error) {
     console.error('Error updating profile:', error);
   }

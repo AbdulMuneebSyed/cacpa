@@ -14,11 +14,10 @@ import {
   WarehouseIcon,
   ArrowRight,
 } from "lucide-react";
-import { AnimatedWarehouse } from "@/components/animated-warehouse";
-import { FeatureCard } from "@/components/feature-card";
+import { AnimatedWarehouse } from "@/components/services/wm/animated-warehouse";
+import { FeatureCard } from "@/components/services/wm/feature-card";
 import Navbar2 from "@/components/navbar2";
 import Footer from "@/components/Footer";
-import { FlickeringGrid } from "@/components/ui/flickering";
 import { RetroGrid } from "@/components/ui/retrogrid";
 
 const features = [

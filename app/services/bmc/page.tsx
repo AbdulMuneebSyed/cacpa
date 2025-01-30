@@ -1,7 +1,7 @@
 "use client"
-import HeroSection from "@/components/hero-section";
-import AnimatedServices from "@/components/animated-services";
-import ContactSection from "@/components/contact-section";
+import HeroSection from "@/components/services/bmc/hero-section";
+import AnimatedServices from "@/components/services/bmc/animated-services";
+import ContactSection from "@/components/services/bmc/contact-section";
 import Navbar2 from "@/components/navbar2";
 import Footer from "@/components/Footer"
 export default function Page() {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,6 +26,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        {/* Add the Chatbase embed script here */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w, d, s, t, j, a, r) {
+                w.Chatbase = w.Chatbase || {};
+                w.Chatbase.apiKey = 'amh647norp38lvqaxf1tpg9x3r8wqmtu';
+                j = d.createElement(s);
+                a = d.getElementsByTagName(s)[0];
+                j.async = true;
+                j.src = t;
+                a.parentNode.insertBefore(j, a);
+              })(window, document, 'script', 'https://www.chatbase.co/embed/chatbase.js');
+            `,
+          }}
+        ></script>
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -40,7 +40,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { EditModal } from "@/components/edit-model";
+import { EditModal } from "@/components/cms/edit-model";
 import { LeadForm, LeadData } from "@/components/lead-form";
 import {
   createClient,

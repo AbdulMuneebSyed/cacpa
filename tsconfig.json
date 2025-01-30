@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/navbar2.jsx", "components/contactus.jsx", "components/animated-services.jsx", "components/animated-background.jsx", "components/animated-warehouse.jsx", "components/ui/dataTable.jsx", "components/ui/dataTable.jsx", "components/ui/dataTable.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/navbar2.jsx", "components/contactus.jsx", "components/animated-services.jsx", "components/animated-background.jsx", "components/services/wm/animated-warehouse.jsx", "components/ui/dataTable.jsx", "components/ui/dataTable.jsx", "components/ui/dataTable.jsx"],
   "exclude": ["node_modules"]
 }

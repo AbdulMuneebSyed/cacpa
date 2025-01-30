@@ -12,9 +12,9 @@ import {
   BarChart,
   Lock,
 } from "lucide-react";
-import { ProcessFlow } from "@/components/process-flow";
-import { StatsGrid } from "@/components/stats-grid";
-import { AnimatedIcon } from "@/components/animmated-icon";
+import { ProcessFlow } from "@/components/services/grmc/process-flow";
+import { StatsGrid } from "@/components/services/grmc/stats-grid";
+import { AnimatedIcon } from "@/components/services/grmc/animmated-icon";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/navbar2";
 import { Button } from "@/components/ui/button";
@@ -89,7 +89,9 @@ export default function GovernancePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 max-w-screen overflow-x-hidden">
-      <Navbar />
+       <div className="fixed z-50 top-0 max-w-screen w-full">
+              <Navbar />
+            </div>
       {/* Hero Section */}
       <AnimatedGridBackgroundSection>
         <section className="relative py-20 overflow-hidden">

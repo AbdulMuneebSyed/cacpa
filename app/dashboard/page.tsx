@@ -1,7 +1,7 @@
 "use client";
-import { LeadManagementTable } from "@/components/ui/dataTable";
+import { LeadManagementTable } from "@/components/cms/dataTable";
 import React, { useState, useEffect } from "react";
-import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/crm/sidebar";
+import { Sidebar, SidebarBody, SidebarLink } from "@/components/cms/sidebar";
 import {
   IconArrowLeft,
   IconBrandTabler,
@@ -23,7 +23,7 @@ export default function Page() {
   // Check if the user is logged in when the component mounts
   useEffect(() => {
     const user = localStorage.getItem("user");
-    console.log(user);
+    // console.log(user);
     if (!user) {
       router.push("/unauthorized"); 
     }else{

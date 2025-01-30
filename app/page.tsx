@@ -23,6 +23,7 @@ export default function Home() {
       <AnimatedContent/>
       <About />
       <LandServices />
+      
       <Footer />
     </div>
   );
