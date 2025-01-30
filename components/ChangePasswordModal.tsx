@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/lib/supabaseClient";
 import { useToast } from "@/components/ui/use-toast";
+// import { console } from "inspector";
 
 interface ChangePasswordModalProps {
   isOpen: boolean;
@@ -29,47 +30,58 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newPassword !== confirmPassword) {
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (newPassword !== confirmPassword) {
+    toast({
+      title: "Error",
+      description: "New passwords do not match.",
+      variant: "destructive",
+    });
+    return;
+  }
+
+  setIsLoading(true);
+  try {
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+    if (!user) {
+      console.log("User is not logged in.", userError);
       toast({
         title: "Error",
-        description: "New passwords do not match.",
+        description: "User is not logged in.",
         variant: "destructive",
       });
       return;
     }
 
-    setIsLoading(true);
-    try {
-      const { error } = await supabase.auth.updateUser({
-        password: newPassword,
-      });
-      if (error) throw error;
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) throw error;
 
-      toast({
-        title: "Success",
-        description: "Your password has been updated.",
-      });
-      onClose();
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to update password. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    toast({ title: "Success", description: "Your password has been updated." });
+    onClose();
+  } catch (error) {
+    toast({
+      title: "Error",
+      description: "Failed to update password: " + error,
+      variant: "destructive",
+    });
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Change Password(to be added)</DialogTitle>
+          <DialogTitle>Change Password</DialogTitle>
         </DialogHeader>
-        {/* <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="current-password" className="text-right">
@@ -116,7 +128,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
               {isLoading ? "Updating..." : "Update Password"}
             </Button>
           </DialogFooter>
-        </form> */}
+        </form>
       </DialogContent>
     </Dialog>
   );

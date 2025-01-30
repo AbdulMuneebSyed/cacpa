@@ -1,16 +1,32 @@
-import  {OrbitingCirclesMobile , OrbitingCirclesDemo} from "@/components/ui/orbiting";
+"use client"
 import About from "@/components/about";
 import Footer from "@/components/Footer";
-import Hero from "@/components/hero";
-import LandingPageBanner from "@/components/landingPageBanner";
 import LandServices from "@/components/LandServices";
-import Navbar from "@/components/navbar";
 import Navbar2 from "@/components/navbar2";
-import Vision from "@/components/Vision";
 import ServiceSlider from "@/components/hero1";
 import AnimatedContent from "@/components/new";
+import { useEffect } from "react";
+import Lenis from "@studio-freight/lenis";
 
 export default function Home() {
+   useEffect(() => {
+     const lenis = new Lenis({
+       duration: 1.2, // Scroll speed (higher value = slower scroll)
+       smoothWheel: true, // Enable smooth scrolling on wheel
+      //  smoothTouch: true, // Enable smooth scrolling on touch devices
+     });
+
+     function raf(time: number) {
+       lenis.raf(time);
+       requestAnimationFrame(raf);
+     }
+
+     requestAnimationFrame(raf);
+
+     return () => {
+       lenis.destroy();
+     };
+   }, []);
   return (
     <div className="min-h-screen max-w-screen overflow-hidden">
       {/* <Navbar/> */}
