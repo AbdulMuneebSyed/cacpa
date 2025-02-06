@@ -132,7 +132,7 @@ export default function ServiceSlider() {
   };
 
   return (
-    <div className="relative  min-h-screen overflow-hidden ">
+    <div className="relative min-h-fit md:min-h-screen overflow-hidden ">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={currentIndex}
@@ -145,14 +145,14 @@ export default function ServiceSlider() {
           onAnimationComplete={handleAnimationComplete}
           className="absolute inset-0"
         >
-          <div className="absolute inset-0 flex justify-end items-end">
+          <div className="absolute inset-0 flex justify-center items-center md:justify-end md:items-end">
             <Image
               src={services[currentIndex].image || "/placeholder.svg"}
               alt={services[currentIndex].title}
               // layout="fill"
               objectFit="cover"
               priority
-              className="h-[90vh] w-screen"
+              className="md:h-[90vh] h-screen w-screen"
             />
 
             <div className="absolute inset-0 bg-black bg-opacity-60" />
