@@ -62,6 +62,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     if (error) throw error;
 
     toast({ title: "Success", description: "Your password has been updated." });
+    
     onClose();
   } catch (error) {
     toast({

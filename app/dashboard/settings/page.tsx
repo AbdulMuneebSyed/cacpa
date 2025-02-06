@@ -137,10 +137,11 @@ const LogoIcon = () => {
     </Link>
   );
 };
+
 const Settings = () => {
   const [isChangePasswordModalOpen, setIsChangePasswordModalOpen] =
     useState(false);
-
+  const [newpassword,setNewPassword] = useState("");
   return (
     <div className="container mx-auto py-10">
       <Card>

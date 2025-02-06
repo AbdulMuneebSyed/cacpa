@@ -153,6 +153,9 @@ const Footer = () => {
                   <Link href="/services/wm">Warehouse Management</Link>
                 </li>
                 <li className="text-lg">
+                  <Link href="/services/am">Asset Management</Link>
+                </li>
+                <li className="text-lg">
                   <Link href="/services/grmc">
                     Governance, Risk Management & Compliance
                   </Link>
@@ -161,6 +164,9 @@ const Footer = () => {
                   <Link href="/services/wdhs">
                     Web Development & Hosting Services
                   </Link>
+                </li>
+                <li className="text-lg">
+                  <Link href="/services/its">IT Services</Link>
                 </li>
               </ul>
             </div>
@@ -296,6 +302,7 @@ const Footer = () => {
                 <li className="text-lg">
                   <Link href="/services/hrm">Human Resource Management</Link>
                 </li>
+
                 <li className="text-lg">
                   <Link href="/services/dmbc">
                     Digital Marketing & Business Consulting
@@ -303,6 +310,9 @@ const Footer = () => {
                 </li>
                 <li className="text-lg">
                   <Link href="/services/wm">Warehouse Management</Link>
+                </li>
+                <li className="text-lg">
+                  <Link href="/services/am">Asset Management</Link>
                 </li>
                 <li className="text-lg">
                   <Link href="/services/grmc">
@@ -313,6 +323,9 @@ const Footer = () => {
                   <Link href="/services/wdhs">
                     Web Development & Hosting Services
                   </Link>
+                </li>
+                <li className="text-lg">
+                  <Link href="/services/its">IT Services</Link>
                 </li>
               </ul>
             </div>

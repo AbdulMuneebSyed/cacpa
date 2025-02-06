@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Check } from "lucide-react";
-
+import home from "@/public/home.jpeg"
 export default function AnimatedContent() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -53,7 +53,7 @@ export default function AnimatedContent() {
         <motion.div variants={itemVariants} className="w-full md:w-1/2">
           <div className="relative h-[500px] w-full overflow-hidden rounded-xl shadow-2xl">
             <Image
-              src="/home.webp"
+              src={home}
               alt="Mission Vision Values"
               fill
               className="object-cover transition-transform duration-700 hover:scale-105"

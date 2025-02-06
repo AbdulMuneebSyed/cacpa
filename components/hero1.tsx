@@ -34,15 +34,6 @@ const services: Service[] = [
     link: "services/bmc",
   },
   {
-    id: 1,
-    title: "Ready to Bring Your Digital Vision to Life?",
-    description:
-      "Let's create a stunning website that captures your brand essence and engages your audience. Our expert team is here to turn your ideas into a powerful online presence.",
-    slug: "web-development",
-    image: web,
-    link: "services/wdhs",
-  },
-  {
     id: 3,
     title: "Looking to Build a High-Performing Team?",
     description:
@@ -59,6 +50,15 @@ const services: Service[] = [
     slug: "digital-marketing",
     image: dmbc,
     link: "services/dmbc",
+  },
+  {
+    id: 1,
+    title: "Ready to Bring Your Digital Vision to Life?",
+    description:
+      "Let's create a stunning website that captures your brand essence and engages your audience. Our expert team is here to turn your ideas into a powerful online presence.",
+    slug: "web-development",
+    image: web,
+    link: "services/wdhs",
   },
   {
     id: 5,
@@ -145,13 +145,14 @@ export default function ServiceSlider() {
           onAnimationComplete={handleAnimationComplete}
           className="absolute inset-0"
         >
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 flex justify-end items-end">
             <Image
               src={services[currentIndex].image || "/placeholder.svg"}
               alt={services[currentIndex].title}
-              layout="fill"
+              // layout="fill"
               objectFit="cover"
               priority
+              className="h-[90vh] w-screen"
             />
 
             <div className="absolute inset-0 bg-black bg-opacity-60" />

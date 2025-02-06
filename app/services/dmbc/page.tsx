@@ -45,11 +45,10 @@ export default function HomePage() {
             y,
           }}
         />
-              <Meteors number={30} />
+        <Meteors number={30} />
         <div className="container mx-auto px-4 py-6">
           <div className="mt-24 grid items-start gap-12 md:grid-cols-2">
             <div className="space-y-8">
-                
               <AnimatedText
                 text="Digital Marketing & Business Consultant"
                 className="text-balance text-4xl font-bold text-gray-600 md:text-5xl lg:text-6xl"

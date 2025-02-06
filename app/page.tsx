@@ -7,11 +7,12 @@ import ServiceSlider from "@/components/hero1";
 import AnimatedContent from "@/components/new";
 import { useEffect } from "react";
 import Lenis from "@studio-freight/lenis";
+import ChatBot from "@/components/chatbot";
 
 export default function Home() {
    useEffect(() => {
      const lenis = new Lenis({
-       duration: 1.2, // Scroll speed (higher value = slower scroll)
+       duration: 1, // Scroll speed (higher value = slower scroll)
        smoothWheel: true, // Enable smooth scrolling on wheel
       //  smoothTouch: true, // Enable smooth scrolling on touch devices
      });
@@ -33,13 +34,12 @@ export default function Home() {
       <div className="fixed z-50 top-0 max-w-screen">
         <Navbar2 />
       </div>
-
-      <ServiceSlider/>
+      <ServiceSlider />
       {/* <LandingPageBanner /> */}
-      <AnimatedContent/>
+      <AnimatedContent />
       <About />
       <LandServices />
-      
+      <ChatBot />
       <Footer />
     </div>
   );

@@ -2,18 +2,15 @@
 "use client"
 import Link from "next/link";
 import { motion } from "framer-motion";
-import pic from "@/public/parallax/OIP.jpg";
 import Image from "next/image";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-import { useEffect } from "react";
-import Footer from "./Footer";
 import grmc from "@/public/manage.png";
 import bmc from "@/public/biz.png"
 import dmbc from "@/public/ad.png"
 import wm from "@/public/mar.png"
 import wdhs from "@/public/web.png"
 import hrm from "@/public/hr.png"
+import am from "@/public/am.jpeg"
+import it from "@/public/it.jpeg"
 const services = [
   {
     name: "Business Management",
@@ -44,6 +41,13 @@ const services = [
     image: wm,
   },
   {
+    name: "Asset Management",
+    description:
+      "Enhancing asset performance through proactive lifecycle management, data-driven insights, and technology integration to maximize returns and reduce risks.",
+    route: "/services/am",
+    image: am,
+  },
+  {
     name: "Governance & Compliance",
     description:
       "Ensuring organizational accountability and adhering to regulatory requirements with robust compliance frameworks.",
@@ -56,6 +60,13 @@ const services = [
       "Building modern, responsive, and feature-rich websites to enhance your digital presence and user experience.",
     route: "/services/wm",
     image: wdhs,
+  },
+  {
+    name: "IT Services",
+    description:
+      "Delivering comprehensive IT solutions including infrastructure support, cybersecurity, and digital transformation to empower business growth and innovation.",
+    route: "/services/it",
+    image: it,
   },
 ];
 
