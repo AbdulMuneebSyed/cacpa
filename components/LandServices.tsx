@@ -65,7 +65,7 @@ const services = [
     name: "IT Services",
     description:
       "Delivering comprehensive IT solutions including infrastructure support, cybersecurity, and digital transformation to empower business growth and innovation.",
-    route: "/services/it",
+    route: "/services/its",
     image: it,
   },
 ];

@@ -105,7 +105,7 @@ export default function HomePage() {
       </div>
 
       {/* Hero Section with Terminal */}
-      <section className="relative flex flex-row min-h-screen items-center justify-center px-4 space-x-12">
+      <section className="relative flex flex-col md:flex-row min-h-screen items-center justify-center px-4 space-x-12">
         {/* Text Content */}
         <div className="flex-1 z-10 space-y-8">
           <motion.h1
