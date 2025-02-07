@@ -9,8 +9,8 @@ import dmbc from "@/public/ad.png"
 import wm from "@/public/mar.png"
 import wdhs from "@/public/web.png"
 import hrm from "@/public/hr.png"
-import am from "@/public/am.jpeg"
-import it from "@/public/it.jpeg"
+import am from "@/public/am.png"
+import it from "@/public/it.png"
 const services = [
   {
     name: "Business Management",

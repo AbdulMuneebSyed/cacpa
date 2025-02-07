@@ -55,28 +55,31 @@ export default function ChatBot() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const typeText = (text: string, index: number, sender: "user" | "bot") => {
-    if (index < text.length) {
-      setTimeout(() => {
-        setMessages((prev) => {
-          const lastMessage = prev[prev.length - 1];
-          if (lastMessage?.sender === sender) {
-            return [
-              ...prev.slice(0, -1),
-              { sender, text: lastMessage.text + text[index] },
-            ];
-          } else {
-            return [...prev, { sender, text: text[index] }];
-          }
-        });
-        typeText(text, index + 1, sender);
-      }, 25);
-    }
-  };
+ const typeText = (text: string, index: number, sender: "user" | "bot") => {
+
+   // Apply typewriter effect for bot messages
+   if (index < text.length) {
+    // console.log(text);
+     setTimeout(() => {
+       setMessages((prev) => {
+         const lastMessage = prev[prev.length - 1];
+         if (lastMessage?.sender === sender) {
+           return [
+             ...prev.slice(0, -1),
+             { sender, text: lastMessage.text + text[index] },
+           ];
+         } else {
+           return [...prev, { sender, text: text[index] }];
+         }
+       });
+       typeText(text, index + 1, sender);
+     }, 25);
+   }
+ };
 
   const sendMessage = async (question: string) => {
-   const newMessage: Message = { sender: "user", text: "" };
-   setMessages((prev) => [...prev, newMessage]);
+    const newMessage: Message = { sender: "user", text: "" };
+    setMessages((prev) => [...prev, newMessage]);
 
     typeText(question, 0, "user");
     setInput("");
@@ -109,7 +112,7 @@ export default function ChatBot() {
   };
 
   const formatMessage = (text: string) => {
-    const urlRegex = /(https?:\/\/\S+)/g;
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
     return text.split(urlRegex).map((part, index) =>
       urlRegex.test(part) ? (
         <a
@@ -117,7 +120,7 @@ export default function ChatBot() {
           href={part}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-500 underline"
+          className="text-blue-500 underline break-words"
         >
           {part}
         </a>
@@ -173,7 +176,7 @@ export default function ChatBot() {
                       }`}
                     >
                       {msg.sender === "bot" && (
-                        <Avatar className="h-6 w-6 rounded-full bg-gray-300">
+                        <Avatar className="h-6 w-6 rounded-full bg-gray-500">
                           <AvatarImage
                             src="/capco-logo.png"
                             alt="Capco Bot"
@@ -183,13 +186,13 @@ export default function ChatBot() {
                         </Avatar>
                       )}
                       <div
-                        className={`rounded-lg text-sm px-3 py-2 max-w-[70%] ${
+                        className={`rounded-lg text-sm px-3 py-2 max-w-[70%] whitespace-normal break-words ${
                           msg.sender === "user"
                             ? "bg-primary text-white"
-                            : "bg-gray-200"
+                            : "bg-gray-300 text-black"
                         }`}
                       >
-                        {formatMessage(msg.text)}
+                           {formatMessage(msg.text)}
                       </div>
                     </div>
                   ))}

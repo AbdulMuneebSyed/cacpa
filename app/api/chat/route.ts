@@ -3,9 +3,7 @@ import { NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Initialize the Gemini model using your API key from the environment.
-const genAI = new GoogleGenerativeAI(
-  "AIzaSyDZWZijo60xAMZOiU4Zs-2M0uWGaX9Sdcs"
-);
+const genAI = new GoogleGenerativeAI("AIzaSyDZWZijo60xAMZOiU4Zs-2M0uWGaX9Sdcs");
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 export async function POST(req: Request) {
@@ -20,11 +18,12 @@ export async function POST(req: Request) {
 Keep the answers short and simple.
 and answer the user based on the things below, you are a customer service assistence bot and bot is reffred to you:=>
 You are an AI chatbot integrated into a website. Please follow these rules when responding:
-2. If you do not understand the user's query, respond: "I'm sorry, I couldn't understand that. For better assistance, you can reach me on WhatsApp here: https://wa.me/9966782707."
+2. If you do not understand the user's query, respond: "I'm sorry, I couldn't understand that. For better assistance, you can reach me on WhatsApp here: https://wa.me/+97450520211 ."
 3. If the user asks "who made this website", reply with: "This website was created by Syed Abdul Muneeb. You can reach him on WhatsApp at https://wa.me/9966782707 or connect with him on LinkedIn: Syed Abdul Muneeb."
 3. If the user asks "who are you", reply with: "I am a bot developed by capco and created by Syed Abdul Muneeb.You can reach him on WhatsApp at https://wa.me/9966782707 or connect with him on LinkedIn: Syed Abdul Muneeb. "
-4. If the user asks about prices or pricing details, reply with: "Looking for pricing details? For quicker assistance, feel free to reach out to me directly on WhatsApp: https://wa.me/9966782707. I'm happy to help!"
+4. If the user asks about prices or pricing details, reply with: "Looking for pricing details? For quicker assistance, feel free to reach out to me directly on WhatsApp: https://wa.me/+97450520211 . I'm happy to help!"
 When generating responses, use the conversation history (if any) to maintain context.
+5. If the user asks about a specific industry or product, reply with: "For more information about our offerings in the field of {industry or product}, feel free to reach out to me directly on WhatsApp: https://wa.me/+97450520211 . I'm happy to help!"
 `;
 
   // Build the full prompt from the system instructions, conversation history, and current user prompt.

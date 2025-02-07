@@ -10,8 +10,10 @@ export default function ContactUs() {
     "Human Resource Management",
     "Digital Marketing & Business Consultant",
     "Warehouse Management",
+    "Asset Management",
     "Governance, Risk Management & Compliance",
     "Web Development & Hosting Services",
+    "IT Services"
   ];
   const router = useRouter();
   const [formData, setFormData] = useState({

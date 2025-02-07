@@ -132,7 +132,7 @@ export default function ServiceSlider() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden ">
+    <div className="relative md:min-h-screen min-h-[55vh] overflow-hidden">
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={currentIndex}
@@ -149,45 +149,32 @@ export default function ServiceSlider() {
             <Image
               src={services[currentIndex].image || "/placeholder.svg"}
               alt={services[currentIndex].title}
-              // layout="fill"
               objectFit="cover"
               priority
-              className="md:h-[90vh] h-screen w-screen"
+              className="md:h-[90vh] h-[80vh] w-screen"
             />
-
             <div className="absolute inset-0 bg-black bg-opacity-60" />
           </div>
-          <div className="absolute inset-0" style={{ zIndex: -1 }}>
-            {/* <Image
-              src={
-                services[(currentIndex ) % services.length].image ||
-                "/placeholder.svg"
-              }
-              alt={services[(currentIndex ) % services.length].title}
-              layout="fill"
-              objectFit="cover"
-            /> */}
-          </div>
-          <div className="relative container mx-auto px-4 py-20">
-            <div className="flex flex-col items-center justify-center min-h-[80vh]">
-              <div className="text-center space-y-8">
-                <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+          <div className="relative container mx-auto px-4 md:py-20 ">
+            <div className="flex flex-col items-center justify-center md:min-h-[80vh] min-h-[60vh]">
+              <div className="text-center space-y-6 md:space-y-8">
+                <h2 className="text-2xl md:text-6xl font-bold text-white mb-4 md:mb-6 px-4">
                   {services[currentIndex].title}
                 </h2>
-                <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-8">
+                <p className="text-base md:text-2xl text-white/90 max-w-3xl mx-auto mb-6 md:mb-8 px-4">
                   {services[currentIndex].description}
                 </p>
-                <div className="flex gap-4 justify-center">
+                <div className="flex flex-row md:flex-row gap-3 md:gap-4 justify-center">
                   <Link href={`/${services[currentIndex].link}`} passHref>
                     <Button
                       variant="secondary"
-                      className="text-lg px-6 py-2 bg-white text-teal-800 hover:bg-white/90 transition-colors duration-300"
+                      className="text-base md:text-lg px-4 py-3 md:px-6 md:py-2 bg-white text-teal-800 hover:bg-white/90"
                     >
                       Explore More
                     </Button>
                   </Link>
                   <Link href="/contactus" passHref>
-                    <Button className="text-lg px-6 py-2 bg-teal-600 text-white hover:bg-teal-700 transition-colors duration-300">
+                    <Button className="text-base md:text-lg px-4 py-3 md:px-6 md:py-2 bg-teal-600 text-white hover:bg-teal-700">
                       Get Started
                     </Button>
                   </Link>
@@ -198,7 +185,7 @@ export default function ServiceSlider() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-2 z-10">
+      <div className="absolute md:bottom-10 bottom-6 left-0 right-0 flex justify-center gap-2 z-10">
         {services.map((_, index) => (
           <button
             key={index}
@@ -213,7 +200,7 @@ export default function ServiceSlider() {
 
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white transition-colors duration-300 z-10"
+        className="hidden md:block absolute left-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white transition-colors duration-300 z-10"
         aria-label="Previous slide"
         disabled={isAnimating}
       >
@@ -221,7 +208,7 @@ export default function ServiceSlider() {
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white transition-colors duration-300 z-10"
+        className="hidden md:block absolute right-4 top-1/2 transform -translate-y-1/2 text-white/80 hover:text-white transition-colors duration-300 z-10"
         aria-label="Next slide"
         disabled={isAnimating}
       >

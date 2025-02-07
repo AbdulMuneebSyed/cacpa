@@ -92,17 +92,20 @@ const Footer = () => {
                 <li>
                   <strong>Canada:</strong>
                   <br />
-                  123 Main Street, Toronto, ON, M1H 3A1
+                  IA, 2000 McGill College Avenue Tower, Montreal, QC, H3A 3H3,
+                  CAN
                 </li>
                 <li>
                   <strong>Qatar:</strong>
                   <br />
-                  Building No: 67, Street No: 250, Zone No: 45, Doha
+                  5th Floor, Building no. 1 Office, Muntazah, Al Muntazah
+                  Trading Centre, 8 Hiteen St, Doha
                 </li>
                 <li>
                   <strong>India:</strong>
                   <br />
-                  Plot No. 45, Hitech City, Hyderabad, Telangana 500081
+                  Level 6, Chennai City Centre, 10/11, Dr Radha Krishnan Salai,
+                  Loganathan Colony, Mylapore, Chennai, Tamil Nadu 600004, India
                 </li>
               </ul>
             </div>
@@ -249,17 +252,20 @@ const Footer = () => {
                 <li>
                   <strong>Canada:</strong>
                   <br />
-                  123 Main Street, Toronto, ON, M1H 3A1
+                  IA, 2000 McGill College Avenue Tower, Montreal, QC, H3A 3H3,
+                  CAN
                 </li>
                 <li>
                   <strong>Qatar:</strong>
                   <br />
-                  Building No: 67, Street No: 250, Zone No: 45, Doha
+                  5th Floor, Building no. 1 Office, Muntazah, Al Muntazah
+                  Trading Centre, 8 Hiteen St, Doha
                 </li>
                 <li>
                   <strong>India:</strong>
                   <br />
-                  Plot No. 45, Hitech City, Hyderabad, Telangana 500081
+                  Level 6, Chennai City Centre, 10/11, Dr Radha Krishnan Salai,
+                  Loganathan Colony, Mylapore, Chennai, Tamil Nadu 600004, India
                 </li>
               </ul>
             </div>
