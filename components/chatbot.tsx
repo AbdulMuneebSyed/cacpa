@@ -34,7 +34,7 @@ export default function ChatBot() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 50);
+    const timer = setTimeout(() => setVisible(true), 500);
     return () => clearTimeout(timer);
   }, []);
 
