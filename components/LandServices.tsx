@@ -43,7 +43,7 @@ const services = [
   {
     name: "Asset Management",
     description:
-      "Enhancing asset performance through proactive lifecycle management, data-driven insights, and technology integration to maximize returns and reduce risks.",
+      "Enhancing asset performance through lifecycle management and technology to maximize returns and reduce risks.",
     route: "/services/am",
     image: am,
   },
@@ -64,7 +64,7 @@ const services = [
   {
     name: "IT Services",
     description:
-      "Delivering comprehensive IT solutions including infrastructure support, cybersecurity, and digital transformation to empower business growth and innovation.",
+      "Delivering comprehensive IT solutions including infrastructure support and digital transformation to empower business growth.",
     route: "/services/its",
     image: it,
   },
