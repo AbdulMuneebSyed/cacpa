@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/card";
 import { MessageCircle, X, Send } from "lucide-react";
+import emailjs from "emailjs-com"; // Import emailjs
 
 interface Message {
   sender: "user" | "bot";
@@ -19,11 +20,11 @@ interface Message {
 }
 
 const welcomeMessages = [
-  "Welcome to Capco! How can I assist you today?",
-  "Hello! I'm here to help. What can I do for you?",
-  "Greetings from Capco! What brings you here today?",
-  "Welcome! How may I be of service to you?",
-  "Hi there! What questions can I answer for you about Capco?",
+  "Welcome to Capco! Please provide your email to continue.",
+  "Hello! I'm here to help. What's your email address?",
+  "Greetings from Capco! Could you share your email address?",
+  "Welcome! Please enter your email to get started.",
+  "Hi there! What's your email address?",
 ];
 
 export default function ChatBot() {
@@ -31,6 +32,8 @@ export default function ChatBot() {
   const [chatOpen, setChatOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  const [emailProvided, setEmailProvided] = useState(false);
+  const [emailInput, setEmailInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,29 +58,62 @@ export default function ChatBot() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
- const typeText = (text: string, index: number, sender: "user" | "bot") => {
+  const typeText = (text: string, index: number, sender: "user" | "bot") => {
+    if (index < text.length) {
+      setTimeout(() => {
+        setMessages((prev) => {
+          const lastMessage = prev[prev.length - 1];
+          if (lastMessage?.sender === sender) {
+            return [
+              ...prev.slice(0, -1),
+              { sender, text: lastMessage.text + text[index] },
+            ];
+          } else {
+            return [...prev, { sender, text: text[index] }];
+          }
+        });
+        typeText(text, index + 1, sender);
+      }, 25);
+    }
+  };
 
-   // Apply typewriter effect for bot messages
-   if (index < text.length) {
-    // console.log(text);
-     setTimeout(() => {
-       setMessages((prev) => {
-         const lastMessage = prev[prev.length - 1];
-         if (lastMessage?.sender === sender) {
-           return [
-             ...prev.slice(0, -1),
-             { sender, text: lastMessage.text + text[index] },
-           ];
-         } else {
-           return [...prev, { sender, text: text[index] }];
-         }
-       });
-       typeText(text, index + 1, sender);
-     }, 25);
-   }
- };
+  const sendEmail = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const emailParams = {
+      to_name: "info@capco.com",
+      from_name: emailInput,
+      message: `We had a new query => \n Email: ${emailInput}`,
+    };
+
+    emailjs
+      .send(
+        "service_znyyw56", // Your EmailJS service ID
+        "muneeb_iqciy5o", // Your EmailJS template ID
+        emailParams,
+        "T4h1H0gjpxDP_OF7r" // Your EmailJS public key
+      )
+      .then(
+        (response) => {
+          setEmailProvided(true);
+          setMessages((prev) => [
+            ...prev,
+            { sender: "bot", text: "Thank you! How can I assist you today?" },
+          ]);
+        },
+        (error) => {
+          console.error("Failed to send message", error);
+          setMessages((prev) => [
+            ...prev,
+            { sender: "bot", text: "Failed to send email. Please try again." },
+          ]);
+        }
+      );
+  };
 
   const sendMessage = async (question: string) => {
+    if (!emailProvided) return;
+
     const newMessage: Message = { sender: "user", text: "" };
     setMessages((prev) => [...prev, newMessage]);
 
@@ -192,30 +228,50 @@ export default function ChatBot() {
                             : "bg-gray-300 text-black"
                         }`}
                       >
-                           {formatMessage(msg.text)}
+                        {formatMessage(msg.text)}
                       </div>
                     </div>
                   ))}
+                  {!emailProvided && (
+                    <form
+                      onSubmit={sendEmail}
+                      className="flex items-center space-x-2 mt-2"
+                    >
+                      <input
+                        type="email"
+                        value={emailInput}
+                        onChange={(e) => setEmailInput(e.target.value)}
+                        placeholder="Enter your email..."
+                        className="flex-grow border rounded-lg px-3 py-2 text-sm focus:outline-none"
+                        required
+                      />
+                      <Button type="submit" size="icon">
+                        <Send className="h-4 w-4" />
+                      </Button>
+                    </form>
+                  )}
                   <div ref={messagesEndRef} />
                 </div>
               </CardContent>
-              <CardFooter className="p-3 border-t">
-                <form
-                  onSubmit={handleSubmit}
-                  className="flex w-full items-center bg-white rounded-md p-2 shadow-inner"
-                >
-                  <input
-                    type="text"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder="Type your message..."
-                    className="flex-grow border-none rounded-lg px-3 py-2 text-sm focus:outline-none"
-                  />
-                  <Button type="submit" size="icon" disabled={!input.trim()}>
-                    <Send className="h-4 w-4" />
-                  </Button>
-                </form>
-              </CardFooter>
+              {emailProvided && (
+                <CardFooter className="p-3 border-t">
+                  <form
+                    onSubmit={handleSubmit}
+                    className="flex w-full items-center space-x-2 bg-white rounded-md p-2 shadow-inner"
+                  >
+                    <input
+                      type="text"
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      placeholder="Type your message..."
+                      className="flex-grow border-none rounded-lg px-3 py-2 text-sm focus:outline-none"
+                    />
+                    <Button type="submit" size="icon" disabled={!input.trim()}>
+                      <Send className="h-4 w-4" />
+                    </Button>
+                  </form>
+                </CardFooter>
+              )}
             </Card>
           )}
         </motion.div>
