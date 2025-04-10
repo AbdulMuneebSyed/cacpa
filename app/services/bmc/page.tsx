@@ -6,7 +6,7 @@ import Navbar2 from "@/components/navbar2";
 import Footer from "@/components/Footer"
 export default function Page() {
   return (
-    <main className="max-w-screen overflow-x-hidden">
+    <main className="max-w-screen relative overflow-x-clip">
       <div className="sticky z-50 top-0 max-w-screen">
               <Navbar2 />
             </div>
