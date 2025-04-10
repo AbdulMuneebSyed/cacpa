@@ -1,5 +1,6 @@
 // app/api/chat/route.ts
 import { NextResponse } from "next/server";
+export const runtime = "edge";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Initialize the Gemini model using your API key from the environment.
