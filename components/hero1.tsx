@@ -150,7 +150,7 @@ export default function ServiceSlider() {
               src={services[currentIndex].image || "/placeholder.svg"}
               alt={services[currentIndex].title}
               objectFit="cover"
-              priority
+              priority={true}
               className="md:h-[90vh] h-[80vh] w-screen"
             />
             <div className="absolute inset-0 bg-black bg-opacity-60" />
