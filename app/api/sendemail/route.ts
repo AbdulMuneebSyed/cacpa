@@ -1,4 +1,5 @@
 import { ChartColumnStacked } from "lucide-react";
+export const runtime = "edge";
 
 // app/api/send-email/route.js
 interface EmailRequestBody {
