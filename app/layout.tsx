@@ -15,26 +15,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CAPCO – Driving Your Success",
-  description:
-    "CAPCO empowers businesses across Qatar, India, and Canada with tailored consulting, HR, IT, and digital solutions to drive sustainable growth.",
-  keywords:
-    "CAPCO, business consulting, HR solutions, digital marketing, IT services, asset management, Qatar, India, Canada, enterprise solutions, growth strategy",
-  authors: [{ name: "CAPCO" }],
-  creator: "CAPCO",
-  metadataBase: new URL("https://www.capco-cs.com"),
+  title: {
+    default: "Capco | AI Assistant & Digital Solutions",
+    template: "%s | Capco",
+  },
+  description: "Capco offers innovative digital solutions and an AI assistant to help you succeed. Discover our services and get instant support.",
+  keywords: [
+    "Capco", "AI Assistant", "Digital Solutions", "Consulting", "Technology", "Innovation", "Business", "Chatbot"
+  ],
   openGraph: {
-    title: "CAPCO – Empowering Business Growth",
-    description:
-      "Delivering strategic consulting, IT solutions, HR services, and more to help your business thrive.",
-    url: "https://www.capco-cs.com",
-    siteName: "CAPCO",
+    title: "Capco | AI Assistant & Digital Solutions",
+    description: "Capco offers innovative digital solutions and an AI assistant to help you succeed.",
+    url: "https://your-domain.com",
+    siteName: "Capco",
     images: [
       {
-        url: "/logo/logo.png",
+        url: "/capco-og-image.png",
         width: 1200,
         height: 630,
-        alt: "CAPCO - Business Empowerment",
+        alt: "Capco AI Assistant",
       },
     ],
     locale: "en_US",
@@ -42,10 +41,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CAPCO – Driving Business Forward",
-    description:
-      "Strategic consulting, HR, IT, and digital services to transform your business.",
-    images: [`/logo/logo.png`],
+    title: "Capco | AI Assistant & Digital Solutions",
+    description: "Capco offers innovative digital solutions and an AI assistant to help you succeed.",
+    images: ["/capco-og-image.png"],
+  },
+  icons: {
+    icon: "/favicon.ico",
   },
 };
 

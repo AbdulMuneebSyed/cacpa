@@ -77,38 +77,34 @@ export default function ChatBot() {
     }
   };
 
-  const sendEmail = (e: React.FormEvent) => {
+  const sendEmail = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const emailParams = {
-      to_name: "info@capco.com",
-      from_name: emailInput,
-      message: `We had a new query => \n Email: ${emailInput}`,
-    };
+    const message = `We had a new query => \nEmail: ${emailInput}`;
 
-    emailjs
-      .send(
-        "service_znyyw56", // Your EmailJS service ID
-        "muneeb_iqciy5o", // Your EmailJS template ID
-        emailParams,
-        "T4h1H0gjpxDP_OF7r" // Your EmailJS public key
-      )
-      .then(
-        (response) => {
-          setEmailProvided(true);
-          setMessages((prev) => [
-            ...prev,
-            { sender: "bot", text: "Thank you! How can I assist you today?" },
-          ]);
-        },
-        (error) => {
-          console.error("Failed to send message", error);
-          setMessages((prev) => [
-            ...prev,
-            { sender: "bot", text: "Failed to send email. Please try again." },
-          ]);
-        }
-      );
+    try {
+      const res = await fetch("/api/sendemail", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
+
+      if (res.ok) {
+        setEmailProvided(true);
+        setMessages((prev) => [
+          ...prev,
+          { sender: "bot", text: "Thank you! How can I assist you today?" },
+        ]);
+      } else {
+        throw new Error("Failed");
+      }
+    } catch (error) {
+      console.error("Failed to send message", error);
+      setMessages((prev) => [
+        ...prev,
+        { sender: "bot", text: "Failed to send email. Please try again." },
+      ]);
+    }
   };
 
   const sendMessage = async (question: string) => {
@@ -147,24 +143,49 @@ export default function ChatBot() {
     sendMessage(input);
   };
 
+  // ...existing code...
   const formatMessage = (text: string) => {
+    // First, split by URLs so we don't format inside links
     const urlRegex = /(https?:\/\/[^\s]+)/g;
-    return text.split(urlRegex).map((part, index) =>
-      urlRegex.test(part) ? (
-        <a
-          key={index}
-          href={part}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 underline break-words"
-        >
-          {part}
-        </a>
-      ) : (
-        part
-      )
-    );
+    return text.split(urlRegex).map((part, idx) => {
+      if (urlRegex.test(part)) {
+        return (
+          <a
+            key={idx}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline break-words"
+          >
+            {part}
+          </a>
+        );
+      } else {
+        // Replace *text* with <strong>text</strong>
+        const boldRegex = /\*([^\*]+)\*/g;
+        const segments = [];
+        let lastIndex = 0;
+        let match;
+        let key = 0;
+        while ((match = boldRegex.exec(part)) !== null) {
+          if (match.index > lastIndex) {
+            segments.push(part.slice(lastIndex, match.index));
+          }
+          segments.push(
+            <strong key={key++} className="font-semibold">
+              {match[1]}
+            </strong>
+          );
+          lastIndex = match.index + match[0].length;
+        }
+        if (lastIndex < part.length) {
+          segments.push(part.slice(lastIndex));
+        }
+        return segments.length > 0 ? segments : part;
+      }
+    });
   };
+  // ...existing code...
 
   return (
     <AnimatePresence>

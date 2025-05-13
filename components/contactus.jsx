@@ -13,8 +13,9 @@ export default function ContactUs() {
     "Asset Management",
     "Governance, Risk Management & Compliance",
     "Web Development & Hosting Services",
-    "IT Services"
+    "IT Services",
   ];
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -25,7 +26,7 @@ export default function ContactUs() {
   });
 
   const handleChange = (e) => {
-    const { name,id, value, type, checked } = e.target;
+    const { name, id, value, type, checked } = e.target;
     // console.log(e.target);
     if (type === "checkbox") {
       // console.log("name"+ id,"value"+ value,"type"+ type,"checked"+ checked);
@@ -41,41 +42,29 @@ export default function ContactUs() {
     }
   };
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    const message = `
+      Name: ${formData.fullName}
+      Email: ${formData.email}
+      Phone: ${formData.phone}
+      Services: ${formData.services.join(", ")}
+      Message: ${formData.message}
+    `;
 
-    // Map formData to match the EmailJS template structure
-    const emailParams = {
-      to_name: "Sadmuneeb786@gmail.com", 
-      from_name: "samuneeb786@gmail.com", 
-      message: `Name:${formData.fullName}\n Email: ${formData.email}\nPhone: ${
-        formData.phone
-      }\nServices: ${formData.services.join(", ")}\nMessage: ${
-        formData.message
-      }`, // Combine all details into the message
-    };
-
-    emailjs
-      .send(
-        "service_znyyw56", // Your EmailJS service ID
-        "muneeb_iqciy5o", // Your EmailJS template ID
-        emailParams,
-        "T4h1H0gjpxDP_OF7r" // Your EmailJS public key
-      )
-      .then(
-        (response) => {
-          // alert("Message sent successfully!");
-          router.push("/form-Success");
-          // console.log("Success!", response.status, response.text);
-        },
-        (error) => {
-          console.error("Failed to send message", error);
-          alert("Failed to send message. Please try again later.");
-        }
-      );
+    const res = await fetch("/api/sendemail", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message }),
+    });
+    setLoading(false);
+    if (res.ok) {
+      router.push("/form-Success");
+    } else {
+      alert("Failed to send message.");
+    }
   };
-
-
 
   return (
     <main className="flex min-h-screen w-full bg-gradient-to-br from-blue-50 to-indigo-100 justify-center items-center py-20">
@@ -198,8 +187,38 @@ export default function ContactUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.5 }}
           >
-            <button className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150">
-              Submit
+            <button
+              className="w-full px-4 py-2 text-white font-medium bg-gray-800 hover:bg-gray-700 active:bg-gray-900 rounded-lg duration-150 flex items-center justify-center"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <svg
+                    className="animate-spin h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                    ></path>
+                  </svg>
+                  Submitting...
+                </span>
+              ) : (
+                "Submit"
+              )}
             </button>
           </motion.div>
         </form>
