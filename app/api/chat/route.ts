@@ -4,7 +4,7 @@ export const runtime = "edge";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Initialize the Gemini model using your API key from the environment.
-const genAI = new GoogleGenerativeAI("AIzaSyDZWZijo60xAMZOiU4Zs-2M0uWGaX9Sdcs");
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
 export async function POST(req: Request) {
